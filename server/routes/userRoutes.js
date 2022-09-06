@@ -10,6 +10,7 @@ userRouter.post("/signup", async (req, res) => {
     userName: req.body.userName,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, Number(process.env.SALT)),
+    isAdmin: req.body.isAdmin || false,
   });
 
   const user = await newUser.save();
