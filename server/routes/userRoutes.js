@@ -37,6 +37,8 @@ userRouter.post("/signin", async (req, res) => {
         token: generateToken(user),
       });
       return;
+    } else {
+      res.status(401).send({ message: "Invalid email or password." });
     }
   }
 

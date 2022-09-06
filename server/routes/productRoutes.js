@@ -47,4 +47,28 @@ productRouter.put("/update/:id", isAuth, isAdmin, async (req, res) => {
   }
 });
 
+productRouter.delete("/delete/:id", isAuth, isAdmin, async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  if (product) {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).send({ message: "Successfully removed." });
+  } else {
+    res
+      .status(404)
+      .send({ message: `Product with id: ${req.params.id} not found.` });
+  }
+});
+
+productRouter.get("/:id", isAuth, async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.status(200).send(product);
+  } else {
+    res
+      .status(404)
+      .send({ message: `Prodcut with id: ${req.params.id} not found.` });
+  }
+});
+
 export default productRouter;
