@@ -1,0 +1,147 @@
+header {
+  background-color: var(--header-color);
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+nav {
+  width: 100%;
+}
+nav > ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+  align-items: center;
+}
+.navLogo {
+  width: 50px;
+  height: 50px;
+}
+
+nav > ul > li > a {
+  text-decoration: none;
+  color: var(--light-color);
+  position: relative;
+}
+
+nav > ul > li:not(:first-child) > a::after {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: "";
+  color: transparent;
+  background-color: var(--secondary-color);
+  height: 1.5px;
+}
+
+nav > ul > li > a:hover:after {
+  animation: fill 1s forwards;
+  -webkit-animation: fill 1s forwards;
+  -moz-animation: fill 1s forwards;
+  opacity: 1;
+}
+
+.active {
+  color: var(--primary-color);
+}
+
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+  transition: all 0.4s;
+}
+.basketIcon {
+  color: var(--light-color);
+  width: 25px;
+  height: 25px;
+}
+.basket-container {
+  cursor: pointer;
+  position: relative;
+}
+
+.numberItemsInBasket {
+  position: absolute;
+  top: -8px;
+  background-color: var(--light-color);
+  right: -15px;
+  width: 20px;
+  border-radius: 100%;
+  text-align: center;
+}
+
+.hamburger {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  margin-block: 8px;
+  border-radius: 4px;
+  transition: transform 0.6s;
+  opacity: 0.25s;
+}
+
+.hamburger.active .line:nth-child(1) {
+  transform: translateY(16px);
+  rotate: -45deg;
+  transition: all 0.5s;
+}
+
+.hamburger.active .line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .line:nth-child(3) {
+  transform: translateY(-16px);
+  rotate: 45deg;
+  transition: all 0.5s;
+}
+
+.burgerMenu {
+  position: relative;
+  display: none;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  .burgerMenu {
+    display: block;
+  }
+  header > nav > ul > li:not(:last-child) {
+    display: none;
+  }
+  header > nav > ul > li:first-child {
+    display: block;
+  }
+
+  header > nav > ul {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+  }
+}
+
+@keyframes fill {
+  0% {
+    width: 0%;
+    height: 1.5px;
+  }
+  50% {
+    width: 100%;
+    height: 1.5px;
+  }
+  100% {
+    width: 100%;
+    height: 1.5px;
+  }
+}
