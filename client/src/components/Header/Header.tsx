@@ -14,12 +14,11 @@ const Header = () => {
   return (
     <header>
       <nav>
-        <ul>
-          <li>
-            <Link to={"/"}>
-              <img src="eShopLogo.png" className="navLogo" />
-            </Link>
-          </li>
+        <Link to={"/"} className="logoContainer">
+          <img src="eShopLogo.png" alt="mainLogo" className="navLogo" />
+        </Link>
+
+        <ul className={isActive ? "burgerActive" : undefined}>
           <li>
             <NavLink
               to={"/products"}
@@ -61,20 +60,30 @@ const Header = () => {
             </NavLink>
           </li>
           <li className="basket-container">
-            <SlBasket className="basketIcon" />
+            {!isActive ? (
+              <SlBasket className="basketIcon" />
+            ) : (
+              <NavLink
+                to={"/cart"}
+                className={({ isActive }) => (isActive ? "active" : undefined)}
+              >
+                My Cart
+              </NavLink>
+            )}
+
             <p className="numberItemsInBasket">5</p>
           </li>
-          <li className="burgerMenu">
-            <button
-              className={isActive ? "hamburger active" : "hamburger"}
-              onClick={openBurgerMenu}
-            >
-              <span className="line"></span>
-              <span className="line"></span>
-              <span className="line"></span>
-            </button>
-          </li>
         </ul>
+        <div className="burgerMenu">
+          <button
+            className={isActive ? "hamburger active" : "hamburger"}
+            onClick={openBurgerMenu}
+          >
+            <span className="line"></span>
+            <span className="line"></span>
+            <span className="line"></span>
+          </button>
+        </div>
       </nav>
     </header>
   );

@@ -7,16 +7,25 @@ header {
 }
 nav {
   width: 100%;
+  display: flex;
+  align-items: center;
+}
+.logoContainer {
+  margin-left: 30px;
 }
 nav > ul {
   display: flex;
   list-style: none;
   justify-content: space-around;
   align-items: center;
+  width: 100%;
 }
 .navLogo {
   width: 50px;
   height: 50px;
+}
+nav > ul > li {
+  font-size: 20px;
 }
 
 nav > ul > li > a {
@@ -25,7 +34,7 @@ nav > ul > li > a {
   position: relative;
 }
 
-nav > ul > li:not(:first-child) > a::after {
+nav > ul > li > a::after {
   position: absolute;
   bottom: -5px;
   left: 0;
@@ -68,10 +77,12 @@ nav ul li a:before {
   position: absolute;
   top: -8px;
   background-color: var(--light-color);
-  right: -15px;
-  width: 20px;
+  right: -20px;
+  width: 22px;
   border-radius: 100%;
   text-align: center;
+  height: 20px;
+  font-size: 14px;
 }
 
 .hamburger {
@@ -117,17 +128,68 @@ nav ul li a:before {
   .burgerMenu {
     display: block;
   }
-  header > nav > ul > li:not(:last-child) {
+  header > nav > ul > li {
     display: none;
   }
-  header > nav > ul > li:first-child {
-    display: block;
+
+  header > nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 50px;
+  }
+
+  header > nav:first-child {
+    margin-left: 0px;
   }
 
   header > nav > ul {
     display: flex;
-    justify-content: space-between;
-    margin: 0 20px;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+
+  .burgerActive {
+    width: 100%;
+    margin-left: 0px;
+    position: absolute;
+    top: 70px;
+    background-color: #73d7ff;
+    transition: all 0.7s ease;
+    height: calc(100vh - 70px);
+    animation: opacityShow 0.7s ease-in-out;
+    z-index: 100;
+  }
+
+  .numberItemsInBasket {
+    display: none;
+  }
+
+  .burgerActive > li {
+    display: block !important;
+    text-align: center;
+  }
+  .burgerActive > li > a {
+    color: black;
+    font-weight: 600;
+  }
+  nav > ul > li > a:hover:after {
+    display: none;
+  }
+
+  .burgerActive > li:nth-child(3) {
+    order: 1;
+  }
+  .burgerActive > li:nth-child(5) {
+    order: 1;
+  }
+  .burgerActive > li:nth-child(4) {
+    order: 1;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  nav > ul > li {
+    font-size: 18px;
   }
 }
 
@@ -143,5 +205,17 @@ nav ul li a:before {
   100% {
     width: 100%;
     height: 1.5px;
+  }
+}
+
+@keyframes opacityShow {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
   }
 }
