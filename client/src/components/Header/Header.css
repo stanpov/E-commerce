@@ -153,7 +153,7 @@ nav ul li a:before {
     margin-left: 0px;
     position: absolute;
     top: 70px;
-    background-color: #73d7ff;
+    background-color: var(--main-color);
     transition: all 0.7s ease;
     height: calc(100vh - 70px);
     animation: opacityShow 0.7s ease-in-out;
@@ -171,6 +171,7 @@ nav ul li a:before {
   .burgerActive > li > a {
     color: black;
     font-weight: 600;
+    text-transform: uppercase;
   }
   nav > ul > li > a:hover:after {
     display: none;
@@ -184,6 +185,11 @@ nav ul li a:before {
   }
   .burgerActive > li:nth-child(4) {
     order: 1;
+  }
+
+  .burgerActive > li:hover {
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.4);
   }
 }
 
