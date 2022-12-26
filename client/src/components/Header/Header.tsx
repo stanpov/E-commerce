@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { SlBasket } from "react-icons/sl";
-// import "./Header.css";
+import "./Header.css";
 
 const Header = () => {
   const [isActive, setIsActive] = useState(false);
