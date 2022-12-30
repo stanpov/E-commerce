@@ -8,8 +8,6 @@ const Header = () => {
 
   const openBurgerMenu = () => {
     setIsActive(!isActive);
-
-    console.log(isActive);
   };
   return (
     <header>
@@ -29,7 +27,7 @@ const Header = () => {
           </li>
           <li>
             <NavLink
-              to={"/contacts"}
+              to={"/wishlist"}
               className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               Wish List
@@ -37,10 +35,10 @@ const Header = () => {
           </li>
           <li>
             <NavLink
-              to={"/login"}
+              to={"/contacts"}
               className={({ isActive }) => (isActive ? "active" : undefined)}
             >
-              Contacs
+              Contacts
             </NavLink>
           </li>
           <li>
@@ -61,11 +59,14 @@ const Header = () => {
           </li>
           <li className="basket-container">
             {!isActive ? (
-              <SlBasket className="basketIcon" />
+              <NavLink to={"/cart"} data-testid="icon-test">
+                <SlBasket className="basketIcon" />
+              </NavLink>
             ) : (
               <NavLink
                 to={"/cart"}
                 className={({ isActive }) => (isActive ? "active" : undefined)}
+                data-testid="text-test"
               >
                 My Cart
               </NavLink>
@@ -74,10 +75,11 @@ const Header = () => {
             <p className="numberItemsInBasket">5</p>
           </li>
         </ul>
-        <div className="burgerMenu">
+        <div className="burgerMenu" data-testid="size-test">
           <button
             className={isActive ? "hamburger active" : "hamburger"}
             onClick={openBurgerMenu}
+            data-testid="button-test"
           >
             <span className="line"></span>
             <span className="line"></span>

@@ -53,6 +53,9 @@ nav > ul > li > a:hover:after {
   -moz-animation: fill 1s forwards;
   opacity: 1;
 }
+nav > ul > li > a:not(:last-child):hover::after {
+  display: none;
+}
 
 .active {
   color: var(--primary-color);
