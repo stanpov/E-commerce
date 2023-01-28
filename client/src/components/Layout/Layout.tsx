@@ -2,13 +2,13 @@ import React from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./Layout.css";
-import { LayoutProps } from "../../interfaces/interfaces";
+import { Outlet } from "react-router-dom";
 
-const Layout = (props: LayoutProps) => {
+const Layout = () => {
   return (
     <>
       <Header />
-      {props && props.children}
+      <Outlet />
       <Footer />
     </>
   );
