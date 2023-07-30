@@ -1,32 +1,27 @@
 import jwt from "jsonwebtoken";
 
-export const generateToken = (user) => {
-  return jwt.sign(
-    {
-      _id: user._id,
-      userName: user.userName,
-      email: user.email,
-      isAdmin: user.isAdmin,
-    },
-    process.env.SECRET,
-    { expiresIn: "3600s" }
-  );
+export const createAccessToken = (payload) => {
+  return jwt.sign(payload, process.env.SECRET, { expiresIn: "1d" });
 };
 
-export const isAuth = (req, res, next) => {
-  const authorization = req.headers.authorization;
-  if (authorization) {
-    const token = authorization.slice(7, authorization.length);
-    jwt.verify(token, process.env.SECRET, (err, decode) => {
+export const isAuth = async (req, res, next) => {
+  try {
+    const token = req.cookies["access_token"];
+
+    if (!token) {
+      return next();
+    }
+    jwt.verify(token, process.env.SECRET, function (err, decoded) {
       if (err) {
-        res.status(401).send({ message: "Invalid Token" });
-      } else {
-        req.user = decode;
-        next();
+        return next(err);
       }
+      req.user = decoded;
+      return next();
     });
-  } else {
-    res.status(401).send({ message: "You are not unauthorized." });
+  } catch (error) {
+    return res
+      .status(500)
+      .send({ message: "Something went wrong, please try again later." });
   }
 };
 

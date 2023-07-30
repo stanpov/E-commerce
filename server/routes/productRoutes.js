@@ -1,6 +1,7 @@
 import exporess from "express";
 import { isAdmin, isAuth } from "../utils/utils.js";
 import Product from "../models/productModel.js";
+import { createProduct } from "../controllers/productsController.js";
 
 const productRouter = exporess.Router();
 
@@ -9,25 +10,7 @@ productRouter.get("/", async (req, res) => {
   res.status(200).send(products);
 });
 
-productRouter.post("/create", isAuth, isAdmin, async (req, res) => {
-  const newProduct = new Product({
-    productName: req.body.productName,
-    image: req.body.image,
-    category: req.body.category,
-    description: req.body.description,
-    price: req.body.price,
-    countInStock: req.body.countInStock,
-    rating: 0,
-    numReviews: 0,
-  });
-
-  const product = await newProduct.save();
-  if (product) {
-    res.status(201).send(product);
-  } else {
-    res.status(500).send({ message: "Something went wrong" });
-  }
-});
+productRouter.post("/create", isAuth, isAdmin, createProduct);
 
 productRouter.put("/update/:id", isAuth, isAdmin, async (req, res) => {
   const productId = req.params.id;
