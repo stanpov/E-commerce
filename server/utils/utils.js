@@ -9,11 +9,11 @@ export const isAuth = async (req, res, next) => {
     const token = req.cookies["access_token"];
 
     if (!token) {
-      return next();
+      return res.status(400).json({ msg: "Invalid Authorisation" });
     }
     jwt.verify(token, process.env.SECRET, function (err, decoded) {
       if (err) {
-        return next(err);
+        return res.status(400).json({ msg: "Invalid Authorisation" });
       }
       req.user = decoded;
       return next();

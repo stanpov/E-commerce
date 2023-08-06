@@ -49,6 +49,10 @@ export const login = async (req, res) => {
       if (!isMatch) {
         return res.status(400).json({ message: "Password is Incorrect" });
       }
+
+      if (req.cookies["access_token"]) {
+        return res.status(406).json({ message: "Already logged in." });
+      }
       const access_token = createAccessToken({
         id: user._id,
         isAdmin: user.isAdmin,
@@ -61,7 +65,8 @@ export const login = async (req, res) => {
 
       res.json({
         message: "Login Success",
-        access_token,
+        id: user._id,
+        access_token: access_token,
       });
     } else {
       res
@@ -71,4 +76,11 @@ export const login = async (req, res) => {
   } catch (error) {
     res.status(500).send({ message: "Something went wrong" });
   }
+};
+
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("access_token");
+    return res.status(200).json({ message: "Logout Successfully" });
+  } catch (error) {}
 };
