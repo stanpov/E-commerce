@@ -1,6 +1,6 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
-import { createAccessToken } from "../utils/utils.js";
+import { createAccessToken, sentOTPVerificationEmail } from "../utils/utils.js";
 
 export const createUser = async (req, res) => {
   try {
@@ -21,13 +21,13 @@ export const createUser = async (req, res) => {
       isAdmin: req.body.isAdmin,
     });
     const user = await newUser.save();
-
-    res.send({
-      _id: user._id,
-      userName: user.userName,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      password: user.password,
+    sentOTPVerificationEmail(user, res);
+    res.status(201).send({
+      message: "User created, check your email for verification.",
+      response: {
+        userId: user._id,
+        verified: user.verified,
+      },
     });
   } catch (error) {
     res
