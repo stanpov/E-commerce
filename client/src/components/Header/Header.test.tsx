@@ -56,8 +56,8 @@ describe("Testing the functionality of the Header", () => {
         <App />
       </MemoryRouter>
     );
-    await user.click(screen.getByText(/about/i));
-    expect(screen.getByText(/About/i)).toBeInTheDocument();
+    await user.click(screen.getByRole('link',{name:'About'}));
+    expect(screen.getByRole('link',{name:'About'})).toBeInTheDocument();
   });
 
   test("Check when user click to the main Logo if it is going to Home Page", async () => {
@@ -78,11 +78,15 @@ describe("Testing the functionality of the Header", () => {
         <App />
       </MemoryRouter>
     );
-    await user.click(screen.getByText(/About/i));
-    const AboutLink = await screen.getByText(/About/i);
+    const AboutLink = await screen.getByRole('link',{name:'About'});
     const ProductsLink = await screen.getByText(/Products/i);
     const ContactPage = await screen.getByText(/Contacts/i);
+    const WishList = await screen.getByRole('link', {name:'Wish List'});
+    
+    await user.click(screen.getByRole('link',{name:'About'}));
     expect(AboutLink).toHaveClass("active");
+    await user.click(screen.getByRole('link',{name:'Wish List'}));
+    expect(WishList).toHaveClass("active");
     await user.click(screen.getByText(/Products/i));
     expect(ProductsLink).toHaveClass("active");
     await user.click(screen.getByText(/Contacts/i));
