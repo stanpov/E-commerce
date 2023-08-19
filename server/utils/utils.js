@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { userOTPVerification } from "../models/userOTPVerification.js";
 import nodemailer from "nodemailer";
+import User from "../models/userModel.js";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -50,32 +51,54 @@ export const isAdmin = (req, res, next) => {
 export const sentOTPVerificationEmail = async (req, res) => {
   try {
     const otp = Math.floor(10000 + Math.random() * 90000);
-    const hasherOTP = await bcrypt.hash(
-      otp.toString(),
-      Number(process.env.SALT)
-    );
-    const newOTPVerification = await new userOTPVerification({
-      userId: req._id,
-      otp: hasherOTP,
-      createdAt: Date.now(),
-      expiresAt: Date.now() + 3600000,
-    });
-    await newOTPVerification.save();
     let mailOptions = {
       from: "ecommercemailer7@gmail.com",
       to: req.email,
       subject: "Email Verification",
-      html: `<p>This is your OTP number verification to verify your account: <b>${otp}</b></p><p>Please notice that it will expire in 1 hour!</p><br/><p>Thank you for shopping with us :)</p>`,
-      // text: "jdjdko sjjs",
+      html: `<p>You are just on one step to verify your account.</p><br/>
+      <p>This is your OTP verification code <b>${otp}</b></p>
+      <p>Please notice that it will expire in 1 hour!</p>`,
     };
-    await transporter.sendMail(mailOptions, function (err, info) {
-      if (err) {
-        throw new Error("Something went wrong");
-      } else {
-        return info.response;
-      }
+    const newOTPVerification = new userOTPVerification({
+      userId: req._id,
+      otp: otp,
+      createdAt: Date.now(),
+      expiresAt: Date.now() + 3600000,
     });
+    await newOTPVerification
+      .save()
+      .then(() => {
+        transporter.sendMail(mailOptions, function (err, info) {
+          if (err) {
+            throw new Error("Something went wrong");
+          } else {
+            return info.response;
+          }
+        });
+      })
+      .catch((err) => {
+        res.json({ message: "Couldn save the otp verification" });
+      });
   } catch (error) {
-    console.log("myyy errror", error);
+    throw new Error(error);
   }
+};
+
+export const sendNewPassword = async (data, res) => {
+  const newPassword = Math.floor(100000 + Math.random() * 900000);
+  const { email } = data[0];
+  let mailOptions = {
+    from: "ecommercemailer7@gmail.com",
+    to: email,
+    subject: "Password change",
+    html: `<p>You password for accont with email <b> ${email} </b> has been changed.<br><p>This is your new password: <b> ${newPassword} </b> </p></p>`,
+  };
+
+  await transporter.sendMail(mailOptions, function (err, info) {
+    if (err) {
+      throw new Error("Something went wrong");
+    }
+  });
+
+  return newPassword;
 };

@@ -7,7 +7,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 dotenv.config();
-console.log(process.env.MONGODB_URL)
 const port = process.env.PORT || 5000;
 
 mongoose
