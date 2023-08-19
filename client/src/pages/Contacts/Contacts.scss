@@ -1,0 +1,194 @@
+@use '../../global-styles/' as gs;
+
+.contacts {
+    @include gs.page-center(row, center, center);
+
+    &__card {
+        position: relative;
+        width: 23rem;
+        height: 27rem;
+        background: #fff;
+        transform-style: preserve-3d;
+        transform: perspective(62.5rem);
+        // box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.25);
+        box-shadow: gs.$book-effect-shadow;
+        transition: 1s;
+
+        &:hover {
+            transform: translateX(50%);
+        }
+
+        &__logo {
+            position: absolute;
+            z-index: 2;
+            width: 7rem;
+            right: 4rem;
+            top: 4rem;
+
+        }
+
+        &__image__wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            transform-style: preserve-3d;
+            transform-origin: left;
+            background: #000;
+            transition: 1s;
+            // box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.25);
+            box-shadow: gs.$book-effect-shadow;
+
+
+            &>img {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transform-style: preserve-3d;
+                backface-visibility: hidden;
+            }
+        }
+
+        &:hover &__image__wrapper {
+            transform: rotateY(-180deg);
+            cursor: pointer;
+        }
+
+        &__details {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            padding: 1.5rem;
+            @include gs.display-flex(row, center, center);
+
+            &__content {
+                @include gs.display-flex(column, space-evenly, center);
+                width: 100%;
+                height: 100%;
+
+                &__list {
+                    @include gs.display-flex(column, center, start);
+
+                    &__item {
+                        @include gs.display-flex(row, center, center);
+
+                        &__icon {
+                            font-size: 1.9rem;
+                            margin-right: 1rem;
+                        }
+
+                        &__text {
+                            text-transform: capitalize;
+
+                            &>h4 {
+                                color: gs.$secondary-color;
+                            }
+
+                            &>p {
+                                font-size: 0.8rem;
+                            }
+                        }
+                    }
+                }
+
+                &__social {
+                    @include gs.display-flex(row, center, center);
+
+                    &__item {
+                        background: #000;
+                        width: 2.2rem;
+                        height: 2.2rem;
+                        margin: 0.6rem;
+                        border-radius: 0.4rem;
+
+                        &>a {
+                            @include gs.display-flex(row, center, center);
+                            color: #fff;
+                            width: 100%;
+                            height: 100%;
+                            transition: 0.5s;
+                            border-radius: 0.3rem;
+
+                            &:hover {
+                                color: #000;
+                                background: gs.$secondary-color;
+                            }
+                        }
+
+                        &__icon {
+                            font-size: 1.3rem;
+                        }
+                    }
+                }
+
+                &__logo {
+                    position: absolute;
+                    width: 2.5rem;
+                    bottom: 0;
+                    right: 1rem;
+                }
+            }
+        }
+    }
+}
+
+.backside {
+    transform: rotateY(180deg);
+    z-index: 4;
+}
+
+.pulse {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: gs.$secondary-color;
+    width: 9rem;
+    height: 3rem;
+    border-radius: 50%;
+    z-index: 1;
+
+    &__text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.5rem;
+        color: #000;
+        text-shadow: 1px 1px 3px white;
+    }
+
+    &__ring {
+        position: absolute;
+        background: inherit;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        opacity: 0.5;
+        animation: pulsing 2s ease-out infinite;
+
+
+        &>.two {
+            animation-delay: -0.5s;
+        }
+
+        &>.three {
+            animation-delay: -1s;
+        }
+
+        &>.four {
+            animation-delay: -1.5s;
+        }
+    }
+}
+
+
+@keyframes pulsing {
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}

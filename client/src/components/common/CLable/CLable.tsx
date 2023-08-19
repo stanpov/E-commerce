@@ -1,0 +1,17 @@
+import React from "react";
+import { LabelHTMLAttributes } from "react";
+import './CLable.scss';
+
+interface CLableProps extends LabelHTMLAttributes<HTMLLabelElement> {
+    inputId: string,
+    title:string
+}
+
+export const CLable: React.FC<CLableProps> = ({
+    inputId,
+    title,
+}) => {
+    return (
+        <label className="form__label" htmlFor={inputId}>{title}</label>
+    )
+}

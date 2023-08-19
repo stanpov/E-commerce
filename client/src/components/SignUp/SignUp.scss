@@ -1,0 +1,17 @@
+@use '../../global-styles/' as gs;
+
+.sign__up {
+    @include gs.form-setter();
+
+    &__form {
+        &__content__wrapper {
+            @include gs.display-flex(column, space-around, center);
+            margin: 0.9rem 0;
+        }
+    }
+}
+
+.error__message{
+    color: gs.$secondary-color;
+    font-size: 0.9rem;
+}

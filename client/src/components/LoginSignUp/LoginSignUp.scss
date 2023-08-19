@@ -1,0 +1,121 @@
+@use '../../global-styles/' as gs;
+
+.flip {
+    background-color: transparent;
+    width: 23rem;
+    height: 27rem;
+    perspective: 1000px;
+
+    &__wrapper {
+        width: 100%;
+        @include gs.display-flex(column, center, center);
+        padding: 0 1.5rem 2.5rem;
+    }
+
+    &__titles__wrapper {
+        width: 15rem;
+        @include gs.display-flex(row, space-between, center);
+        padding-left: 1.2rem;
+
+        &>h3 {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+
+    &__button {
+        width: 5rem;
+        position: relative;
+
+        .arrow {
+            color: gs.$secondary-color;
+            font-size: 2rem;
+            cursor: pointer;
+            position: relative;
+            border-radius: 50%;
+            border: 2px solid rgb(66, 65, 65);
+            box-shadow: 0 0 10px 0px #00000085;
+            background: #000;
+        }
+
+        &::after {
+            position: absolute;
+            z-index: -1;
+            content: '';
+            width: 100%;
+            height: 0.8rem;
+            background: red;
+            bottom: 0.2rem;
+            left: 0;
+            border-radius: 1rem;
+            border: 1px solid #000;
+            -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.88);
+            box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.88);
+            ;
+        }
+    }
+
+    &__inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 1.5s;
+        transform-style: preserve-3d;
+
+
+        &__front,
+        &__back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        &__back {
+            transform: rotateY(180deg);
+        }
+    }
+}
+
+.rotate {
+    transform: rotateY(180deg);
+}
+
+
+.move__right {
+    animation: moveRight 1s linear;
+    animation-fill-mode: forwards;
+
+}
+
+.move__left {
+    animation: moveLeft 1s linear;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes moveRight {
+    from {
+        left: 0;
+        rotate: 0deg;
+    }
+    
+    to {
+        left: 2.8rem;
+        rotate: 450deg;
+    }
+    
+}
+
+@keyframes moveLeft {
+    from {
+        left: 2.8rem;
+        rotate: 450deg;
+    }
+    
+    to {
+        left: 0;
+        rotate: 0deg;
+    }
+}

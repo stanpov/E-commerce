@@ -1,0 +1,58 @@
+@mixin display-flex ($direction, $content, $items) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $content;
+    align-items: $items;
+}
+
+@mixin page-center ($direction, $content, $items) {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $content;
+    align-items: $items;
+}
+
+@mixin shadow ($blur, $spread ) {
+    box-shadow: 0px 0px $blur $spread rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 0px $blur $spread rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px $blur $spread rgba(0, 0, 0, 0.75);
+}
+
+
+@mixin form-setter () {
+    @include shadow(13px, 1px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 23rem;
+    min-height: 28rem;
+    text-align: center;
+    padding: 1rem 0.6rem;
+    border-radius: 0.5rem;
+    margin: 1rem auto;
+    background-image: url(../../public/bg3.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: $forms-color;
+
+    .form__submit__button {
+        border: 1px solid $secondary-color;
+        color: $forms-color;
+        background: transparent;
+        font-size: 1.25rem;
+        padding: 0.5rem 1.3rem;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 0.5rem;
+        transition: 0.4s;
+        
+        &:hover{
+            background: $secondary-color;
+            color: #000000;
+        }
+    }
+
+}
