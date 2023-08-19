@@ -1,15 +1,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-import About from "./pages/About/About";
+import {About} from "./pages/About/About";
 import Home from "./pages/Home/Home";
 import Cart from "./components/Cart/Cart";
 import Products from "./components/Products/Products";
-import Contacts from "./pages/Contacts/Contacts";
 import WishList from "./pages/WishList/WishList";
-
-import "./App.css";
-import "./variables.css";
+import {Contacts} from "./pages/Contacts/Contacts";
+import { LoginSignUp } from "./components/LoginSignUp/LoginSignUp";
+// import {SignUp} from "./components/SignUp/SignUp";
 
 function App() {
   return (
@@ -22,6 +21,7 @@ function App() {
           <Route path="products" element={<Products />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="wishlist" element={<WishList />} />
+          <Route path="login-signup" element={<LoginSignUp />} />
         </Route>
       </Routes>
     </>

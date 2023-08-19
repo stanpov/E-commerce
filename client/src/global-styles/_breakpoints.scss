@@ -1,0 +1,19 @@
+//mobile 320/767    tablet 768/991   display 992/...
+
+$breakpoints-down: (
+    'mobile-start':20em,
+    'tablet-start':48em,
+    'display-start':62em
+);
+
+$breakpoints-up: (
+    'mobile-end':47.9375em,
+    'tablet-end':61.9375em,
+    'display-end':90em
+);
+
+@mixin breakpoint ($size-start, $size-end) {
+    @media (min-width: map-get($breakpoints-down, $size-start)) and (max-width: map-get($breakpoints-up, $size-end)) {
+        @content;
+    }
+}

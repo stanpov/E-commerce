@@ -1,0 +1,239 @@
+@use '../../global-styles/' as globalStyles;
+
+header {
+    background-color: globalStyles.$header-color;
+    width: 100%;
+    height: 4.375rem;
+    @include globalStyles.display-flex(none, none, center);
+}
+
+
+.navigation {
+    width: 100%;
+    @include globalStyles.display-flex(none, none, center);
+
+    @include globalStyles.breakpoint(mobile-start, mobile-end) {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 3.13rem;
+    }
+
+    &__logo__wrapper {
+        margin-left: 1.88rem;
+        width: 3.13rem;
+        height: 3.13rem;
+        @include globalStyles.breakpoint(mobile-start, mobile-end) {
+            margin-left: 0;
+        }
+    }
+
+    &__list {
+        @include globalStyles.display-flex(none, space-around, center);
+        list-style: none;
+        width: 100%;
+
+        @include globalStyles.breakpoint(mobile-start, mobile-end) {
+            @include globalStyles.display-flex(column, space-evenly, center);
+        }
+
+        &__item,
+        &__basket {
+            font-size: 1.25rem;
+
+            @include globalStyles.breakpoint(mobile-start, mobile-end) {
+                display: none;
+            }
+
+            @include globalStyles.breakpoint(tablet-start, tablet-end) {
+                font-size: 1.12rem;
+            }
+
+            &>a {
+                text-decoration: none;
+                color: globalStyles.$light-color;
+                position: relative;
+
+                &::after {
+                    position: absolute;
+                    bottom: -5px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    width: 0%;
+                    content: "";
+                    color: transparent;
+                    background-color: globalStyles.$secondary-color;
+                    height: 0.1rem;
+                }
+
+                &:hover::after {
+                    animation: fill 1s forwards;
+                    -webkit-animation: fill 1s forwards;
+                    -moz-animation: fill 1s forwards;
+                    opacity: 1;
+
+                    @include globalStyles.breakpoint(mobile-start, mobile-end) {
+                        display: none;
+                    }
+
+                }
+            }
+
+            &>a,
+            &>a::after,
+            &>a::before {
+                transition: all 0.4s;
+            }
+        }
+
+        &__basket {
+            cursor: pointer;
+            position: relative;
+
+            @include globalStyles.breakpoint(mobile-start, mobile-end) {
+                display: none;
+            }
+
+            &__icon {
+                color: globalStyles.$light-color;
+                width: 1.57rem;
+                height: 1.57rem;
+            }
+
+            &__count {
+                position: absolute;
+                top: -8px;
+                background-color: globalStyles.$light-color;
+                right: -20px;
+                width: 22px;
+                border-radius: 100%;
+                text-align: center;
+                height: 20px;
+                font-size: 14px;
+
+                @include globalStyles.breakpoint(mobile-start, mobile-end) {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .burger__menu {
+        position: relative;
+        display: none;
+
+        @include globalStyles.breakpoint(mobile-start, mobile-end) {
+            display: block;
+        }
+
+        .hamburger {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+
+            .line {
+                display: block;
+                width: 30px;
+                height: 3px;
+                background-color: #fff;
+                margin-block: 8px;
+                border-radius: 4px;
+                transition: transform 0.6s;
+                opacity: 0.25s;
+            }
+
+            &.active .line:nth-child(1) {
+                transform: translateY(1rem);
+                rotate: -45deg;
+                transition: all 0.5s;
+            }
+
+            &.active .line:nth-child(2) {
+                opacity: 0;
+            }
+
+            &.active .line:nth-child(3) {
+                transform: translateY(-1rem);
+                rotate: 45deg;
+                transition: all 0.5s;
+            }
+        }
+
+    }
+
+    .burger__active {
+        @include globalStyles.breakpoint(mobile-start, mobile-end) {
+            width: 100%;
+            margin-left: 0;
+            position: absolute;
+            @include globalStyles.display-flex(column, space-around, none);
+            top: 4.375rem;
+            left: 0;
+            background-color: globalStyles.$main-color;
+            transition: all 0.7s ease;
+            height: calc(100vh - 4.375rem);
+            animation: opacityShow 0.7s ease-in-out;
+            z-index: 100;
+
+            &>li {
+                display: block !important;
+                text-align: center;
+                margin-inline: auto;
+
+                &:hover {
+                    transition: all 0.3s ease-in-out;
+                    transform: scale(1.3);
+                }
+
+                &>a {
+                    color: black;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                }
+
+                &:nth-child(3),
+                &:nth-child(5),
+                &:nth-child(4) {
+                    order: 1;
+                }
+            }
+
+        }
+    }
+}
+
+.active {
+    color: globalStyles.$primary-color;
+}
+
+@keyframes fill {
+    0% {
+        width: 0%;
+        height: 1.5px;
+    }
+
+    50% {
+        width: 100%;
+        height: 1.5px;
+    }
+
+    100% {
+        width: 100%;
+        height: 1.5px;
+    }
+}
+
+@keyframes opacityShow {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

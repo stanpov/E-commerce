@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { SlBasket } from "react-icons/sl";
-import "./Header.css";
+import { Logo } from "../common/Logo/Logo";
+import "./Header.scss";
 
 const Header = () => {
     const [isActive, setIsActive] = useState(false);
@@ -11,13 +12,12 @@ const Header = () => {
     };
     return (
         <header>
-            <nav>
-                <Link to={"/"} className="logoContainer">
-                    <img src="eShopLogo.png" alt="mainLogo" className="navLogo" />
-                </Link>
-
-                <ul className={isActive ? "burgerActive" : undefined}>
-                    <li>
+            <nav className="navigation">
+                <div className="navigation__logo__wrapper">
+                    <Logo />
+                </div>
+                <ul className={isActive ? "burger__active" : "navigation__list"}>
+                    <li className="navigation__list__item">
                         <NavLink
                             to={"/products"}
                             className={({ isActive }) => (isActive ? "active" : undefined)}
@@ -25,7 +25,7 @@ const Header = () => {
                             Products
                         </NavLink>
                     </li>
-                    <li>
+                    <li className="navigation__list__item">
                         <NavLink
                             to={"/wishlist"}
                             className={({ isActive }) => (isActive ? "active" : undefined)}
@@ -33,7 +33,7 @@ const Header = () => {
                             Wish List
                         </NavLink>
                     </li>
-                    <li>
+                    <li className="navigation__list__item">
                         <NavLink
                             to={"/contacts"}
                             className={({ isActive }) => (isActive ? "active" : undefined)}
@@ -41,7 +41,7 @@ const Header = () => {
                             Contacts
                         </NavLink>
                     </li>
-                    <li>
+                    <li className="navigation__list__item">
                         <NavLink
                             to={"/about"}
                             className={({ isActive }) => (isActive ? "active" : undefined)}
@@ -49,18 +49,26 @@ const Header = () => {
                             About
                         </NavLink>
                     </li>
-                    <li>
+                    <li className="navigation__list__item">
                         <NavLink
-                            to={"/login"}
+                            to={"/login-signup"}
                             className={({ isActive }) => (isActive ? "active" : undefined)}
                         >
-                            Login
+                            Login / SignUp
                         </NavLink>
                     </li>
-                    <li className="basket-container">
+                    {/* <li className="navigation__list__item">
+                        <NavLink
+                            to={"/sign-up"}
+                            className={({ isActive }) => (isActive ? "active" : undefined)}
+                        >
+                            Sign Up
+                        </NavLink>
+                    </li> */}
+                    <li className="navigation__list__basket">
                         {!isActive ? (
                             <NavLink to={"/cart"} data-testid="icon-test">
-                                <SlBasket className="basketIcon" />
+                                <SlBasket className="navigation__list__basket__icon" />
                             </NavLink>
                         ) : (
                             <NavLink
@@ -72,10 +80,11 @@ const Header = () => {
                             </NavLink>
                         )}
 
-                        <p className="numberItemsInBasket">5</p>
+                        <p className="navigation__list__basket__count">5</p>
                     </li>
                 </ul>
-                <div className="burgerMenu" data-testid="size-test">
+
+                <div className="burger__menu" data-testid="size-test">
                     <button
                         className={isActive ? "hamburger active" : "hamburger"}
                         onClick={openBurgerMenu}

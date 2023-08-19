@@ -1,0 +1,25 @@
+@use '../../global-styles/' as gs;
+
+.login {
+    @include gs.form-setter();
+
+    &__form {
+        &__content__wrapper {
+            @include gs.display-flex(column, space-around, center);
+            margin: 0.9rem 0;
+        }
+    }
+}
+
+.error__message{
+    color: gs.$secondary-color;
+    font-size: 0.9rem;
+}
+
+.forgot__password {
+    @include gs.display-flex(row, center,center);
+    margin-top: 1rem;
+    color: rgb(20, 149, 255);
+    text-decoration: underline;
+    font-size: 0.93rem;
+}
