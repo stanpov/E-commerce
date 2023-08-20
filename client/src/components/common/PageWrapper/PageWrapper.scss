@@ -1,5 +1,9 @@
+@use '../../../global-styles/' as gs;
+
 .pages__wrapper {
-    width: 100%;
+    position: relative;
+    @include gs.page-center (column, center, center);
     min-height: 90vh;
     padding: 1.5rem;
+    overflow: hidden;
 }
