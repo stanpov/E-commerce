@@ -258,6 +258,12 @@ export const changeMyPassword = async (req, res) => {
       .json({ message: "User with this email does not exists." });
   }
 
+  if (password.length <= 4) {
+    return res
+      .status(400)
+      .send({ message: "Password should be at least 5 characters long." });
+  }
+
   const isMatch = await bcrypt.compare(
     password.toString(),
     existingUser[0].password
