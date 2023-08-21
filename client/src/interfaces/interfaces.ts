@@ -33,3 +33,9 @@ export interface InitalState {
   isError: boolean;
   message: string | null;
 }
+
+export interface ChangePasswordData {
+  email: string;
+  password: string;
+  newPassword: string;
+}

@@ -1,11 +1,13 @@
 import axios from "axios";
-import { baseUrl, config, setToken } from "../../Utils/Utils";
+import { config, setToken } from "../../Utils/Utils";
 import {
   UserDataLogin,
   UserDataRegister,
   UserDataResponse,
   UserLoginResponse,
 } from "../../interfaces/interfaces";
+
+const baseUrl = process.env.BASE_URL;
 
 const register = async (
   userData: UserDataRegister

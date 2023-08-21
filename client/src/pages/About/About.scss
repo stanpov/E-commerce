@@ -3,13 +3,14 @@
 .about {
     @include gs.display-flex(column, center, center);
     margin-top: -3rem;
+    scroll-behavior: smooth;
 
     &__article {
         @include gs.page-center(column, center, center);
         position: relative;
 
         &__content {
-            @include gs.before-after-gradient(gs.$gradient-ogange, gs.$gradient-purple, 17rem, 11rem);
+            // @include gs.before-after-gradient(gs.$gradient-ogange, gs.$gradient-purple, 17rem, 11rem);
             @include gs.display-flex(column, space-between, center);
             position: relative;
             max-width: 56rem;
@@ -21,11 +22,22 @@
             text-align: center;
             transition: 1s;
 
+            &__gradient__up {
+                position: absolute;
+                top: -0.8rem;
+                left: -0.8rem;
+                display: block;
+                background: gs.$gradient-ogange;
+                background: linear-gradient(52deg, gs.$gradient-ogange, gs.$gradient-purple 94%);
+                width: 17rem;
+                height: 11rem;
+                z-index: -1;
+                transition: 1s;
+            }
 
             &:hover {
-                @include gs.before-after-gradient(gs.$gradient-ogange, gs.$gradient-purple, 0rem, 0rem);
-                @include gs.shadow(17px ,-6px);
-                //delay
+                //     @include gs.before-after-gradient(gs.$gradient-ogange, gs.$gradient-purple, 0rem, 0rem);
+                @include gs.shadow(17px, -6px);
             }
 
             &>h1 {
@@ -39,7 +51,8 @@
             &__logo {
                 width: 3.5rem;
                 transition: 1s;
-                &:hover{
+
+                &:hover {
                     transform: rotate(360deg)
                 }
             }
