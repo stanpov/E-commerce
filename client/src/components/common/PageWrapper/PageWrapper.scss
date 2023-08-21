@@ -3,6 +3,7 @@
 .pages__wrapper {
     position: relative;
     @include gs.page-center (column, center, center);
+    width: 100%;
     min-height: 90vh;
     padding: 1.5rem;
     overflow: hidden;
