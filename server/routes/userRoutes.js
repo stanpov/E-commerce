@@ -1,5 +1,13 @@
 import express from "express";
-import { createUser, login, logout } from "../controllers/userContraller.js";
+import {
+  changeMyPassword,
+  confirmPassword,
+  createUser,
+  login,
+  logout,
+  resetPasswor,
+  verifyUser,
+} from "../controllers/userContraller.js";
 import { isAuth } from "../utils/utils.js";
 
 const userRouter = express.Router();
@@ -9,5 +17,13 @@ userRouter.post("/signup", createUser);
 userRouter.post("/signin", login);
 
 userRouter.post("/signout", isAuth, logout);
+
+userRouter.get("/verify/:userId/:otp", verifyUser);
+
+userRouter.post("/resetpassword", resetPasswor);
+
+userRouter.put("/confirmpassword", confirmPassword);
+
+userRouter.put("/changepassword", changeMyPassword);
 
 export default userRouter;
