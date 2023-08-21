@@ -6,11 +6,11 @@ import './Login.scss';
 import { Link } from 'react-router-dom';
 
 interface LoginProps {
-
+    setIsPasswordForgot: (forgot: boolean) => void;
 };
 
 export const Login: React.FC<LoginProps> = ({
-
+    setIsPasswordForgot,
 }) => {
 
     const [isUsernameValid, setIsUsernameValid] = useState({ isValid: true, message: '' });
@@ -53,6 +53,10 @@ export const Login: React.FC<LoginProps> = ({
         }
     }
 
+    const forgotPasswordHandler = () =>{
+        setIsPasswordForgot(true);
+    }
+
     return (
         <section className='login'>
             <h1 className='login__title'>Login</h1>
@@ -88,7 +92,7 @@ export const Login: React.FC<LoginProps> = ({
                     }
                 </div>
                 <input type="submit" value={'Login'} className='form__submit__button' />
-                <Link className='forgot__password' to={''}>Forgot password?</Link>
+                <p onClick={forgotPasswordHandler} className='forgot__password' >Forgot password?</p>
             </form>
         </section>
     )

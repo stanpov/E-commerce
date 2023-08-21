@@ -6,7 +6,12 @@
     height: 27rem;
     perspective: 1000px;
 
+    &__height {
+        min-height: 35rem;
+    }
+
     &__wrapper {
+        position: absolute;
         width: 100%;
         @include gs.display-flex(column, center, center);
         padding: 0 1.5rem 2.5rem;
@@ -26,6 +31,7 @@
     &__button {
         width: 5rem;
         position: relative;
+        margin-top: 0.5rem;
 
         .arrow {
             color: gs.$secondary-color;
@@ -43,11 +49,11 @@
             z-index: -1;
             content: '';
             width: 100%;
-            height: 0.8rem;
+            height: 2.3rem;
             background: red;
-            bottom: 0.2rem;
+            bottom: 0.25rem;
             left: 0;
-            border-radius: 1rem;
+            border-radius: 1.2rem;
             border: 1px solid #000;
             -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.88);
             box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.88);
@@ -83,19 +89,92 @@
 }
 
 
-.move__right {
-    animation: moveRight 1s linear;
+.flip__right {
+    animation: flipRight 1s linear;
     animation-fill-mode: forwards;
 
 }
 
-.move__left {
-    animation: moveLeft 1s linear;
+.flip__left {
+    animation: flipLeft 1s linear;
     animation-fill-mode: forwards;
 }
 
+.hide__flipper{
+    display: none;
+}
 
-@keyframes moveRight {
+
+.first__right{
+    animation: firstRight 1.3s linear ;
+    animation-fill-mode: forwards;
+
+}
+.first__left{
+    right: -100%;
+    animation: firstLeft 1.3s linear ;
+    animation-fill-mode: forwards;
+
+}
+.second__right{
+    animation: secondRight 1.3s linear ;
+    animation-fill-mode: forwards;
+
+}
+.second__left{
+    right: -100%;
+    animation: secondLeft 1.3s linear ;
+    animation-fill-mode: forwards;
+
+}
+
+
+@keyframes firstRight{
+    from{
+        left: 0;
+        opacity: 1;
+    }
+
+    to{
+        left: -80%;
+        opacity: 0;
+    }
+}
+@keyframes firstLeft{
+    from{
+        left: -80%;
+        opacity: 0;
+    }
+
+    to{
+        left: 0;
+        opacity: 1;
+    }
+}
+@keyframes secondRight{
+    from{
+        right: -80%;
+        opacity: 0;
+    }
+
+    to{
+        right: 0;
+        opacity: 1;
+    }
+}
+@keyframes secondLeft{
+    from{
+        right: 0;
+        opacity: 1;
+    }
+
+    to{
+        right: -80%;
+        opacity: 0;
+    }
+}
+
+@keyframes flipRight {
     from {
         left: 0;
         rotate: 0deg;
@@ -108,7 +187,7 @@
     
 }
 
-@keyframes moveLeft {
+@keyframes flipLeft {
     from {
         left: 2.8rem;
         rotate: 450deg;

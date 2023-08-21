@@ -30,7 +30,8 @@ export const SignUp: React.FC<SignUpProps> = ({
         const email = target.email.value;
 
         if (isEmailValid.isValid && isPasswordValid.isValid && isUsernameValid.isValid) {
-           //TODO api calls
+           console.log(username,password,email);
+           
         }
 
     }

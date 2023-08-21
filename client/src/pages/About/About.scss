@@ -1,0 +1,71 @@
+@use '../../global-styles/' as gs;
+
+.about {
+    @include gs.display-flex(column, center, center);
+    margin-top: -3rem;
+
+    &__article {
+        @include gs.page-center(column, center, center);
+        position: relative;
+
+        &__content {
+            @include gs.before-after-gradient(gs.$gradient-ogange, gs.$gradient-purple, 17rem, 11rem);
+            @include gs.display-flex(column, space-between, center);
+            position: relative;
+            max-width: 56rem;
+            background: white;
+            min-height: 25rem;
+            margin-bottom: 3rem;
+            padding: 3rem;
+            box-shadow: inset 0 0 15px -3px #b1aeaed2;
+            text-align: center;
+            transition: 1s;
+
+
+            &:hover {
+                @include gs.before-after-gradient(gs.$gradient-ogange, gs.$gradient-purple, 0rem, 0rem);
+                @include gs.shadow(17px ,-6px)
+            }
+
+            &>h1 {
+                color: gs.$gradient-ogange;
+                background: -webkit-linear-gradient(0deg, gs.$gradient-ogange 15%, gs.$gradient-purple 50%, gs.$gradient-ogange 85%);
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                -webkit-text-stroke: 1px solid #000;
+            }
+
+            &__logo {
+                width: 3.5rem;
+                transition: 1s;
+                &:hover{
+                    transform: rotate(360deg)
+                }
+            }
+
+
+            &__icons {
+                @include gs.display-flex(row, space-evenly, center);
+                width: 19rem;
+
+                .about__icon {
+                    color: gs.$gradient-purple;
+                    border-radius: 30%;
+                    font-size: 3rem;
+                    padding: 0.4rem;
+                    background: gs.$gradient-ogange;
+                    transition: 1s;
+
+                    &:hover {
+                        cursor: pointer;
+                        background: gs.$gradient-purple;
+                        color: gs.$gradient-ogange;
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+        }
+
+    }
+}

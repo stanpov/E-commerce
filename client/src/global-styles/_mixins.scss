@@ -48,11 +48,40 @@
         font-weight: 600;
         border-radius: 0.5rem;
         transition: 0.4s;
-        
-        &:hover{
+
+        &:hover {
             background: $secondary-color;
             color: #000000;
         }
     }
+}
 
+@mixin before-after-gradient($first-color, $second-color ,$width,$height) {
+    &::after {
+        content: '';
+        position: absolute;
+        top: -0.8rem;
+        left: -0.8rem;
+        display: block;
+        background: $first-color;
+        background: linear-gradient(52deg, $first-color, $second-color 94%);
+        width: $width;
+        height: $height;
+        z-index: -1;
+        transition: 1s;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -0.8rem;
+        right: -0.8rem;
+        display: block;
+        background: $second-color;
+        background: linear-gradient(52deg, $second-color, $first-color 94%);
+        width: $width;
+        height: $height;
+        z-index: -1;
+        transition: 1s;
+    }
 }
