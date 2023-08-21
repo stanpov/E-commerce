@@ -24,7 +24,8 @@
 
             &:hover {
                 @include gs.before-after-gradient(gs.$gradient-ogange, gs.$gradient-purple, 0rem, 0rem);
-                @include gs.shadow(17px ,-6px)
+                @include gs.shadow(17px ,-6px);
+                //delay
             }
 
             &>h1 {

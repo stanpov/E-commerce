@@ -1,7 +1,30 @@
-import React from "react";
+import React from 'react';
+import { TypeAnimation } from 'react-type-animation';
+import './Home.scss';
+import { PageWrapper } from '../../components/common/PageWrapper/PageWrapper';
 
-const Home = () => {
-  return <div>Home</div>;
-};
-
-export default Home;
+export const Home = () => {
+    return (
+        <PageWrapper>
+            <section className='home__page'>
+                <h1 className='home__page__title'>eShop</h1>
+                <h3 className='home__page__animation'> Choose us because,
+                    <TypeAnimation
+                        sequence={[
+                            ' 555555555555555555', // Types 'One'
+                            2000, // Waits 1s
+                            ' 7777777777777', // Deletes 'One' and types 'Two'
+                            2000, // Waits 2s
+                            '999999999999', // Types 'Three' without deleting 'Two'
+                            2000,
+                        ]}
+                        wrapper="span"
+                        cursor={true}
+                        repeat={Infinity}
+                        style={{ fontSize: '1em', paddingLeft: '5px', }}
+                    />
+                </h3>
+            </section>
+        </PageWrapper>
+    )
+}
