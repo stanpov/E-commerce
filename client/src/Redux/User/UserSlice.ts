@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { InitalState } from '../../interfaces/interfaces'
-import { changeMyPassword } from './UersActions';
+import { changeMyPassword, confirmMyPassword, resetMyPassword } from './UersActions';
 
 
 
@@ -22,6 +22,7 @@ export const userSlice = createSlice({
                 state.isLoading = false;
                 state.message = action.payload.data.message;
             })
+
             .addCase(changeMyPassword.pending, (state: InitalState) => {
                 state.isError = false;
                 state.isLoading = true;
@@ -33,7 +34,45 @@ export const userSlice = createSlice({
                 state.isLoading = false;
                 state.message = action.error as string;
             })
+
+            .addCase(confirmMyPassword.fulfilled, (state: InitalState, action) => {
+                state.isError = false;
+                state.isLoading = false;
+                state.message = action.payload.data.message;
+            })
+
+            .addCase(confirmMyPassword.pending, (state: InitalState) => {
+                state.isError = false;
+                state.isLoading = true;
+                state.message = '';
+            })
+
+            .addCase(confirmMyPassword.rejected, (state: InitalState, action) => {
+                state.isError = true;
+                state.isLoading = false;
+                state.message = action.error as string;
+            })
+
+            .addCase(resetMyPassword.fulfilled, (state: InitalState, action) => {
+                state.isError = false;
+                state.isLoading = false;
+                state.message = action.payload.data.message;
+            })
+
+            .addCase(resetMyPassword.pending, (state: InitalState) => {
+                state.isError = false;
+                state.isLoading = true;
+                state.message = '';
+            })
+
+            .addCase(resetMyPassword.rejected, (state: InitalState, action) => {
+                state.isError = true;
+                state.isLoading = false;
+                state.message = action.error as string;
+            })
     }
-})
+});
+
+export const getUserData = (state:any) => state
 
 export const userReducer = userSlice.reducer;

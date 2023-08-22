@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CLable } from '../common/CLable/CLable';
 import { CInput } from '../common/CInput/CInput';
 import './EnterCode.scss';
+import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';
 
 interface EnterCodeProps {
     setIsPasswordForgot:(forgot:boolean) =>void;
@@ -60,7 +61,7 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
                             : null
                     }
                 </div>
-                <input type="submit" value={'Check verification code'} className='form__submit__button' />
+                <CInputSubmit value='Check verification code'/>
             </form>
         </section>
     )

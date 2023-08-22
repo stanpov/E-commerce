@@ -7,7 +7,7 @@ import {
   UserLoginResponse,
 } from "../../interfaces/interfaces";
 
-const baseUrl = process.env.BASE_URL;
+const baseUrl = `${process.env.REACT_APP_BASE_URL}`;
 
 const register = async (
   userData: UserDataRegister

@@ -37,23 +37,6 @@
     background-size: cover;
     background-repeat: no-repeat;
     color: $forms-color;
-
-    .form__submit__button {
-        border: 1px solid $secondary-color;
-        color: $forms-color;
-        background: transparent;
-        font-size: 1.25rem;
-        padding: 0.5rem 1.3rem;
-        cursor: pointer;
-        font-weight: 600;
-        border-radius: 0.5rem;
-        transition: 0.4s;
-
-        &:hover {
-            background: $secondary-color;
-            color: #000000;
-        }
-    }
 }
 
 @mixin before-after-gradient($first-color, $second-color , $width, $height) {

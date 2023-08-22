@@ -39,3 +39,12 @@ export interface ChangePasswordData {
   password: string;
   newPassword: string;
 }
+
+export interface ConfirmPasswordData {
+  email:string;
+  tempPassword:string;
+}
+
+export interface ResetPasswordData {
+  email:string;
+}
