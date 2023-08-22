@@ -2,27 +2,37 @@ import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import './Home.scss';
 import { PageWrapper } from '../../components/common/PageWrapper/PageWrapper';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../Redux';
+import { Logo } from '../../components/common/Logo/Logo';
+import { motion } from 'framer-motion';
 
 export const Home = () => {
-    // const dispatch = useDispatch<AppDispatch>();
-
 
     return (
         <PageWrapper>
             <section className='home__page'>
-                <h1 className='home__page__title'>eShop</h1>
-                <h3 className='home__page__animation'> Choose us because
+                {/* <h1 className='home__page__title'>eShop</h1> */}
+                <motion.div
+                    variants={{
+                        start: { width: 0, opacity: 0 },
+                        end: { width: 320, opacity: 1 },
+                    }}
+                    initial='start'
+                    whileInView='end'
+                    animate={{ rotateY: 360 }}
+                    transition={{ duration: 2, delay: 1 }}
+                    className='home__page__logo__wrapper'>
+                    <Logo />
+                </motion.div>
+                <h3 className='home__page__animation'> Few reasons to choose eShop <br />
                     <TypeAnimation
                         sequence={[
-                            ' we will give you the best price!', 
+                            ' High quality products !', 'Best brands !!!',
                             3000,
-                            ' our products are with high quality!', 
-                            3000, 
-                            'we\'ll give you an extra-long warranty!',
+                            'Extra-long warranty !', 'Plus 12 months !!!',
                             3000,
-                            ' you delivery will be for free!',
+                            ' Best price !', 'Up to -70% OFF !!!',
+                            3000,
+                             'Great Deals !','FREE Delivery !!!',
                             3000,
                         ]}
                         wrapper="span"
