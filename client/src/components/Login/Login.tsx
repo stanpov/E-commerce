@@ -35,6 +35,7 @@ export const Login: React.FC<LoginProps> = ({
 
         if (isPasswordValid.isValid && email !== '' && isEmailValid.isValid && password !== '') {
             dispatch(login({email,password}));
+            navigate('/');
             console.log(email, password);
 
         }

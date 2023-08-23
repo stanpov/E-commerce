@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TypeAnimation } from 'react-type-animation';
-import './Home.scss';
 import { PageWrapper } from '../../components/common/PageWrapper/PageWrapper';
 import { Logo } from '../../components/common/Logo/Logo';
 import { motion } from 'framer-motion';
+import './Home.scss';
 
 export const Home = () => {
 
@@ -23,7 +23,7 @@ export const Home = () => {
                     className='home__page__logo__wrapper'>
                     <Logo />
                 </motion.div>
-                <h3 className='home__page__animation'> Few reasons to choose eShop <br />
+                <h3 className='home__page__animation'> Why to choose eShop? <br />
                     <TypeAnimation
                         sequence={[
                             ' High quality products !', 'Best brands !!!',
@@ -32,7 +32,7 @@ export const Home = () => {
                             3000,
                             ' Best price !', 'Up to -70% OFF !!!',
                             3000,
-                             'Great Deals !','FREE Delivery !!!',
+                            'Great Deals !', 'FREE Delivery !!!',
                             3000,
                         ]}
                         wrapper="span"

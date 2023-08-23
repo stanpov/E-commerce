@@ -41,6 +41,7 @@ export const SignUp: React.FC<SignUpProps> = ({
             console.log(target);
             
             dispatch(register({userName,password,email}));
+            navigate('/');
             //TODO notifications
         } else {
 

@@ -76,4 +76,6 @@ export const authSlice = createSlice({
   },
 });
 
+export const getUserId = (state:any) => state.auth.userId;
+
 export const authReducer = authSlice.reducer;

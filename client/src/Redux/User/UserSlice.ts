@@ -73,6 +73,5 @@ export const userSlice = createSlice({
     }
 });
 
-export const getUserData = (state:any) => state
 
 export const userReducer = userSlice.reducer;
