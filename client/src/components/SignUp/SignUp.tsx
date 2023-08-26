@@ -42,7 +42,7 @@ export const SignUp: React.FC<SignUpProps> = ({
             
             dispatch(register({userName,password,email}));
             navigate('/');
-            //TODO notifications
+            //TODO notifications tastar
         } else {
 
         }
