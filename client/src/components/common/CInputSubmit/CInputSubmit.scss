@@ -1,0 +1,18 @@
+@use '../../../global-styles/' as gs;
+
+.form__submit__button {
+    border: 1px solid gs.$secondary-color;
+    color: gs.$forms-color;
+    background: transparent;
+    font-size: 1.25rem;
+    padding: 0.5rem 1.3rem;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: 0.4s;
+
+    &:hover {
+        background: gs.$secondary-color;
+        color: #000000;
+    }
+}

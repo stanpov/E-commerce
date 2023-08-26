@@ -2,7 +2,12 @@ import { useState } from 'react';
 // import { Link, useNavigate } from 'react-router-dom';
 import { CLable } from '../common/CLable/CLable';
 import { CInput } from '../common/CInput/CInput';
+import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';
 import './SignUp.scss';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { register } from '../../Redux/Auth/AuthAction';
+import { AppDispatch } from '../../Redux';
 
 interface SignUpProps {
 
@@ -16,22 +21,30 @@ export const SignUp: React.FC<SignUpProps> = ({
     const [isPasswordValid, setIsPasswordValid] = useState({ isValid: true, message: '' });
     const [isEmailValid, setIsEmailValid] = useState({ isValid: true, message: '' });
 
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const target = e.target as typeof e.target & {
-            username: { value: string };
+            userName: { value: string };
             password: { value: string };
             email: { value: string };
         };
 
-        const username = target.username.value;
+        const userName = target.userName.value;
         const password = target.password.value;
         const email = target.email.value;
 
-        if (isEmailValid.isValid && isPasswordValid.isValid && isUsernameValid.isValid) {
-           console.log(username,password,email);
-           
+        if (isEmailValid.isValid && userName !== '' && isPasswordValid.isValid && password !== '' && isUsernameValid.isValid && email !== '') {
+            console.log(userName, password, email);
+            console.log(target);
+            
+            dispatch(register({userName,password,email}));
+            navigate('/');
+            //TODO notifications
+        } else {
+
         }
 
     }
@@ -72,11 +85,11 @@ export const SignUp: React.FC<SignUpProps> = ({
             <h1 className='sign__up__title'>Sign Up</h1>
             <form onSubmit={submitHandler} className='sign__up__form'>
                 <div className='sign__up__form__content__wrapper'>
-                    <CLable inputId={'username'} title={'Username'} />
+                    <CLable inputId={'userName'} title={'Username'} />
                     <CInput
                         type='text'
-                        id='username'
-                        name='username'
+                        id='userName'
+                        name='userName'
                         placeholder='jon-green'
                         onBlur={onBlurHandlerUsername}
                         required
@@ -119,7 +132,7 @@ export const SignUp: React.FC<SignUpProps> = ({
                             : null
                     }
                 </div>
-                <input type="submit" value={'Sign Up'} className='form__submit__button' />
+                <CInputSubmit value='Sign Up' />
             </form>
         </section>
     )

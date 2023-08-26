@@ -2,8 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 import { CLable } from '../common/CLable/CLable';
 import { CInput } from '../common/CInput/CInput';
+import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../Redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../Redux/Auth/AuthAction';
 import './Login.scss';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 interface LoginProps {
     setIsPasswordForgot: (forgot: boolean) => void;
@@ -13,35 +18,38 @@ export const Login: React.FC<LoginProps> = ({
     setIsPasswordForgot,
 }) => {
 
-    const [isUsernameValid, setIsUsernameValid] = useState({ isValid: true, message: '' });
+    const [isEmailValid, setIsEmailValid] = useState({ isValid: true, message: '' });
     const [isPasswordValid, setIsPasswordValid] = useState({ isValid: true, message: '' });
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const target = e.target as typeof e.target & {
-            username: { value: string };
+            email: { value: string };
             password: { value: string };
         };
 
-        const username = target.username.value;
+        const email = target.email.value;
         const password = target.password.value;
 
-        if (isPasswordValid.isValid && isUsernameValid.isValid) {
-            //TODO api calls
-            console.log(username, password);
+        if (isPasswordValid.isValid && email !== '' && isEmailValid.isValid && password !== '') {
+            dispatch(login({email,password}));
+            navigate('/');
+            console.log(email, password);
 
         }
-    }
+    };
 
-    const onBlurHandlerUsername = (e: React.FocusEvent<HTMLInputElement>): void => {
+    const onBlurHandlerEmail = (e: React.FocusEvent<HTMLInputElement>): void => {
         if (e.target.value === '') {
-            setIsUsernameValid({ isValid: false, message: 'Username is required!' });
-        } else if (e.target.value.length < 5) {
-            setIsUsernameValid({ isValid: false, message: 'Username needs to be at least 5 characters long!' });
+            setIsEmailValid({ isValid: false, message: 'Email is required!' });
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(e.target.value)) {
+            setIsEmailValid({ isValid: false, message: 'Invalid email!' });
         } else {
-            setIsUsernameValid({ isValid: true, message: '' });
+            setIsEmailValid({ isValid: true, message: '' });
         }
-    }
+    };
 
     const onBlurHandlerPassword = (e: React.FocusEvent<HTMLInputElement>): void => {
         if (e.target.value === '') {
@@ -51,28 +59,28 @@ export const Login: React.FC<LoginProps> = ({
         } else {
             setIsPasswordValid({ isValid: true, message: '' });
         }
-    }
+    };
 
-    const forgotPasswordHandler = () =>{
+    const forgotPasswordHandler = () => {
         setIsPasswordForgot(true);
-    }
+    };
 
     return (
         <section className='login'>
             <h1 className='login__title'>Login</h1>
             <form onSubmit={submitHandler} className='login__form'>
                 <div className='login__form__content__wrapper'>
-                    <CLable inputId={'loginUsername'} title={'Username'} />
+                    <CLable inputId={'loginEmail'} title={'Email'} />
                     <CInput
-                        type='text'
-                        id='loginUsername'
-                        name='username'
-                        placeholder='jon-green'
-                        onBlur={onBlurHandlerUsername}
+                        type='email'
+                        id='loginEmail'
+                        name='email'
+                        placeholder='jon-green@gmail.com'
+                        onBlur={onBlurHandlerEmail}
                     />
                     {
-                        !isUsernameValid.isValid
-                            ? <p className='error__message'>{isUsernameValid.message}</p>
+                        !isEmailValid.isValid
+                            ? <p className='error__message'>{isEmailValid.message}</p>
                             : null
                     }
                 </div>
@@ -91,7 +99,7 @@ export const Login: React.FC<LoginProps> = ({
                             : null
                     }
                 </div>
-                <input type="submit" value={'Login'} className='form__submit__button' />
+                <CInputSubmit value='Login' />
                 <p onClick={forgotPasswordHandler} className='forgot__password' >Forgot password?</p>
             </form>
         </section>

@@ -1,0 +1,14 @@
+@use '../../../global-styles/' as gs;
+
+.corner__gradient__up {
+    position: absolute;
+    top: -0.8rem;
+    left: -0.8rem;
+    display: block;
+    background: gs.$gradient-ogange;
+    background: linear-gradient(52deg, gs.$gradient-ogange, gs.$gradient-purple 94%);
+    width: 17rem;
+    height: 11rem;
+    z-index: -1;
+    transition: 1s ease-out;
+}

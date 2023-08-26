@@ -4,7 +4,7 @@ import Header from "./Header";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import App from "../../App";
-import Home from "../../pages/Home/Home";
+import {Home} from "../../pages/Home/Home";
 
 let route = "/";
 

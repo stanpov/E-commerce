@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { CLable } from '../common/CLable/CLable'
 import { CInput } from '../common/CInput/CInput';
 import './EnterEmail.scss';
+import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';
 
 interface EnterEmailProps {
-    setRotateVerification:(rotate:boolean) =>void;
+    setRotateVerification: (rotate: boolean) => void;
 };
 
 export const EnterEmail: React.FC<EnterEmailProps> = ({
@@ -12,12 +13,12 @@ export const EnterEmail: React.FC<EnterEmailProps> = ({
 }) => {
 
     const [isValid, setIsValid] = useState({ isValid: false, message: '' });
-    
+
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const target = e.target as typeof e.target & { verificationEmail: { value: string } };
         const email: string = target.verificationEmail.value;
-        if (isValid.isValid) {
+        if (isValid.isValid && email !== '') {
             //TODO api calls
             setRotateVerification(true);
             console.log(email);
@@ -67,7 +68,7 @@ export const EnterEmail: React.FC<EnterEmailProps> = ({
                             : null
                     }
                 </div>
-                <input type="submit" value={'Send verification code'} className='form__submit__button' />
+                <CInputSubmit value='Send verification code' />
             </form>
         </section>
     )
