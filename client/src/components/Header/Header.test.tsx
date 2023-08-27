@@ -1,21 +1,39 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Header from "./Header";
-import { BrowserRouter, MemoryRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import userEvent from "@testing-library/user-event";
 import App from "../../App";
 import { Home } from "../../pages/Home/Home";
 import { store } from "../../Redux";
+import configureStore from "redux-mock-store";
 
 let route = "/";
+const loggedInState = {
+  auth: {
+    isAdmin: false,
+    userId: "my logged id test",
+    isError: false,
+    isLoading: false,
+    message: "User successfully logged in",
+  },
+};
 
-function renderWithProviders(element: React.ReactElement) {
-  render(
-    <Provider store={store}>
-      <BrowserRouter>{element}</BrowserRouter>
-    </Provider>
-  );
+function renderWithProviders(element: React.ReactElement, mockStore?: any) {
+  if (mockStore) {
+    render(
+      <Provider store={mockStore}>
+        <BrowserRouter>{element}</BrowserRouter>
+      </Provider>
+    );
+  } else {
+    render(
+      <Provider store={store}>
+        <BrowserRouter>{element}</BrowserRouter>
+      </Provider>
+    );
+  }
 }
 
 beforeEach(() => {
@@ -100,5 +118,64 @@ describe("Testing the functionality of the Header", () => {
     expect(buttonBurger).not.toHaveClass("active");
     await user.click(screen.getByTestId("button-test"));
     expect(buttonBurger).toHaveClass("active");
+  });
+});
+
+describe("Testing when user is logged in", () => {
+  test("Should render logout link, when user is logged in", async () => {
+    const user = userEvent;
+    const mockStore = configureStore();
+    const userStore = mockStore(loggedInState);
+    userStore.clearActions();
+
+    renderWithProviders(<Header />, userStore);
+    const LogoutLink = await screen.getByTestId("logout-link");
+    const LogoutChildLink = await screen.getByRole("link", { name: "Logout" });
+    expect(LogoutLink).toHaveClass("navigation__list__basket");
+    await user.click(LogoutChildLink);
+    expect(LogoutChildLink).toHaveClass("active");
+  });
+
+  test("Should render wish list link, when user is logged in", async () => {
+    const user = userEvent;
+    const mockStore = configureStore();
+    const userStore = mockStore(loggedInState);
+    userStore.clearActions();
+
+    renderWithProviders(<Header />, userStore);
+    const WishlistLink = await screen.getByTestId("wishlist-link");
+    const wishListListChild = await screen.getByRole("link", {
+      name: "Wish List",
+    });
+    expect(WishlistLink).toHaveClass("navigation__list__item");
+    await user.click(wishListListChild);
+    expect(wishListListChild).toHaveClass("active");
+  });
+
+  test("Should not seen sign in or logg in link when user is logged in", async () => {
+    const mockStore = configureStore();
+    const userStore = mockStore(loggedInState);
+    userStore.clearActions();
+
+    renderWithProviders(<Header />, userStore);
+    const SignInOrLogInLink = await screen.getByTestId("signin_login-link");
+    expect(SignInOrLogInLink).toHaveClass("hidden__element");
+  });
+
+  test("Should see my profile link when user is logged in", async () => {
+    const user = userEvent;
+    const mockStore = configureStore();
+    const userStore = mockStore(loggedInState);
+    userStore.clearActions();
+
+    renderWithProviders(<Header />, userStore);
+    const myProfileLink = await screen.getByTestId("myProfileLink");
+
+    expect(myProfileLink).toHaveClass("navigation__list__basket");
+    const myProfileChildLink = await screen.getByRole("link", {
+      name: "My Profile",
+    });
+    await user.click(myProfileChildLink);
+    expect(myProfileChildLink).toHaveClass("active");
   });
 });
