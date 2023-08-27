@@ -16,6 +16,9 @@
 
         &:hover {
             transform: translateX(50%);
+            @include gs.breakpoint(mobile-start,mobile-end) {
+               transform: translateX(0);
+            }
         }
 
         &__logo {
@@ -24,7 +27,6 @@
             width: 7rem;
             right: 4rem;
             top: 4rem;
-
         }
 
         &__image__wrapper {
@@ -38,6 +40,16 @@
             transition: 1s;
             // box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.25);
             box-shadow: gs.$book-effect-shadow;
+
+            @include gs.breakpoint(mobile-start,mobile-end) {
+                // display: block !important;
+                width: 0;
+                height: 0;
+                background: #000;
+                visibility: hidden ;
+                display: none ;
+                opacity: 0;
+            }
 
 
             &>img {
@@ -63,7 +75,9 @@
             height: 100%;
             padding: 1.5rem;
             @include gs.display-flex(row, center, center);
-
+            @include gs.breakpoint(mobile-start,mobile-end) {
+                margin-inline:auto;
+            }
             &__content {
                 @include gs.display-flex(column, space-evenly, center);
                 width: 100%;

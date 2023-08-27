@@ -16,7 +16,7 @@ export const About: React.FC = () => {
     return (
         <PageWrapper>
 
-            <section className='about'>
+            <section className='about' >
 
                 <motion.article
                     variants={{
@@ -30,7 +30,7 @@ export const About: React.FC = () => {
                 >
                     <div className='about__article__content'>
                         <MotionUpCorner />
-                        <h1>Why we should be <br /> <span>your choice!?</span> </h1>
+                        <h1 data-testid="heading-about-test">Why we should be <br /> <span>your choice!?</span> </h1>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam dolorum ipsa iure. Delectus molestias accusamus natus quo mollitia, iure vel laudantium. Saepe aspernatur totam doloremque similique qui vitae praesentium placeat!</p>
                         <div className='about__article__content__logo'>
                             <Logo />
@@ -41,22 +41,22 @@ export const About: React.FC = () => {
 
                 <motion.article
                     variants={{
-                        hidden: { opacity: 0, x: -500 },
+                        hidden: { opacity: 0, x: -300 },
                         visible: { opacity: 1, x: 0 },
                     }}
                     initial='hidden'
                     whileInView='visible'
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 2 }}
                     className='about__article'>
                     <div className='about__article__content '>
                         <MotionUpCorner />
-                        <h1>Best products <br /> Best price </h1>
+                        <h1 data-testid="heading-about-test">Best products <br /> Best price </h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ad nihil eveniet perferendis distinctio amet ab consectetur facere ipsa facilis! Itaque, odit cupiditate. Nobis perspiciatis soluta dolores! Vero, est sunt.</p>
                         <div className='about__article__content__icons '>
-                            <BsLaptop className='about__icon' />
-                            <FiMonitor className='about__icon' />
-                            <FiSmartphone className='about__icon' />
-                            <AiOutlineDollarCircle className='about__icon' />
+                            <BsLaptop data-testid="icon-about-test" className='about__icon' />
+                            <FiMonitor data-testid="icon-about-test" className='about__icon' />
+                            <FiSmartphone data-testid="icon-about-test" className='about__icon' />
+                            <AiOutlineDollarCircle data-testid="icon-about-test" className='about__icon' />
                         </div>
                         <MotionDownCorner />
                     </div>
@@ -64,20 +64,20 @@ export const About: React.FC = () => {
 
                 <motion.article
                     variants={{
-                        hidden: { opacity: 0, x: 500 },
+                        hidden: { opacity: 0, x: 300 },
                         visible: { opacity: 1, x: 0 },
                     }}
                     initial='hidden'
                     whileInView='visible'
-                    transition={{ delay: 0., duration: 1 }}
+                    transition={{ delay: 0., duration: 2 }}
                     className='about__article'>
                     <div className='about__article__content '>
                         <MotionUpCorner />
-                        <h1>Quality and warranty</h1>
+                        <h1 data-testid="heading-about-test">Quality and warranty</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ad nihil eveniet perferendis distinctio amet ab consectetur facere ipsa facilis! Itaque, odit cupiditate. Nobis perspiciatis soluta dolores! Vero, est sunt.</p>
                         <div className='about__article__content__icons '>
-                            <FaFileContract className='about__icon' />
-                            <AiOutlineFileDone className='about__icon' />
+                            <FaFileContract data-testid="icon-about-test" className='about__icon' />
+                            <AiOutlineFileDone data-testid="icon-about-test" className='about__icon' />
                         </div>
                         <MotionDownCorner />
                     </div>
@@ -94,13 +94,13 @@ export const About: React.FC = () => {
                     className='about__article'>
                     <div className='about__article__content '>
                         <MotionUpCorner />
-                        <h1>Delivery and payment</h1>
+                        <h1 data-testid="heading-about-test">Delivery and payment</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas ad nihil eveniet perferendis distinctio amet ab consectetur facere ipsa facilis! Itaque, odit cupiditate. Nobis perspiciatis soluta dolores! Vero, est sunt.</p>
                         <div className='about__article__content__icons '>
-                            <FaDhl className='about__icon' />
-                            <FaFedex className='about__icon' />
-                            <BsPaypal className='about__icon' />
-                            <RiVisaFill className='about__icon' />
+                            <FaDhl data-testid="icon-about-test" className='about__icon' />
+                            <FaFedex data-testid="icon-about-test" className='about__icon' />
+                            <BsPaypal data-testid="icon-about-test" className='about__icon' />
+                            <RiVisaFill data-testid="icon-about-test" className='about__icon' />
                         </div>
                         <MotionDownCorner />
                     </div>

@@ -6,9 +6,10 @@
 
     &__logo__wrapper {
         width: 19rem;
-        // transform: rotateY(180deg);
-        // transition: transform 3s ;
-        // transform-style: preserve-3d;
+        height: 20rem;
+        @include gs.breakpoint(mobile-start, mobile-end) {
+           height: 20rem;
+        }
     }
 
     &__title {

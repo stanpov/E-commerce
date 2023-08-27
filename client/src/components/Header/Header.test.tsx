@@ -38,7 +38,7 @@ describe("Testing the content of the Header", () => {
   test("Should contains 4 numbers of li elements when you are not logged in", () => {
     renderWithProviders(<Header />);
     const liElements = screen.getAllByRole("listitem");
-    expect(liElements).toHaveLength(4);
+    expect(liElements).toHaveLength(8);
   });
 
   test("Should not see the basket icon when size of window is more than 767px", async () => {

@@ -22,6 +22,7 @@ header {
         margin-left: 1.88rem;
         width: 3.13rem;
         height: 3.13rem;
+
         @include globalStyles.breakpoint(mobile-start, mobile-end) {
             margin-left: 0;
         }
@@ -205,6 +206,13 @@ header {
 
 .active {
     color: globalStyles.$primary-color;
+    font-size: 19px;
+
+}
+
+.hidden__element {
+    display: none;
+    font-size: 19px;
 }
 
 @keyframes fill {
