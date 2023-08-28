@@ -48,7 +48,7 @@ export const EnterEmail: React.FC<EnterEmailProps> = ({
 
     return (
         <section className='enter__email'>
-            <h1 className='enter__email__title'>Email verification</h1>
+            <h1 className='enter__email__title'>Forgot password</h1>
 
             <form onSubmit={submitHandler} className='enter__email__form'>
                 <div className='enter__email__form__content__wrapper'>
@@ -68,7 +68,7 @@ export const EnterEmail: React.FC<EnterEmailProps> = ({
                             : null
                     }
                 </div>
-                <CInputSubmit value='Send verification code' />
+                <CInputSubmit value='Send' />
             </form>
         </section>
     )

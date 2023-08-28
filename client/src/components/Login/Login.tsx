@@ -8,7 +8,6 @@ import { AppDispatch } from '../../Redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../Redux/Auth/AuthAction';
 import './Login.scss';
-// import { Link } from 'react-router-dom';
 
 interface LoginProps {
     setIsPasswordForgot: (forgot: boolean) => void;
@@ -30,14 +29,12 @@ export const Login: React.FC<LoginProps> = ({
             password: { value: string };
         };
 
-        const email = target.email.value;
-        const password = target.password.value;
+        const email = target.email?.value;
+        const password = target.password?.value;
 
         if (isPasswordValid.isValid && email !== '' && isEmailValid.isValid && password !== '') {
-            dispatch(login({email,password}));
+            dispatch(login({ email, password }));
             navigate('/');
-            console.log(email, password);
-
         }
     };
 
@@ -68,7 +65,7 @@ export const Login: React.FC<LoginProps> = ({
     return (
         <section className='login'>
             <h1 className='login__title'>Login</h1>
-            <form onSubmit={submitHandler} className='login__form'>
+            <form onSubmit={submitHandler} className='login__form' role='login-form'>
                 <div className='login__form__content__wrapper'>
                     <CLable inputId={'loginEmail'} title={'Email'} />
                     <CInput
@@ -80,7 +77,7 @@ export const Login: React.FC<LoginProps> = ({
                     />
                     {
                         !isEmailValid.isValid
-                            ? <p className='error__message'>{isEmailValid.message}</p>
+                            ? <p className='error__message' role='validation-message'>{isEmailValid.message}</p>
                             : null
                     }
                 </div>
@@ -95,7 +92,7 @@ export const Login: React.FC<LoginProps> = ({
                     />
                     {
                         !isPasswordValid.isValid
-                            ? <p className='error__message'>{isPasswordValid.message}</p>
+                            ? <p className='error__message' role='validation-message'>{isPasswordValid.message}</p>
                             : null
                     }
                 </div>
