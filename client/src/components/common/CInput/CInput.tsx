@@ -1,6 +1,5 @@
 import React, { ChangeEventHandler, InputHTMLAttributes } from 'react';
 import './CInput.scss';
-import { log } from 'console';
 
 interface CInputProps extends InputHTMLAttributes<HTMLInputElement> {
     type: 'text' | 'password' | 'number' | 'email',
@@ -24,6 +23,8 @@ export const CInput: React.FC<CInputProps> = ({
     return (
         <input
             className='form__input'
+            data-testid="form-input"
+            role='form-input'
             type={type}
             name={name}
             id={id}
