@@ -12,6 +12,6 @@ export const CLable: React.FC<CLableProps> = ({
     title,
 }) => {
     return (
-        <label className="form__label" htmlFor={inputId}>{title}</label>
+        <label className="form__label" role="input-lable" htmlFor={inputId}>{title}</label>
     )
 }

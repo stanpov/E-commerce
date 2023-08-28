@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { CLable } from '../common/CLable/CLable';
 import { CInput } from '../common/CInput/CInput';
 import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';
-import './SignUp.scss';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../Redux/Auth/AuthAction';
 import { AppDispatch } from '../../Redux';
+import './SignUp.scss';
 
 interface SignUpProps {
 
@@ -32,9 +32,9 @@ export const SignUp: React.FC<SignUpProps> = ({
             email: { value: string };
         };
 
-        const userName = target.userName.value;
-        const password = target.password.value;
-        const email = target.email.value;
+        const userName = target.userName?.value;
+        const password = target.password?.value;
+        const email = target.email?.value;
 
         if (isEmailValid.isValid && userName !== '' && isPasswordValid.isValid && password !== '' && isUsernameValid.isValid && email !== '') {
             console.log(userName, password, email);
@@ -80,10 +80,9 @@ export const SignUp: React.FC<SignUpProps> = ({
 
 
     return (
-
         <section className='sign__up'>
             <h1 className='sign__up__title'>Sign Up</h1>
-            <form onSubmit={submitHandler} className='sign__up__form'>
+            <form onSubmit={submitHandler} className='sign__up__form' data-testid='sign__up__form'>
                 <div className='sign__up__form__content__wrapper'>
                     <CLable inputId={'userName'} title={'Username'} />
                     <CInput
@@ -96,7 +95,7 @@ export const SignUp: React.FC<SignUpProps> = ({
                     />
                     {
                         !isUsernameValid.isValid
-                            ? <p className='error__message'>{isUsernameValid.message}</p>
+                            ? <p className='error__message'  role='validation-message'>{isUsernameValid.message}</p>
                             : null
                     }
                 </div>
@@ -112,7 +111,7 @@ export const SignUp: React.FC<SignUpProps> = ({
                     />
                     {
                         !isPasswordValid.isValid
-                            ? <p className='error__message'>{isPasswordValid.message}</p>
+                            ? <p className='error__message' role='validation-message'>{isPasswordValid.message}</p>
                             : null
                     }
                 </div>
@@ -128,11 +127,11 @@ export const SignUp: React.FC<SignUpProps> = ({
                     />
                     {
                         !isEmailValid.isValid
-                            ? <p className='error__message'>{isEmailValid.message}</p>
+                            ? <p className='error__message' role='validation-message'>{isEmailValid.message}</p>
                             : null
                     }
                 </div>
-                <CInputSubmit value='Sign Up' />
+                <CInputSubmit value='Sign Up'/>
             </form>
         </section>
     )

@@ -10,6 +10,6 @@ export const CInputSubmit: React.FC<CInputSubmitProps> = ({
     value,
 }) => {
     return (
-        <input type="submit" value={value} className='form__submit__button' />
+        <input type="submit" value={value} className='form__submit__button' role="submit-input" />
     )
 }
