@@ -14,7 +14,7 @@ const Header = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(isUserLoggedIn);
+    // console.log(isUserLoggedIn);
   }, [isUserLoggedIn]);
 
   const openBurgerMenu = () => {
