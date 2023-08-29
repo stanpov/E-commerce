@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
 import { CLable } from '../common/CLable/CLable';
 import { CInput } from '../common/CInput/CInput';
 import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';

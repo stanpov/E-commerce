@@ -10,7 +10,6 @@ export const Home = () => {
     return (
         <PageWrapper>
             <section className='home__page'>
-                {/* <h1 className='home__page__title'>eShop</h1> */}
                 <motion.div
                     variants={{
                         start: { width: 0, opacity: 0 },
@@ -23,7 +22,7 @@ export const Home = () => {
                     className='home__page__logo__wrapper'>
                     <Logo />
                 </motion.div>
-                <h3 className='home__page__animation'> Why to choose eShop? <br />
+                <h3 className='home__page__animation' data-testid='home-page-title'> Why to choose eShop? <br />
                     <TypeAnimation
                         sequence={[
                             ' High quality products !', 'Best brands !!!',
@@ -39,6 +38,7 @@ export const Home = () => {
                         cursor={true}
                         repeat={Infinity}
                         style={{ fontSize: '1em', paddingLeft: '5px', }}
+
                     />
                 </h3>
             </section>

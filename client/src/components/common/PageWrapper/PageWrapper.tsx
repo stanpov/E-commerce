@@ -8,7 +8,7 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({
     children
 }) => {
     return (
-        <div className='pages__wrapper'>
+        <div className='pages__wrapper' data-testid='page-wrapper'>
             {children}
         </div>
     )

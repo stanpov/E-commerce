@@ -22,7 +22,7 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
         e.preventDefault();
         const target = e.target as typeof e.target & { verificationCode: { value: string } };
 
-        const code = target.verificationCode.value;
+        const code = target.verificationCode?.value;
 
         if (isValid.isValid) {
             forgotPasswordHandler();
@@ -32,9 +32,9 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
 
     const onBlurHandler = (e: React.FocusEvent<HTMLInputElement>): void => {
         if (e.target.value === '') {
-            setIsValid({ isValid: false, message: 'Verification code is required!' });
-        // } else if (e.target.value.length < 5 || e.target.value.length > 15) {
-        //     setIsValid({ isValid: false, message: 'Invalid verification code!' });
+            setIsValid({ isValid: false, message: 'Password is required!' });
+        } else if (e.target.value.length < 5 ) {
+            setIsValid({ isValid: false, message: 'Invalid password!' });
         } else {
             setIsValid({ isValid: true, message: '' });
         }
@@ -42,11 +42,11 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
     
     return (
         <section className='enter__code'>
-            <h1 className='enter__code__title'>Verification code</h1>
+            <h1 className='enter__code__title'>Verification password</h1>
 
             <form onSubmit={submitHandler} className='enter__code__form'>
                 <div className='enter__code__form__content__wrapper'>
-                    <CLable inputId={'verificationCode'} title={'Enter here:'} />
+                    <CLable inputId={'verificationCode'} title={'Enter your new password:'} />
                     <CInput
                         type='text'
                         id='verificationCode'
@@ -61,7 +61,7 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
                             : null
                     }
                 </div>
-                <CInputSubmit value='Check verification code'/>
+                <CInputSubmit value='Confirm new password' role='confirm-new-password-button'/>
             </form>
         </section>
     )

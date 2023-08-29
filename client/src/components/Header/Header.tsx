@@ -16,7 +16,7 @@ const Header = () => {
   const router = useNavigate();
 
   useEffect(() => {
-    console.log(isUserLoggedIn);
+    // console.log(isUserLoggedIn);
   }, [isUserLoggedIn]);
 
   const openBurgerMenu = () => {
