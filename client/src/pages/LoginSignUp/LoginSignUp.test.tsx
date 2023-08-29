@@ -132,6 +132,7 @@ describe('Forgot password functionality',()=>{
         renderWithProviders(<LoginSignUp/>);
         const confirmNewPassword = screen.getByDisplayValue('Confirm new password');
         const secondInner = screen.getByRole('flip-inner-two');
+        expect(secondInner).toHaveClass('flip__inner');
         await user.click(confirmNewPassword);
         expect(secondInner).toHaveClass('flip__inner');
     });
