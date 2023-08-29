@@ -22,7 +22,7 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
         e.preventDefault();
         const target = e.target as typeof e.target & { verificationCode: { value: string } };
 
-        const code = target.verificationCode.value;
+        const code = target.verificationCode?.value;
 
         if (isValid.isValid) {
             forgotPasswordHandler();
@@ -61,7 +61,7 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
                             : null
                     }
                 </div>
-                <CInputSubmit value='Confirm new password'/>
+                <CInputSubmit value='Confirm new password' role='confirm-new-password-button'/>
             </form>
         </section>
     )
