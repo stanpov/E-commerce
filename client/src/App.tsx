@@ -8,7 +8,6 @@ import Products from "./components/Products/Products";
 import WishList from "./pages/WishList/WishList";
 import { Contacts } from "./pages/Contacts/Contacts";
 import { LoginSignUp } from "./pages/LoginSignUp/LoginSignUp";
-// import {SignUp} from "./components/SignUp/SignUp";
 
 function App() {
   return (
