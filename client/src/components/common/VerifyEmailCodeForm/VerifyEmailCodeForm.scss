@@ -1,16 +1,12 @@
-@use '../../global-styles/' as gs;
+@use '../../../global-styles/' as gs;
 
-.enter__code{
+.verify__email{
     @include gs.form-setter();
 
-    &__title{
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
     &__form {
         height: 16rem;
         @include gs.display-flex(column, space-between,center);
-        // padding-top: 2rem;
+        padding-top: 2rem;
 
         &__content__wrapper {
             @include gs.display-flex(column, space-around, center);
@@ -21,5 +17,10 @@
 
 .error__message{
     color: gs.$secondary-color;
+    font-size: 0.9rem;
+}
+
+.code__message{
+    text-align: center;
     font-size: 0.9rem;
 }

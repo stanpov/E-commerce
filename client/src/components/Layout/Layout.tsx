@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import "./Layout.scss";
 import { Outlet } from "react-router-dom";
 
+
 const Layout = () => {
   return (
     <>

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { register } from '../../Redux/Auth/AuthAction';
 import { AppDispatch } from '../../Redux';
 import './SignUp.scss';
+import { VerifyEmailCodeForm } from '../common/VerifyEmailCodeForm/VerifyEmailCodeForm';
 
 interface SignUpProps {
 
@@ -19,6 +20,7 @@ export const SignUp: React.FC<SignUpProps> = ({
     const [isUsernameValid, setIsUsernameValid] = useState({ isValid: true, message: '' });
     const [isPasswordValid, setIsPasswordValid] = useState({ isValid: true, message: '' });
     const [isEmailValid, setIsEmailValid] = useState({ isValid: true, message: '' });
+    const [isVerifyCodeSent, setVerifyCodeSent] = useState(false);
 
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
@@ -36,12 +38,9 @@ export const SignUp: React.FC<SignUpProps> = ({
         const email = target.email?.value;
 
         if (isEmailValid.isValid && userName !== '' && isPasswordValid.isValid && password !== '' && isUsernameValid.isValid && email !== '') {
-            console.log(userName, password, email);
-            console.log(target);
-            
-            dispatch(register({userName,password,email}));
-            navigate('/');
-            //TODO notifications tastar
+            dispatch(register({ userName, password, email }));
+            setVerifyCodeSent(true);
+            // navigate('/');
         } else {
 
         }
@@ -81,57 +80,60 @@ export const SignUp: React.FC<SignUpProps> = ({
     return (
         <section className='sign__up'>
             <h1 className='sign__up__title'>Sign Up</h1>
-            <form onSubmit={submitHandler} className='sign__up__form' data-testid='sign__up__form'>
-                <div className='sign__up__form__content__wrapper'>
-                    <CLable inputId={'userName'} title={'Username'} />
-                    <CInput
-                        type='text'
-                        id='userName'
-                        name='userName'
-                        placeholder='jon-green'
-                        onBlur={onBlurHandlerUsername}
-                        required
-                    />
-                    {
-                        !isUsernameValid.isValid
-                            ? <p className='error__message'  role='validation-message'>{isUsernameValid.message}</p>
-                            : null
-                    }
-                </div>
-                <div className='sign__up__form__content__wrapper'>
-                    <CLable inputId={'password'} title={'Password'} />
-                    <CInput
-                        type='password'
-                        id='password'
-                        name='password'
-                        placeholder='* * * * * * '
-                        onBlur={onBlurHandlerPassword}
-                        required
-                    />
-                    {
-                        !isPasswordValid.isValid
-                            ? <p className='error__message' role='validation-message'>{isPasswordValid.message}</p>
-                            : null
-                    }
-                </div>
-                <div className='sign__up__form__content__wrapper'>
-                    <CLable inputId={'email'} title={'Email'} />
-                    <CInput
-                        type='email'
-                        id='email'
-                        name='email'
-                        placeholder='jon.green@gmail.com'
-                        onBlur={onBlurHandlerEmail}
-                        required
-                    />
-                    {
-                        !isEmailValid.isValid
-                            ? <p className='error__message' role='validation-message'>{isEmailValid.message}</p>
-                            : null
-                    }
-                </div>
-                <CInputSubmit value='Sign Up'/>
-            </form>
+            {!isVerifyCodeSent
+                ?<form onSubmit={submitHandler} className='sign__up__form' data-testid='sign__up__form'>
+                    <div className='sign__up__form__content__wrapper'>
+                        <CLable inputId={'userName'} title={'Username'} />
+                        <CInput
+                            type='text'
+                            id='userName'
+                            name='userName'
+                            placeholder='jon-green'
+                            onBlur={onBlurHandlerUsername}
+                            required
+                        />
+                        {
+                            !isUsernameValid.isValid
+                                ? <p className='error__message' role='validation-message'>{isUsernameValid.message}</p>
+                                : null
+                        }
+                    </div>
+                    <div className='sign__up__form__content__wrapper'>
+                        <CLable inputId={'password'} title={'Password'} />
+                        <CInput
+                            type='password'
+                            id='password'
+                            name='password'
+                            placeholder='* * * * * * '
+                            onBlur={onBlurHandlerPassword}
+                            required
+                        />
+                        {
+                            !isPasswordValid.isValid
+                                ? <p className='error__message' role='validation-message'>{isPasswordValid.message}</p>
+                                : null
+                        }
+                    </div>
+                    <div className='sign__up__form__content__wrapper'>
+                        <CLable inputId={'email'} title={'Email'} />
+                        <CInput
+                            type='email'
+                            id='email'
+                            name='email'
+                            placeholder='jon.green@gmail.com'
+                            onBlur={onBlurHandlerEmail}
+                            required
+                        />
+                        {
+                            !isEmailValid.isValid
+                                ? <p className='error__message' role='validation-message'>{isEmailValid.message}</p>
+                                : null
+                        }
+                    </div>
+                    <CInputSubmit value='Sign Up' />
+                </form>
+                : <VerifyEmailCodeForm/>
+            }
         </section>
     )
 }

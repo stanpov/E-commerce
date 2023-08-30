@@ -214,7 +214,7 @@ export const resetPasswor = async (req, res) => {
 
 export const confirmPassword = async (req, res) => {
   const { email, tempPassword } = req.body;
-
+console.log(email, tempPassword);
   const existingNewPassWordVerification =
     await userNewPasswordVerification.find({ userEmail: email });
   if (existingNewPassWordVerification === 0) {
