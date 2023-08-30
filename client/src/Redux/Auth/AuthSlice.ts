@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
 import { InitalState } from "../../interfaces/interfaces";
-import { login, register } from "./AuthAction";
+import { login, logout, register } from "./AuthAction";
 
 // Define a type for the slice state
 interface AuthState extends InitalState {
   isAdmin?: boolean;
   userId: string | null | undefined;
+  isVerified?: boolean;
 }
 
 // Define the initial state using that type
@@ -16,6 +17,7 @@ const initialAuthState: AuthState = {
   isError: false,
   isLoading: false,
   message: "",
+  isVerified: false,
 };
 
 export const authSlice = createSlice({
@@ -56,6 +58,7 @@ export const authSlice = createSlice({
         state.userId = action.payload.id;
         state.isAdmin = false;
         state.message = action.payload.message as string;
+        state.isVerified = action.payload.isVerified;
       })
 
       .addCase(login.pending, (state, action) => {
@@ -72,10 +75,38 @@ export const authSlice = createSlice({
         state.userId = null;
         state.isAdmin = false;
         state.message = action.error as string;
+      })
+
+      .addCase(logout.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.userId = null;
+        state.isAdmin = false;
+        state.message = action.error as string;
+        state.isVerified = false;
+      })
+
+      .addCase(logout.pending, (state, action) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.userId = null;
+        state.isAdmin = false;
+        state.message = null;
+        state.isVerified = false;
+      })
+
+      .addCase(logout.fulfilled, (state, action) => {
+        console.log(action);
+        state.isLoading = false;
+        state.isError = false;
+        state.userId = null;
+        state.isAdmin = false;
+        state.isVerified = false;
+        state.message = action.payload.data.message as string;
       });
   },
 });
 
-export const getUserId = (state:any) => state.auth.userId;
+export const getUserId = (state: any) => state.auth.userId;
 
 export const authReducer = authSlice.reducer;

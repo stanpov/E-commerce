@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { SlBasket } from "react-icons/sl";
 import { Logo } from "../common/Logo/Logo";
 import "./Header.scss";
@@ -7,11 +7,13 @@ import "./Header.scss";
 import { getUserId } from "../../Redux/Auth/AuthSlice";
 import { RootState } from "../../Redux";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { logout } from "../../Redux/Auth/AuthAction";
 
 const Header = () => {
   const [isActive, setIsActive] = useState(false);
   const isUserLoggedIn = !!useAppSelector(getUserId);
   const dispatch = useAppDispatch();
+  const router = useNavigate();
 
   useEffect(() => {
     // console.log(isUserLoggedIn);
@@ -19,6 +21,11 @@ const Header = () => {
 
   const openBurgerMenu = () => {
     setIsActive(!isActive);
+  };
+
+  const handleLogOut = () => {
+    dispatch(logout());
+    router("/");
   };
 
   return (
@@ -98,12 +105,14 @@ const Header = () => {
               isUserLoggedIn ? "navigation__list__basket" : "hidden__element"
             }
           >
-            <NavLink
-              to={"/logout"}
-              className={({ isActive }) => (isActive ? "active" : undefined)}
+            <div
+              className="logoutwrapper"
+              onClick={handleLogOut}
+              // to={"/logout"}
+              // className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               Logout
-            </NavLink>
+            </div>
           </li>
           <li
             data-testid="myCartIdTest"

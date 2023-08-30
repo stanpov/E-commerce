@@ -80,6 +80,7 @@ export const login = async (req, res) => {
       const access_token = createAccessToken({
         id: user._id,
         isAdmin: user.isAdmin,
+        isVerified: user.verified,
       });
 
       res.cookie("access_token", access_token, {
@@ -91,6 +92,7 @@ export const login = async (req, res) => {
         message: "Login Success",
         id: user._id,
         access_token: access_token,
+        isVerified: user.verified,
       });
     } else {
       res
@@ -105,7 +107,7 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
   try {
     res.clearCookie("access_token");
-    return res.status(200).json({ message: "Logout Successfully" });
+    return res.status(200).json({ data: { message: "Logout Successfully" } });
   } catch (error) {}
 };
 
