@@ -19,6 +19,7 @@ export const SignUp: React.FC<SignUpProps> = ({
     const [isUsernameValid, setIsUsernameValid] = useState({ isValid: true, message: '' });
     const [isPasswordValid, setIsPasswordValid] = useState({ isValid: true, message: '' });
     const [isEmailValid, setIsEmailValid] = useState({ isValid: true, message: '' });
+    // const []
 
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
@@ -36,12 +37,8 @@ export const SignUp: React.FC<SignUpProps> = ({
         const email = target.email?.value;
 
         if (isEmailValid.isValid && userName !== '' && isPasswordValid.isValid && password !== '' && isUsernameValid.isValid && email !== '') {
-            console.log(userName, password, email);
-            console.log(target);
-            
-            dispatch(register({userName,password,email}));
-            navigate('/');
-            //TODO notifications tastar
+            dispatch(register({ userName, password, email }));
+            // navigate('/');
         } else {
 
         }
@@ -94,7 +91,7 @@ export const SignUp: React.FC<SignUpProps> = ({
                     />
                     {
                         !isUsernameValid.isValid
-                            ? <p className='error__message'  role='validation-message'>{isUsernameValid.message}</p>
+                            ? <p className='error__message' role='validation-message'>{isUsernameValid.message}</p>
                             : null
                     }
                 </div>
@@ -130,7 +127,7 @@ export const SignUp: React.FC<SignUpProps> = ({
                             : null
                     }
                 </div>
-                <CInputSubmit value='Sign Up'/>
+                <CInputSubmit value='Sign Up' />
             </form>
         </section>
     )
