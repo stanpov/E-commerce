@@ -57,7 +57,7 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
                     />
                     {
                         !isValid.isValid
-                            ? <p className='error__message'>{isValid.message}</p>
+                            ? <p className='error__message' role='validation-message'>{isValid.message}</p>
                             : null
                     }
                 </div>

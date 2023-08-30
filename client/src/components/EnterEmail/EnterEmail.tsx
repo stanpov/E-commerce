@@ -14,7 +14,6 @@ export const EnterEmail: React.FC<EnterEmailProps> = ({
 }) => {
 
     const [isValid, setIsValid] = useState({ isValid: false, message: '' });
-    const navigate = useNavigate();
 
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
@@ -23,12 +22,8 @@ export const EnterEmail: React.FC<EnterEmailProps> = ({
         if (isValid.isValid && email !== '') {
             //TODO api calls
             setRotateVerification(true);
-            navigate('/');
 
-        } else {
-            console.log('no');
-
-        }
+        } 
 
     }
 
