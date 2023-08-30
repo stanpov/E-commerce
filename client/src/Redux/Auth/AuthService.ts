@@ -1,10 +1,11 @@
-import axios, { AxiosPromise, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { config, getToken, removeToken, setToken } from "../../Utils/Utils";
 import {
     UserDataLogin,
     UserDataRegister,
     UserDataResponse,
     UserLoginResponse,
+    UserVerifyData,
 } from "../../interfaces/interfaces";
 import { successNotification, errorNotification } from "../../services/notificationServices";
 
@@ -33,6 +34,8 @@ const login = async (UserData: UserDataLogin): Promise<UserLoginResponse> => {
         if (response.status === 200) {
             setToken(response.data?.access_token);
             successNotification(`${response.data.message}`);
+            console.log(response.data);
+
         }
         return response.data;
     } catch (error: any) {
@@ -61,13 +64,31 @@ const logout = async (): Promise<AxiosResponse> => {
         }
         return response.data;
     } catch (error: any) {
-        errorNotification(`${error.response.data.message}`)
+        errorNotification(`${error.response.data.message}`);
         throw error.response.data.message;
     }
 };
+
+const verify = async (UserData:UserVerifyData): Promise<AxiosResponse> => {
+    try {
+        const response = await axios.get(`${baseUrl}/users/verify/${UserData.userId}/${UserData.otp}`)
+        if (response.status === 200) {
+            setToken(response.data?.access_token);
+            successNotification(`${response.data.message}`);
+            console.log(response.data);
+        }
+        return response.data
+    } catch (error: any) {
+        console.log(error.response.message);
+        
+        errorNotification(`${error.response.data.message}`);
+        throw error.response.data.message;
+    }
+}
 
 export const AuthService = {
     register,
     login,
     logout,
+    verify
 };

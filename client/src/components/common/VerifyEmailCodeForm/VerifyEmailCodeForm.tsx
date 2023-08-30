@@ -3,6 +3,9 @@ import { CLable } from '../CLable/CLable';
 import { CInput } from '../CInput/CInput';
 import { CInputSubmit } from '../CInputSubmit/CInputSubmit';
 import './VerifyEmailCodeForm.scss';
+import { useAppDispatch, useAppSelector } from '../../../Redux/hooks';
+import { getUserId } from '../../../Redux/Auth/AuthSlice';
+import { verify } from '../../../Redux/Auth/AuthAction';
 
 interface VerifyEmailCodeFormProps {
 
@@ -11,18 +14,25 @@ interface VerifyEmailCodeFormProps {
 export const VerifyEmailCodeForm: React.FC<VerifyEmailCodeFormProps> = () => {
 
     const [isValid, setIsValid] = useState({ isValid: true, message: '' });
+    const dispatch = useAppDispatch();
+    const userId = useAppSelector(getUserId);
 
-    const submitHandler = (e:React.SyntheticEvent) => {
+
+    const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const target = e.target as typeof e.target & {
-            codeValue: {value: string};
+            verifyEmail: { value: string };
         }
-        if(isValid.isValid){
-            //TODO api call
+        const otp  = target.verifyEmail?.value;
+        if (isValid.isValid && otp !=='') {
+            console.log(otp);
+            dispatch(verify({userId,otp}));
+            
+
         }
     }
 
-    const onBlurHandler =(e:React.FocusEvent<HTMLInputElement>):void => {
+    const onBlurHandler = (e: React.FocusEvent<HTMLInputElement>): void => {
         if (e.target.value === '') {
             setIsValid({ isValid: false, message: 'Code is required!' });
         } else if (e.target.value.length < 5) {

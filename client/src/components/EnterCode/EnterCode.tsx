@@ -4,6 +4,7 @@ import { CInput } from "../common/CInput/CInput";
 import "./EnterCode.scss";
 import { CInputSubmit } from "../common/CInputSubmit/CInputSubmit";
 import { useAppDispatch } from "../../Redux/hooks";
+import { confirmMyPassword } from "../../Redux/User/UersActions";
 
 interface EnterCodeProps {
     setIsPasswordForgot: (forgot: boolean) => void;
@@ -17,18 +18,21 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
     const dispatch = useAppDispatch();
 
     //TODO add email inupt
-    const forgotPasswordHandler = () => {
+    const forgotPasswordHandler = (email:string,tempPassword:string) => {
         setIsPasswordForgot(false);
+        dispatch(confirmMyPassword({email,tempPassword}))
     };
 
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const target = e.target as typeof e.target & {
+            confirmEmail:{value:string}
             verificationCode: { value: string };
         };
-        const code = target.verificationCode?.value;
+        const email = target.confirmEmail?.value;
+        const tempPassword = target.verificationCode?.value;
         if (isValidEmail.isValid && isValidPassword.isValid) {
-            forgotPasswordHandler();
+            forgotPasswordHandler(email,tempPassword);
         }
     };
 

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
 import { InitalState } from "../../interfaces/interfaces";
-import { login, logout, register } from "./AuthAction";
+import { login, logout, register ,verify} from "./AuthAction";
 
 // Define a type for the slice state
 interface AuthState extends InitalState {
@@ -103,10 +103,39 @@ export const authSlice = createSlice({
         state.isAdmin = false;
         state.isVerified = false;
         state.message = action.payload.data.message as string;
+      })
+
+      .addCase(verify.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.userId = null;
+        state.isAdmin = false;
+        state.message = action.error as string;
+        state.isVerified = false;
+      })
+
+      .addCase(verify.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.userId = null;
+        state.isAdmin = false;
+        state.message = null;
+        state.isVerified = false;
+      })
+
+      .addCase(verify.fulfilled, (state, action) => {
+        console.log(action);
+        state.isLoading = false;
+        state.isError = false;
+        state.userId = action.payload.data.id;
+        state.isAdmin = false;
+        state.isVerified = action.payload.data.verified;
+        state.message = action.payload.data.message as string;
       });
   },
 });
 
 export const getUserId = (state: any) => state.auth.userId;
+export const getIsVerified = (state: any) => state.auth.isVerified;
 
 export const authReducer = authSlice.reducer;

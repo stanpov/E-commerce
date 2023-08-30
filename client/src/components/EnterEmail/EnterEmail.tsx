@@ -17,13 +17,14 @@ export const EnterEmail: React.FC<EnterEmailProps> = ({
 
     const [isValid, setIsValid] = useState({ isValid: false, message: '' });
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const target = e.target as typeof e.target & { verificationEmail: { value: string } };
         const email: string = target.verificationEmail?.value;
         if (isValid.isValid && email !== '') {
-            //TODO api calls
+            dispatch(resetMyPassword({email}));
             setRotateVerification(true);
 
         }
