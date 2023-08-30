@@ -8,6 +8,7 @@ import { AppDispatch } from '../../Redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../Redux/Auth/AuthAction';
 import './Login.scss';
+import { VerifyEmailCodeForm } from '../common/VerifyEmailCodeForm/VerifyEmailCodeForm';
 
 interface LoginProps {
     setIsPasswordForgot: (forgot: boolean) => void;
@@ -19,6 +20,7 @@ export const Login: React.FC<LoginProps> = ({
 
     const [isEmailValid, setIsEmailValid] = useState({ isValid: true, message: '' });
     const [isPasswordValid, setIsPasswordValid] = useState({ isValid: true, message: '' });
+    const [isEmailVerify, setIsEmailVerify] = useState(true);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
@@ -65,40 +67,44 @@ export const Login: React.FC<LoginProps> = ({
     return (
         <section className='login'>
             <h1 className='login__title'>Login</h1>
-            <form onSubmit={submitHandler} className='login__form' role='login-form'>
-                <div className='login__form__content__wrapper'>
-                    <CLable inputId={'loginEmail'} title={'Email'} />
-                    <CInput
-                        type='email'
-                        id='loginEmail'
-                        name='email'
-                        placeholder='jon-green@gmail.com'
-                        onBlur={onBlurHandlerEmail}
-                    />
-                    {
-                        !isEmailValid.isValid
-                            ? <p className='error__message' role='validation-message'>{isEmailValid.message}</p>
-                            : null
-                    }
-                </div>
-                <div className='login__form__content__wrapper'>
-                    <CLable inputId={'loginPassword'} title={'Password'} />
-                    <CInput
-                        type='password'
-                        id='loginPassword'
-                        name='password'
-                        placeholder='* * * * * * '
-                        onBlur={onBlurHandlerPassword}
-                    />
-                    {
-                        !isPasswordValid.isValid
-                            ? <p className='error__message' role='validation-message'>{isPasswordValid.message}</p>
-                            : null
-                    }
-                </div>
-                <CInputSubmit value='Login' />
-                <p onClick={forgotPasswordHandler} className='forgot__password' >Forgot password?</p>
-            </form>
+            {
+                isEmailVerify
+                    ? <form onSubmit={submitHandler} className='login__form' role='login-form'>
+                        <div className='login__form__content__wrapper'>
+                            <CLable inputId={'loginEmail'} title={'Email'} />
+                            <CInput
+                                type='email'
+                                id='loginEmail'
+                                name='email'
+                                placeholder='jon-green@gmail.com'
+                                onBlur={onBlurHandlerEmail}
+                            />
+                            {
+                                !isEmailValid.isValid
+                                    ? <p className='error__message' role='validation-message'>{isEmailValid.message}</p>
+                                    : null
+                            }
+                        </div>
+                        <div className='login__form__content__wrapper'>
+                            <CLable inputId={'loginPassword'} title={'Password'} />
+                            <CInput
+                                type='password'
+                                id='loginPassword'
+                                name='password'
+                                placeholder='* * * * * * '
+                                onBlur={onBlurHandlerPassword}
+                            />
+                            {
+                                !isPasswordValid.isValid
+                                    ? <p className='error__message' role='validation-message'>{isPasswordValid.message}</p>
+                                    : null
+                            }
+                        </div>
+                        <CInputSubmit value='Login' />
+                        <p onClick={forgotPasswordHandler} className='forgot__password' >Forgot password?</p>
+                    </form>
+                    : <VerifyEmailCodeForm />
+            }
         </section>
     )
 }
