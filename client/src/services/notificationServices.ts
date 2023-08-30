@@ -1,5 +1,4 @@
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export const successNotification = (message:string) => {
     toast.success((message), {
@@ -28,7 +27,7 @@ export const errorNotification = (message:string) => {
 }
 
 export const happyNotification = (message:string) => {
-    toast(`❤️ ${message} ❤️`, {
+    toast(`${message} `, {
         position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,
@@ -41,7 +40,7 @@ export const happyNotification = (message:string) => {
 }
 
 export const sadNotification = (message:string) => {
-    toast(`🥺 ${message}🥺`, {
+    toast(`${message}`, {
         position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,

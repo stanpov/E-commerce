@@ -42,14 +42,14 @@ describe('Test Enter Code component content', () => {
     })
 });
 
-describe('Test validation messages functionality', () => {
+describe('Test password validation messages functionality', () => {
 
     test('Password input is empty', async () => {
         renderWithProviders(<EnterCode setIsPasswordForgot={() => { }} />);
         const codeInput = screen.getByLabelText('Enter your new password:');
         fireEvent.blur(codeInput);
         expect(codeInput).toHaveValue('');
-        const validationMessage = screen.getByRole('validation-message');
+        const validationMessage = screen.getByRole('password-validation-message');
         expect(validationMessage).toHaveTextContent('Password is required!');
     });
 
@@ -59,7 +59,7 @@ describe('Test validation messages functionality', () => {
         fireEvent.change(codeInput, { 'target': { 'value': '123' } });
         fireEvent.blur(codeInput);
         expect(codeInput).toHaveValue('123');
-        const validationMessage = screen.getByRole('validation-message');
+        const validationMessage = screen.getByRole('password-validation-message');
         expect(validationMessage).toHaveTextContent('Invalid password!');
     });
     test('Password is valid', async () => {
@@ -68,6 +68,37 @@ describe('Test validation messages functionality', () => {
         fireEvent.change(codeInput, { 'target': { 'value': '123456' } });
         fireEvent.blur(codeInput);
         expect(codeInput).toHaveValue('123456');
+        const validationMessage = null;
+        expect(validationMessage).toEqual(null);
+    });
+});
+
+describe('Test Email validation messages functionality', () => {
+
+    test('Email input is empty', async () => {
+        renderWithProviders(<EnterCode setIsPasswordForgot={() => { }} />);
+        const emailInput = screen.getByLabelText('Email');
+        fireEvent.blur(emailInput);
+        expect(emailInput).toHaveValue('');
+        const validationMessage = screen.getByRole('email-validation-message');
+        expect(validationMessage).toHaveTextContent('Email is required!');
+    });
+
+    test('Email is invalid', async () => {
+        renderWithProviders(<EnterCode setIsPasswordForgot={() => { }} />);
+        const emailInput = screen.getByLabelText('Email');
+        fireEvent.change(emailInput, { 'target': { 'value': 'peter@' } });
+        fireEvent.blur(emailInput);
+        expect(emailInput).toHaveValue('peter@');
+        const validationMessage = screen.getByRole('email-validation-message');
+        expect(validationMessage).toHaveTextContent('Invalid email!');
+    });
+    test('Email is valid', async () => {
+        renderWithProviders(<EnterCode setIsPasswordForgot={() => { }} />);
+        const emailInput = screen.getByLabelText('Email');
+        fireEvent.change(emailInput, { 'target': { 'value': 'peter@abv.bg' } });
+        fireEvent.blur(emailInput);
+        expect(emailInput).toHaveValue('peter@abv.bg');
         const validationMessage = null;
         expect(validationMessage).toEqual(null);
     });

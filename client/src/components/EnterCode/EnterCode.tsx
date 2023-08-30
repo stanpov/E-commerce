@@ -26,12 +26,9 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
         const target = e.target as typeof e.target & {
             verificationCode: { value: string };
         };
-
         const code = target.verificationCode?.value;
-
         if (isValidEmail.isValid && isValidPassword.isValid) {
             forgotPasswordHandler();
-            console.log(code);
         }
     };
 
@@ -84,7 +81,7 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
                     />
                     {
                         !isValidEmail.isValid
-                            ? <p className="error__message"> {isValidEmail.message} </p>
+                            ? <p className="error__message" role="email-validation-message"> {isValidEmail.message} </p>
                             : null
                     }
                 </div>
@@ -100,7 +97,7 @@ export const EnterCode: React.FC<EnterCodeProps> = ({
                     />
                     {
                         !isValidPassword.isValid
-                            ? <p className='error__message'>{isValidPassword.message}</p>
+                            ? <p className='error__message' role="password-validation-message">{isValidPassword.message}</p>
                             : null
                     }
                 </div>
