@@ -9,6 +9,10 @@ export const setToken = (token: string) => {
   return Cookie.set("access_token", token);
 };
 
+export const removeToken = (token: string) => {
+  return Cookie.remove(token);
+};
+
 export const config = {
   headers: {
     Authorization: `Bearer ${getToken()}`,

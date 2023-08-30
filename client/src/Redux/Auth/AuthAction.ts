@@ -23,3 +23,14 @@ export const login = createAsyncThunk(
     }
   }
 );
+
+export const logout = createAsyncThunk(
+  "auth/Logout",
+  async (undefined, thunkAPI) => {
+    try {
+      return AuthService.logout();
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ message: error });
+    }
+  }
+);

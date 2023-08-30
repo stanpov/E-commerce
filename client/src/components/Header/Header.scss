@@ -86,6 +86,36 @@ header {
                 transition: all 0.4s;
             }
         }
+        .logoutwrapper {
+            text-decoration: none;
+                color: globalStyles.$light-color;
+                position: relative;
+
+                &::after {
+                    position: absolute;
+                    bottom: -5px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    width: 0%;
+                    content: "";
+                    color: transparent;
+                    background-color: globalStyles.$secondary-color;
+                    height: 0.1rem;
+                }
+
+                &:hover::after {
+                    animation: fill 1s forwards;
+                    -webkit-animation: fill 1s forwards;
+                    -moz-animation: fill 1s forwards;
+                    opacity: 1;
+
+                    @include globalStyles.breakpoint(mobile-start, mobile-end) {
+                        display: none;
+                    }
+
+                }
+        }
 
         &__basket {
             cursor: pointer;
