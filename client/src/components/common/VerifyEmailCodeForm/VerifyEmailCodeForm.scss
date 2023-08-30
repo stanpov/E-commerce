@@ -1,0 +1,26 @@
+@use '../../../global-styles/' as gs;
+
+.verify__email{
+    @include gs.form-setter();
+
+    &__form {
+        height: 16rem;
+        @include gs.display-flex(column, space-between,center);
+        padding-top: 2rem;
+
+        &__content__wrapper {
+            @include gs.display-flex(column, space-around, center);
+            margin: 0.9rem 0;
+        }
+    }
+}
+
+.error__message{
+    color: gs.$secondary-color;
+    font-size: 0.9rem;
+}
+
+.code__message{
+    text-align: center;
+    font-size: 0.9rem;
+}
