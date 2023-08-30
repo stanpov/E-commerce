@@ -178,7 +178,7 @@ export const resetPasswor = async (req, res) => {
             .then(() => {
               return res
                 .status(202)
-                .json({ message: "Password successfully updated." });
+                .json({ data:{message: "Password successfully updated."} });
             })
             .catch((er) => {
               return res.status(500).json({
@@ -194,7 +194,7 @@ export const resetPasswor = async (req, res) => {
             .then(() => {
               return res
                 .status(202)
-                .json({ message: "Password successfully updated." });
+                .json({ data:{message: "Password successfully updated."} });
             })
             .catch((er) => {
               return res.status(500).json({
