@@ -6,11 +6,18 @@ import { BsFillArrowUpLeftCircleFill } from 'react-icons/bs';
 import './LoginSignUp.scss';
 import { EnterEmail } from '../../components/EnterEmail/EnterEmail';
 import { EnterCode } from '../../components/EnterCode/EnterCode';
+import { useAppSelector } from '../../Redux/hooks';
+import { getIsAuthLoading } from '../../Redux/Auth/AuthSlice';
+import { getIsUserLoading } from '../../Redux/User/UserSlice';
+import { Loader } from '../../components/common/Loader/Loader';
 
 export const LoginSignUp = () => {
     const [isRotate, setIsRotate] = useState<boolean>(false);
     const [rotateVerification, setRotateVerification] = useState<boolean>(false);
     const [isPasswordForgot, setIsPasswordForgot] = useState<boolean>(false);
+    const isAuthLoading = useAppSelector(getIsAuthLoading);
+    const isUserLoading = useAppSelector(getIsUserLoading);
+
 
     const rotateButtonHandler = () => {
         setIsRotate(!isRotate);
@@ -28,7 +35,7 @@ export const LoginSignUp = () => {
     return (
         <PageWrapper>
             <div className='flip__height'>
-
+                { (isAuthLoading || isUserLoading ? <Loader/> : null)}
                 <div className={!isPasswordForgot ? 'flip__wrapper first__left' : 'flip__wrapper first__right'} role='flip-container-one'>
                     <div className='flip__titles__wrapper'>
                         <h3 onClick={setIsRotateFalse} role='option-title'>Login</h3>

@@ -55,7 +55,7 @@ export const userSlice = createSlice({
             })
 
             .addCase(resetMyPassword.fulfilled, (state: InitalState, action) => {
-                console.log(action.payload);
+                // console.log(action.payload);
                 state.isError = false;
                 state.isLoading = false;
                 state.message = action.payload.data.message;
@@ -76,5 +76,6 @@ export const userSlice = createSlice({
     }
 });
 
+export const getIsUserLoading = (state:any) => state.user.isLoading;
 
 export const userReducer = userSlice.reducer;

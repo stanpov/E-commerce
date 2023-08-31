@@ -15,7 +15,7 @@ export interface logOutResponse {
 }
 
 export interface UserDataResponse {
-    _id: string | null;
+    userId: string | null;
     password: string;
     email: string;
     isAdmin?: boolean;
