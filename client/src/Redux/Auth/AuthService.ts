@@ -77,12 +77,9 @@ const verify = async (UserData:UserVerifyData): Promise<AxiosResponse> => {
         if (response.status === 200) {
             setToken(response.data?.access_token);
             successNotification(`${response.data.data.message}`);
-            console.log(response.data);
         }
         return response.data
     } catch (error: any) {
-        console.log(error.response.message);
-        
         errorNotification(`${error.response.data.message}`);
         throw error.response.data.message;
     }

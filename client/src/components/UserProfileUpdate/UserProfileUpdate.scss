@@ -1,0 +1,169 @@
+@use '../../global-styles/' as gs;
+
+.update {
+    padding: 1rem;
+
+    &__card {
+        @include gs.display-flex(column, space-between, center);
+        min-width: 70rem;
+        background: #ffffffc4;
+        border-radius: 1.2rem;
+        padding: 1.5rem;
+        @include gs.shadow(15px, -3px);
+
+        &__title {
+            font-style: italic;
+            text-decoration: wavy;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        &__content {
+            width: 85%;
+            margin: 2rem 0;
+            @include gs.display-flex(row, space-around, stretch);
+
+            &__image {
+                @include gs.display-flex(column, center, center);
+                width: 25rem;
+
+                &__wrapper {
+                    position: relative;
+                    background: #e9edee;
+                    border-radius: 50%;
+                    width: 20rem;
+                    height: 20rem;
+                    overflow: hidden;
+                    margin: 1rem;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        inset: 0rem 5.5rem;
+                        background: linear-gradient(320deg, #ff6600, #5900ff);
+                        transition: 1s;
+                        animation: animate 3.5s linear infinite;
+                    }
+
+                    &:hover::before {
+                        inset: -1rem 0;
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        inset: 0.5rem;
+                        background: #fef9f8;
+                        border-radius: 50%;
+                        z-index: 1;
+                    }
+
+                }
+
+                &__inside {
+                    position: absolute;
+                    inset: 1rem;
+                    border: 0.22rem solid gray;
+                    z-index: 2;
+                    border-radius: 50%;
+                    overflow: hidden;
+
+                    &>img {
+                        position: absolute;
+                        z-index: 3;
+                        top: 1rem;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                }
+            }
+
+            &__information {
+                @include gs.shadow(15px, -3px);
+                width: 22rem;
+                padding: 1rem;
+                background: #e9edee;
+                background: linear-gradient(320deg, #ff66006c 0%, #5900ff71 77%);
+                background: linear-gradient(320deg, gs.$secondary-color, gs.$gradient-purple);
+
+                border-radius: 1rem;
+
+                &__list {
+                    width: 100%;
+                    height: 100%; 
+                    @include gs.display-flex(column, space-evenly, center);
+                    text-align: center;
+                    color: white;
+
+                    &__item {
+                       @include gs.display-flex(column,center,center);
+                    }
+                }
+            }
+
+            &__buttons {
+                &>a {
+                    display: inline-block;
+                    margin: 0.5rem 1rem;
+                    padding: 0.3rem;
+                    width: 6rem;
+                    text-align: center;
+                    border-radius: 50%;
+                    color: gs.$gradient-purple;
+                    font-weight: 500;
+                    text-transform: capitalize;
+                    background: gs.$secondary-color;
+                    transition: 0.5s;
+                    @include gs.shadow(15px, -3px);
+
+
+                    &:hover {
+                        cursor: pointer;
+                        background: gs.$gradient-purple;
+                        color: gs.$gradient-ogange;
+                        transform: scale(1.1);
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+.save__button {
+    @include gs.shadow(15px, -3px);
+    display: inline-block;
+    margin: 0.5rem 1rem;
+    padding: 0.3rem;
+    width: 10rem;
+    height: 3rem;
+    text-align: center;
+    border: none;
+    border-radius: 50%;
+    color: gs.$secondary-color;
+    font-weight: 600;
+    font-size: 1.03rem;
+    text-transform: capitalize;
+    background: gs.$gradient-purple;
+    transition: 0.5s;
+
+    &:hover {
+        cursor: pointer;
+        background: gs.$gradient-ogange;
+        color: gs.$gradient-purple;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    0% {
+        transform: rotate(360deg);
+    }
+}

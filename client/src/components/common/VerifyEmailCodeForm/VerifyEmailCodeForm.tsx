@@ -6,6 +6,7 @@ import './VerifyEmailCodeForm.scss';
 import { useAppDispatch, useAppSelector } from '../../../Redux/hooks';
 import { getUserId } from '../../../Redux/Auth/AuthSlice';
 import { verify } from '../../../Redux/Auth/AuthAction';
+import { useNavigate } from 'react-router-dom';
 
 interface VerifyEmailCodeFormProps {
 
@@ -16,7 +17,7 @@ export const VerifyEmailCodeForm: React.FC<VerifyEmailCodeFormProps> = () => {
     const [isValid, setIsValid] = useState({ isValid: true, message: '' });
     const dispatch = useAppDispatch();
     const userId = useAppSelector(getUserId);
-
+    const navigate = useNavigate();
 
     const submitHandler = (e: React.SyntheticEvent) => {
         e.preventDefault();
@@ -25,10 +26,8 @@ export const VerifyEmailCodeForm: React.FC<VerifyEmailCodeFormProps> = () => {
         }
         const otp  = target.verifyEmail?.value;
         if (isValid.isValid && otp !=='') {
-            console.log(otp);
             dispatch(verify({userId,otp}));
-            
-
+            navigate('/');
         }
     }
 

@@ -8,6 +8,7 @@ import Products from "./components/Products/Products";
 import WishList from "./pages/WishList/WishList";
 import { Contacts } from "./pages/Contacts/Contacts";
 import { LoginSignUp } from "./pages/LoginSignUp/LoginSignUp";
+import {UserProfile} from "./pages/UserProfile/UserProfile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="contacts" element={<Contacts />} />
           <Route path="wishlist" element={<WishList />} />
           <Route path="login-signup" element={<LoginSignUp />} />
+          <Route path="my-profile" element={<UserProfile />} />
         </Route>
       </Routes>
     </>
