@@ -20,6 +20,8 @@ const register = async (
             setToken(response.data?.access_token);
             successNotification(`${response.data.message}`);
         }
+        console.log(response.data);
+        
         return response.data;
 
     } catch (error: any) {
@@ -74,13 +76,10 @@ const verify = async (UserData:UserVerifyData): Promise<AxiosResponse> => {
         const response = await axios.get(`${baseUrl}/users/verify/${UserData.userId}/${UserData.otp}`)
         if (response.status === 200) {
             setToken(response.data?.access_token);
-            successNotification(`${response.data.message}`);
-            console.log(response.data);
+            successNotification(`${response.data.data.message}`);
         }
         return response.data
     } catch (error: any) {
-        console.log(error.response.message);
-        
         errorNotification(`${error.response.data.message}`);
         throw error.response.data.message;
     }

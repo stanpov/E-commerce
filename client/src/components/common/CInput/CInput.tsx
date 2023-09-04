@@ -2,7 +2,7 @@ import React, { ChangeEventHandler, InputHTMLAttributes } from 'react';
 import './CInput.scss';
 
 interface CInputProps extends InputHTMLAttributes<HTMLInputElement> {
-    type: 'text' | 'password' | 'number' | 'email',
+    type: 'text' | 'password' | 'number' | 'email' | 'tel',
     name: string,
     id: string,
     placeholder: string,

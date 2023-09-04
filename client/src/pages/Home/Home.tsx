@@ -18,7 +18,7 @@ export const Home = () => {
                     initial='start'
                     whileInView='end'
                     animate={{ rotateY: 360 }}
-                    transition={{ duration: 2, delay: 1 }}
+                    transition={{ duration: 1, delay: 0.7}}
                     className='home__page__logo__wrapper'>
                     <Logo />
                 </motion.div>

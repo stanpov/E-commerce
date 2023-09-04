@@ -65,7 +65,7 @@
         position: relative;
         width: 100%;
         height: 100%;
-        transition: transform 1.5s;
+        transition: transform 1s;
         transform-style: preserve-3d;
 
 
@@ -90,13 +90,13 @@
 
 
 .flip__right {
-    animation: flipRight 1s linear;
+    animation: flipRight 0.7s linear;
     animation-fill-mode: forwards;
 
 }
 
 .flip__left {
-    animation: flipLeft 1s linear;
+    animation: flipLeft 0.7s linear;
     animation-fill-mode: forwards;
 }
 
@@ -106,24 +106,24 @@
 
 
 .first__right{
-    animation: firstRight 1.3s linear ;
+    animation: firstRight 0.8s linear ;
     animation-fill-mode: forwards;
 
 }
 .first__left{
     right: -100%;
-    animation: firstLeft 1.3s linear ;
+    animation: firstLeft 0.8s linear ;
     animation-fill-mode: forwards;
 
 }
 .second__right{
-    animation: secondRight 1.3s linear ;
+    animation: secondRight 0.8s linear ;
     animation-fill-mode: forwards;
 
 }
 .second__left{
     right: -100%;
-    animation: secondLeft 1.3s linear ;
+    animation: secondLeft 0.8s linear ;
     animation-fill-mode: forwards;
 
 }

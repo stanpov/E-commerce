@@ -10,7 +10,7 @@ export const MotionUpCorner = () => {
             }}
             initial='start'
             whileInView='end'
-            transition={{ duration: 2, delay: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
             className='corner__gradient__up'>
         </motion.div>
     )

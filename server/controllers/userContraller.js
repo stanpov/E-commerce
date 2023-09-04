@@ -47,10 +47,10 @@ export const createUser = async (req, res) => {
       sentOTPVerificationEmail(response, res);
       res.status(201).send({
         message: "User created, check your email for verification.",
-        response: {
+        
           userId: response._id,
           verified: response.verified,
-        },
+        
       });
     });
   } catch (error) {
@@ -140,7 +140,7 @@ export const verifyUser = async (req, res) => {
     }
     await User.findOneAndUpdate({ _id: verifyUser.userId }, { verified: true });
     await verifyUser.deleteOne({ userId: verifyUser.userId });
-    return res.status(200).json({ message: "User successfully verified!" });
+    return res.status(200).json({data:{ message: "User successfully verified!" }});
   } catch (error) {
     return res
       .status(500)
@@ -178,7 +178,7 @@ export const resetPasswor = async (req, res) => {
             .then(() => {
               return res
                 .status(202)
-                .json({ message: "Password successfully updated." });
+                .json({ data:{message: "Password successfully updated."} });
             })
             .catch((er) => {
               return res.status(500).json({
@@ -194,7 +194,7 @@ export const resetPasswor = async (req, res) => {
             .then(() => {
               return res
                 .status(202)
-                .json({ message: "Password successfully updated." });
+                .json({ data:{message: "Password successfully updated."} });
             })
             .catch((er) => {
               return res.status(500).json({
@@ -244,7 +244,7 @@ console.log(email, tempPassword);
         await existingNewPassWordVerification[0].deleteOne({
           userEmail: email,
         });
-        return res.status(201).json({ message: "Successfully updated" });
+        return res.status(201).json({data:{ message: "Successfully updated" }});
       }
     }
   }

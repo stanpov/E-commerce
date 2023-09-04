@@ -1,4 +1,4 @@
-import axios, { AxiosPromise } from "axios";
+import axios, { AxiosPromise, AxiosResponse } from "axios";
 import {
   ChangePasswordData,
   ConfirmPasswordData,
@@ -13,11 +13,13 @@ export const changePassword = async (
 ): Promise<AxiosPromise> => {
   try {
     const response = await axios.put(`${baseUrl}/users/changepassword`,userData);
-    successNotification(`${response.data.message}`)
+    successNotification(`${response.data.data.message}`);
+    console.log(response);
+    
     return response.data;
   } catch (error: any) {
-    errorNotification(`${error.response.data.message}`)
-    throw error.response.data.message;
+    errorNotification(`${error.response.data.data.message}`);
+    throw error.response.data.data.message;
   }
 };
 
@@ -26,9 +28,13 @@ export const confirmPassword = async (
 ): Promise<AxiosPromise> => {
   try {
     const response = await axios.put(`${baseUrl}/users/confirmpassword`,userData);
+    successNotification(`${response.data.data.message}`);
+    console.log(response);
+    
     return response.data;
   } catch (error: any) {
-    throw error.response.data.message;
+    errorNotification(`${error.response.data.data.message}`);
+    throw error.response.data.data.message;
   }
 };
 
@@ -40,9 +46,11 @@ export const resetPassword = async (
       `${baseUrl}/users/resetpassword`,
       userData
     );
-
+    successNotification(`${response.data.data.message}`);
+    
     return response.data;
   } catch (error: any) {
+    errorNotification(`${error.response.data.message}`);
     throw error.response.data.message;
   }
 };

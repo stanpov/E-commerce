@@ -29,9 +29,11 @@ export const authSlice = createSlice({
     builder
 
       .addCase(register.fulfilled, (state: AuthState, action) => {
+        console.log(action.payload);
+        
         state.isLoading = false;
         state.isError = false;
-        state.userId = action.payload?._id;
+        state.userId = action.payload.userId;
         state.isAdmin = action.payload?.isAdmin;
         state.message = null;
       })
@@ -127,7 +129,7 @@ export const authSlice = createSlice({
         console.log(action);
         state.isLoading = false;
         state.isError = false;
-        state.userId = action.payload.data.id;
+        state.userId = action.meta.arg.userId;
         state.isAdmin = false;
         state.isVerified = action.payload.data.verified;
         state.message = action.payload.data.message as string;
@@ -137,5 +139,6 @@ export const authSlice = createSlice({
 
 export const getUserId = (state: any) => state.auth.userId;
 export const getIsVerified = (state: any) => state.auth.isVerified;
-
+export const getIsAuthLoading = (state:any) => state.auth.isLoading;
+ 
 export const authReducer = authSlice.reducer;
