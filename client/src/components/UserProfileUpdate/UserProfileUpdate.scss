@@ -133,13 +133,13 @@
     }
 }
 
-.save__button {
+.save__button  {
     @include gs.shadow(15px, -3px);
     display: inline-block;
     margin: 0.5rem 1rem;
     padding: 0.3rem;
-    width: 10rem;
-    height: 3rem;
+    width: 6rem;
+    height: 2rem;
     text-align: center;
     border: none;
     border-radius: 50%;

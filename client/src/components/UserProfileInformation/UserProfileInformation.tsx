@@ -13,7 +13,7 @@ export const UserProfileInformation: React.FC<UserProfileInformationProps> = ({
 
     const updateHandler = () => {
         setIsUpdate(true)
-        console.log(666777);
+     
 
     }
 
