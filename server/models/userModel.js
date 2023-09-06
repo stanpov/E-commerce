@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
   verified: { type: Boolean, default: false },
+  userImage: { type: String, required: false },
 });
 
 const User = mongoose.model("User", userSchema);

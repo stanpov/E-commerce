@@ -7,6 +7,7 @@ import {
   logout,
   resetPasswor,
   verifyUser,
+  uploadUserImage,
 } from "../controllers/userContraller.js";
 import { isAuth } from "../utils/utils.js";
 
@@ -25,5 +26,7 @@ userRouter.post("/resetpassword", resetPasswor);
 userRouter.put("/confirmpassword", confirmPassword);
 
 userRouter.put("/changepassword", changeMyPassword);
+
+userRouter.post("/uploaduserimage", uploadUserImage);
 
 export default userRouter;

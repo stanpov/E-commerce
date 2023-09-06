@@ -7,6 +7,7 @@ import {
 } from "../utils/utils.js";
 import { userOTPVerification } from "../models/userOTPVerification.js";
 import { userNewPasswordVerification } from "../models/userNewPasswordVerification.js";
+import { cloudinaryUploader } from "../cloudinary/cloudinary.js";
 
 export const createUser = async (req, res) => {
   try {
@@ -255,7 +256,6 @@ export const confirmPassword = async (req, res) => {
 
 export const changeMyPassword = async (req, res) => {
   const { email, password, newPassword } = req.body;
-  console.log(email);
   const existingUser = await User.find({ email: email });
   if (existingUser.length === 0) {
     return res
@@ -283,4 +283,26 @@ export const changeMyPassword = async (req, res) => {
   await User.findOneAndUpdate({ email: email }, { password: hasPass });
 
   return res.status(202).json({ message: "Password successfully updated." });
+};
+
+export const uploadUserImage = async (req, res) => {
+  const { userImage, userId } = req.body;
+  try {
+    const uploadedUrl = await cloudinaryUploader(userImage);
+    const user = await User.find({ _id: userId });
+    if (user.length === 0) {
+      return res.status(404).json({ message: "User with this id not found." });
+    } else {
+      await User.findOneAndUpdate(
+        { _id: userId },
+        { userImage: uploadedUrl }
+      ).then(() => {
+        return res
+          .status(202)
+          .json({ message: "Successfully updated user image" });
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
 };
