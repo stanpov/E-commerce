@@ -286,8 +286,8 @@ export const changeMyPassword = async (req, res) => {
 };
 
 export const updateUserInformation = async (req, res) => {
-  const { userImage, userId, userName, phoneNumber, deliveryAddress } =
-    req.body;
+  const { userImage, userName, phoneNumber, deliveryAddress } = req.body;
+  const { userId } = req.params;
   try {
     let uploadedUrl;
     if (userImage !== undefined) {
@@ -328,5 +328,29 @@ export const updateUserInformation = async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getUserInformation = async (req, res) => {
+  const { userId } = req.params;
+  const myUser = await User.findById({ _id: userId });
+  if (!myUser) {
+    return res.status(404).json({ message: "User not found!" });
+  } else {
+    const partialInfo = {
+      isAdmin: myUser.isAdmin,
+      deliveryAddress: myUser.deliveryAddress,
+      phoneNumber: myUser.phoneNumber,
+      userImage: myUser.userImage,
+      verified: myUser.verified,
+      email: myUser.email,
+      userName: myUser.userName,
+    };
+    return res.status(200).json({
+      data: {
+        response: partialInfo,
+        message: "Successfully retrieved user information",
+      },
+    });
   }
 };
