@@ -285,22 +285,46 @@ export const changeMyPassword = async (req, res) => {
   return res.status(202).json({ message: "Password successfully updated." });
 };
 
-export const uploadUserImage = async (req, res) => {
-  const { userImage, userId } = req.body;
+export const updateUserInformation = async (req, res) => {
+  const { userImage, userId, userName, phoneNumber, deliveryAddress } =
+    req.body;
   try {
-    const uploadedUrl = await cloudinaryUploader(userImage);
+    let uploadedUrl;
+    if (userImage !== undefined) {
+      uploadedUrl = await cloudinaryUploader(userImage);
+    }
     const user = await User.find({ _id: userId });
     if (user.length === 0) {
       return res.status(404).json({ message: "User with this id not found." });
     } else {
-      await User.findOneAndUpdate(
-        { _id: userId },
-        { userImage: uploadedUrl }
-      ).then(() => {
-        return res
-          .status(202)
-          .json({ message: "Successfully updated user image" });
-      });
+      if (uploadedUrl) {
+        await User.findOneAndUpdate(
+          { _id: userId },
+          {
+            userImage: uploadedUrl,
+            userName: userName,
+            phoneNumber: Number(phoneNumber),
+            deliveryAddress: deliveryAddress,
+          }
+        ).then(() => {
+          return res
+            .status(202)
+            .json({ message: "Successfully updated user information" });
+        });
+      } else {
+        await User.findOneAndUpdate(
+          { _id: userId },
+          {
+            userName: userName,
+            phoneNumber: phoneNumber,
+            deliveryAddress: deliveryAddress,
+          }
+        ).then(() => {
+          return res
+            .status(202)
+            .json({ message: "Successfully user information" });
+        });
+      }
     }
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
