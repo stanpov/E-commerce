@@ -12,12 +12,12 @@ const productRouter = exporess.Router();
 
 productRouter.get("/allproducts", getAllProduct);
 
-productRouter.post("/create", isAuth, isAdmin, createProduct);
+productRouter.post("/create", createProduct);
 
-productRouter.put("/update/:id", isAuth, isAdmin, updateProduct);
+productRouter.put("/update/:id", updateProduct);
 
 productRouter.delete("/delete/:id", isAuth, isAdmin, deleteProduct);
 
-productRouter.get("/product/:id", isAuth, getProductById);
+productRouter.get("/product/:id", getProductById);
 
 export default productRouter;
