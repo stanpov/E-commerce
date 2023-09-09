@@ -63,44 +63,44 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
             transition={{ duration: 1.3, delay: 0.2 }} className='update__card'>
             <h2 className='update__card__title'>update your profile</h2>
             <section className='update__card__content'>
-                <section className='update__card__content__image'>
-                    <div className='update__card__content__image__wrapper'>
-                        <div className='update__card__content__image__inside'>
-                            <img src='https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png' alt="" />
-                        </div>
-                        <CInputImage />
-                    </div>
-                </section>
                 <form onSubmit={saveHandler} className='update__card__content__information'>
+                    <section className='update__card__content__image'>
+                        <div className='update__card__content__image__wrapper'>
+                            <div className='update__card__content__image__inside'>
+                                <img src='https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png' alt="" />
+                            </div>
+                            <CInputImage />
+                        </div>
+                    </section>
                     <ul className='update__card__content__information__list'>
                         <li className='update__card__content__information__list__item'>
                             <CLable inputId={'username'} title={'Username'} />
-                            <CInput type={'text'} name={'username'} id={'username'} placeholder={'john-green'} onBlur={onBlurHandlerUsername} />
+                            <CInput type={'text'} name={'username'} id={'username'} placeholder={'john-green'} onBlur={onBlurHandlerUsername} required />
                             {
                                 isUsernameValid
-                                    ? <p className='update__card__error__message'>{isUsernameValid.message}</p>
+                                    ? <p className='update__card__error__message' role='validation-message'>{isUsernameValid.message}</p>
                                     : null
                             }
                         </li>
                         <li className='update__card__content__information__list__item'>
                             <CLable inputId={'phone'} title={'Phone number'} />
-                            <CInput type={'number'} name={'phone'} id={'phone'} placeholder={'212 456 7890'} onBlur={onBlurHandlerPhone} />
+                            <CInput type={'number'} name={'phone'} id={'phone'} placeholder={'212 456 7890'} onBlur={onBlurHandlerPhone} required />
                             {
                                 isPhoneValid
-                                    ? <p className='update__card__error__message'>{isPhoneValid.message}</p>
+                                    ? <p className='update__card__error__message' role='validation-message'>{isPhoneValid.message}</p>
                                     : null
                             }
                         </li>
                         <li className='update__card__content__information__list__item'>
                             <CLable inputId={'address'} title={'Delivery address'} />
-                            <CInput type={'text'} name={'address'} id={'address'} placeholder={'332, My Street, Kingston'} onBlur={onBlurHandlerAddress} />
+                            <CInput type={'text'} name={'address'} id={'address'} placeholder={'332, My Street, Kingston'} onBlur={onBlurHandlerAddress} required />
                             {
                                 isAddressValid
-                                    ? <p className='update__card__error__message'>{isAddressValid.message}</p>
+                                    ? <p className='update__card__error__message' role='validation-message'>{isAddressValid.message}</p>
                                     : null
                             }
                         </li>
-                    <input type='submit' className='save__button' value={'Save'}/>
+                        <input type='submit' className='save__button' value={'Save'} />
                     </ul>
                 </form>
             </section>
