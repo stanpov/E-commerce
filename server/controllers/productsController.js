@@ -1,4 +1,5 @@
 import Product from "../models/productModel.js";
+import { productCategories } from "../categories/categories.js";
 
 export const createProduct = async (req, res) => {
   try {
@@ -30,10 +31,54 @@ export const createProduct = async (req, res) => {
 
 export const getAllProduct = async (req, res) => {
   try {
-    const products = await Product.find();
-    res.status(200).send({ response: products });
+    const page = parseInt(req.query.page) - 1 || 0;
+    const limit = parseInt(req.query.limit) || 10;
+    const search = req.query.search || "";
+    let sort = req.query.sort || "rating";
+    let category = req.query.category || "ALL";
+
+    if (category === "ALL") {
+      category = [...productCategories];
+    } else {
+      category = category.split(",");
+    }
+
+    req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
+    let sortBy = {};
+    if (sort[1]) {
+      sortBy[sort[0]] = sort[1];
+    } else {
+      sortBy[sort[0]] = "asc";
+    }
+
+    const products = await Product.find({
+      productName: { $regex: search, $options: "i" },
+    })
+      .where("category")
+      .in([...category])
+      .sort(sortBy)
+      .skip(page * limit)
+      .limit(limit);
+
+    const total = await Product.countDocuments({
+      category: { $in: [...category] },
+      productName: { $regex: search, $options: "i" },
+    });
+
+    const response = {
+      total,
+      page: page + 1,
+      limit,
+      category: category,
+      products,
+    };
+
+    return res.status(200).send(response);
   } catch (error) {
-    return res.status(500).send("Something went wrong.");
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: "Something went wrong while fetching data" });
   }
 };
 

@@ -7,6 +7,7 @@ import {
 } from "../utils/utils.js";
 import { userOTPVerification } from "../models/userOTPVerification.js";
 import { userNewPasswordVerification } from "../models/userNewPasswordVerification.js";
+import { cloudinaryUploader } from "../cloudinary/cloudinary.js";
 
 export const createUser = async (req, res) => {
   try {
@@ -47,10 +48,9 @@ export const createUser = async (req, res) => {
       sentOTPVerificationEmail(response, res);
       res.status(201).send({
         message: "User created, check your email for verification.",
-        
-          userId: response._id,
-          verified: response.verified,
-        
+
+        userId: response._id,
+        verified: response.verified,
       });
     });
   } catch (error) {
@@ -140,7 +140,9 @@ export const verifyUser = async (req, res) => {
     }
     await User.findOneAndUpdate({ _id: verifyUser.userId }, { verified: true });
     await verifyUser.deleteOne({ userId: verifyUser.userId });
-    return res.status(200).json({data:{ message: "User successfully verified!" }});
+    return res
+      .status(200)
+      .json({ data: { message: "User successfully verified!" } });
   } catch (error) {
     return res
       .status(500)
@@ -178,7 +180,7 @@ export const resetPasswor = async (req, res) => {
             .then(() => {
               return res
                 .status(202)
-                .json({ data:{message: "Password successfully updated."} });
+                .json({ data: { message: "Password successfully updated." } });
             })
             .catch((er) => {
               return res.status(500).json({
@@ -194,7 +196,7 @@ export const resetPasswor = async (req, res) => {
             .then(() => {
               return res
                 .status(202)
-                .json({ data:{message: "Password successfully updated."} });
+                .json({ data: { message: "Password successfully updated." } });
             })
             .catch((er) => {
               return res.status(500).json({
@@ -214,7 +216,7 @@ export const resetPasswor = async (req, res) => {
 
 export const confirmPassword = async (req, res) => {
   const { email, tempPassword } = req.body;
-console.log(email, tempPassword);
+  console.log(email, tempPassword);
   const existingNewPassWordVerification =
     await userNewPasswordVerification.find({ userEmail: email });
   if (existingNewPassWordVerification === 0) {
@@ -244,7 +246,9 @@ console.log(email, tempPassword);
         await existingNewPassWordVerification[0].deleteOne({
           userEmail: email,
         });
-        return res.status(201).json({data:{ message: "Successfully updated" }});
+        return res
+          .status(201)
+          .json({ data: { message: "Successfully updated" } });
       }
     }
   }
@@ -252,7 +256,6 @@ console.log(email, tempPassword);
 
 export const changeMyPassword = async (req, res) => {
   const { email, password, newPassword } = req.body;
-
   const existingUser = await User.find({ email: email });
   if (existingUser.length === 0) {
     return res
@@ -280,4 +283,74 @@ export const changeMyPassword = async (req, res) => {
   await User.findOneAndUpdate({ email: email }, { password: hasPass });
 
   return res.status(202).json({ message: "Password successfully updated." });
+};
+
+export const updateUserInformation = async (req, res) => {
+  const { userImage, userName, phoneNumber, deliveryAddress } = req.body;
+  const { userId } = req.params;
+  try {
+    let uploadedUrl;
+    if (userImage !== undefined) {
+      uploadedUrl = await cloudinaryUploader(userImage);
+    }
+    const user = await User.find({ _id: userId });
+    if (user.length === 0) {
+      return res.status(404).json({ message: "User with this id not found." });
+    } else {
+      if (uploadedUrl) {
+        await User.findOneAndUpdate(
+          { _id: userId },
+          {
+            userImage: uploadedUrl,
+            userName: userName,
+            phoneNumber: Number(phoneNumber),
+            deliveryAddress: deliveryAddress,
+          }
+        ).then(() => {
+          return res
+            .status(202)
+            .json({ message: "Successfully updated user information" });
+        });
+      } else {
+        await User.findOneAndUpdate(
+          { _id: userId },
+          {
+            userName: userName,
+            phoneNumber: phoneNumber,
+            deliveryAddress: deliveryAddress,
+          }
+        ).then(() => {
+          return res
+            .status(202)
+            .json({ message: "Successfully user information" });
+        });
+      }
+    }
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getUserInformation = async (req, res) => {
+  const { userId } = req.params;
+  const myUser = await User.findById({ _id: userId });
+  if (!myUser) {
+    return res.status(404).json({ message: "User not found!" });
+  } else {
+    const partialInfo = {
+      isAdmin: myUser.isAdmin,
+      deliveryAddress: myUser.deliveryAddress,
+      phoneNumber: myUser.phoneNumber,
+      userImage: myUser.userImage,
+      verified: myUser.verified,
+      email: myUser.email,
+      userName: myUser.userName,
+    };
+    return res.status(200).json({
+      data: {
+        response: partialInfo,
+        message: "Successfully retrieved user information",
+      },
+    });
+  }
 };
