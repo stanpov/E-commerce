@@ -34,6 +34,20 @@ export interface UserLoginResponse {
     isVerified: boolean;
 }
 
+export interface UserId {
+    userId:string;
+}
+
+export interface UserInformationData {
+    isAdmin: string;
+    deliveryAddress?: string;
+    phoneNumber?: string;
+    userImage?: string;
+    verified: string;
+    email: string;
+    userName: string;
+}
+
 export interface UserVerifyData {
     userId: string;
     otp:string;

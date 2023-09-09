@@ -5,6 +5,9 @@ import { CInput } from '../common/CInput/CInput';
 import { CInputImage } from '../common/CInputImage/CInputImage';
 import './UserProfileUpdate.scss';
 import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';
+import { useAppSelector } from '../../Redux/hooks';
+import { userInfo } from '../../Redux/User/UserSlice';
+import axios from 'axios';
 
 interface UserProfileUpdateProps {
     setIsUpdate: (updata: boolean) => void;
@@ -17,10 +20,37 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
     const [isUsernameValid, setIsUsernameValid] = useState({ isValid: true, message: '' });
     const [isPhoneValid, setIsPhoneValid] = useState({ isValid: true, message: '' });
     const [isAddressValid, setIsAddressValid] = useState({ isValid: true, message: '' });
+    const [image, setImage] = useState<string | ArrayBuffer | null>('');
+    const user = useAppSelector(userInfo);
 
 
     const saveHandler = () => {
-        setIsUpdate(false)
+        setIsUpdate(false);
+        const data = {
+            userImage: image,
+            userName: 'pesho',
+            phoneNumber: 55555555,
+            deliveryAddress: 'sofia 5864',
+        }
+        axios.post(`${process.env.REACT_APP_BASE_URL}/users/updateuserinformation/64ef976eac08b376c69025f2`,
+            data
+        )
+    }
+
+    const imageChangeHandler = (e: React.ChangeEvent): void => {
+        e.preventDefault();
+        const target = e.target as HTMLInputElement;
+        const file: File = (target.files as FileList)[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        console.log(55555);
+        
+
+        reader.onloadend = () => {
+            setImage(reader.result)
+            console.log(reader.result);
+            
+        }
     }
 
     const onBlurHandlerUsername = (e: React.FocusEvent<HTMLInputElement>): void => {
@@ -67,15 +97,19 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
                     <section className='update__card__content__image'>
                         <div className='update__card__content__image__wrapper'>
                             <div className='update__card__content__image__inside'>
-                                <img src='https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png' alt="" />
+                                {
+                                    user.userImage
+                                        ? <img src={user.userImage} alt="" />
+                                        : <img src='https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png' alt="" />
+                                }
                             </div>
-                            <CInputImage />
+                            <CInputImage onChange={(e)=>imageChangeHandler(e)} />
                         </div>
                     </section>
                     <ul className='update__card__content__information__list'>
                         <li className='update__card__content__information__list__item'>
                             <CLable inputId={'username'} title={'Username'} />
-                            <CInput type={'text'} name={'username'} id={'username'} placeholder={'john-green'} onBlur={onBlurHandlerUsername} required />
+                            <CInput type={'text'} name={'username'} id={'username'} placeholder={user.userName} onBlur={onBlurHandlerUsername} required />
                             {
                                 isUsernameValid
                                     ? <p className='update__card__error__message' role='validation-message'>{isUsernameValid.message}</p>
@@ -84,7 +118,7 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
                         </li>
                         <li className='update__card__content__information__list__item'>
                             <CLable inputId={'phone'} title={'Phone number'} />
-                            <CInput type={'number'} name={'phone'} id={'phone'} placeholder={'212 456 7890'} onBlur={onBlurHandlerPhone} required />
+                            <CInput type={'number'} name={'phone'} id={'phone'} placeholder={user.phoneNumber ? user.phoneNumber : '8474341122'} onBlur={onBlurHandlerPhone} required />
                             {
                                 isPhoneValid
                                     ? <p className='update__card__error__message' role='validation-message'>{isPhoneValid.message}</p>
@@ -93,7 +127,7 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
                         </li>
                         <li className='update__card__content__information__list__item'>
                             <CLable inputId={'address'} title={'Delivery address'} />
-                            <CInput type={'text'} name={'address'} id={'address'} placeholder={'332, My Street, Kingston'} onBlur={onBlurHandlerAddress} required />
+                            <CInput type={'text'} name={'address'} id={'address'} placeholder={user.deliveryAddress ? user.deliveryAddress : '332, My Street, Kingston'} onBlur={onBlurHandlerAddress} required />
                             {
                                 isAddressValid
                                     ? <p className='update__card__error__message' role='validation-message'>{isAddressValid.message}</p>

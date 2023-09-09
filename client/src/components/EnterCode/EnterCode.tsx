@@ -4,7 +4,7 @@ import { CInput } from "../common/CInput/CInput";
 import "./EnterCode.scss";
 import { CInputSubmit } from "../common/CInputSubmit/CInputSubmit";
 import { useAppDispatch } from "../../Redux/hooks";
-import { confirmMyPassword } from "../../Redux/User/UersActions";
+import { confirmMyPassword } from "../../Redux/User/UserActions";
 
 interface EnterCodeProps {
     setIsPasswordForgot: (forgot: boolean) => void;

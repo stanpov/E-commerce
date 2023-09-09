@@ -1,5 +1,5 @@
-import { ChangePasswordData, ConfirmPasswordData, ResetPasswordData } from '../../interfaces/interfaces';
-import { changePassword, confirmPassword, resetPassword } from './UserServices';
+import { ChangePasswordData, ConfirmPasswordData, ResetPasswordData, UserId, UserInformationData } from '../../interfaces/interfaces';
+import { changePassword, confirmPassword, getUserInformation, resetPassword } from './UserServices';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const changeMyPassword = createAsyncThunk('user/ChangePassword', async (userData: ChangePasswordData, thunkAPI) => {
@@ -25,3 +25,11 @@ export const resetMyPassword = createAsyncThunk('user/ResetPassword', async (use
         return thunkAPI.rejectWithValue({ message: error });
     }
 });
+
+export const userInformation = createAsyncThunk('user/GetInformation', async( userData:UserId, thunkAPI)=>{
+    try {
+        return getUserInformation(userData);
+    } catch (error) {
+        return thunkAPI.rejectWithValue({ message: error });
+    }
+})

@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from "../../../Redux";
 import { Provider } from "react-redux";
 import { CInputImage } from "./CInputImage";
+import { ChangeEvent } from "react";
 
 let route = '/';
 
@@ -30,9 +31,9 @@ afterEach(() => {
     return route;
 });
 
-describe('Test Input content test',()=>{
-    test('Should have lable , input  and icon',()=>{
-        renderWithProviders(<CInputImage/>);
+describe('Test Input content test', () => {
+    test('Should have lable , input  and icon', () => {
+        renderWithProviders(<CInputImage onChange={function (event: ChangeEvent<HTMLInputElement>): void { }} />);
         const lable = screen.getByRole('profile-image');
         expect(lable).toBeInTheDocument;
         const input = screen.getByLabelText('');
