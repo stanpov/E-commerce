@@ -287,7 +287,9 @@ export const changeMyPassword = async (req, res) => {
 
 export const updateUserInformation = async (req, res) => {
   const { userImage, userName, phoneNumber, deliveryAddress } = req.body;
+  console.log( userImage, userName, phoneNumber, deliveryAddress );
   const { userId } = req.params;
+  console.log(userId);
   try {
     let uploadedUrl;
     if (userImage !== undefined) {

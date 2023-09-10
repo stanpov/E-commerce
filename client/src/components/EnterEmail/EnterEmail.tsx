@@ -4,7 +4,7 @@ import { CInput } from "../common/CInput/CInput";
 import { CInputSubmit } from "../common/CInputSubmit/CInputSubmit";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../Redux/hooks";
-import { resetMyPassword } from "../../Redux/User/UersActions";
+import { resetMyPassword } from "../../Redux/User/UserActions";
 import "./EnterEmail.scss";
 
 interface EnterEmailProps {

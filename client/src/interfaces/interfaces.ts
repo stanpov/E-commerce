@@ -34,9 +34,35 @@ export interface UserLoginResponse {
     isVerified: boolean;
 }
 
+export interface UserId {
+    userId: string;
+}
+
+export interface UserInformationData {
+    isAdmin: string;
+    deliveryAddress?: string;
+    phoneNumber?: string;
+    userImage?: string;
+    verified: string;
+    email: string;
+    userName: string;
+}
+
+export interface UpdateUserData {
+    userImage?: string |ArrayBuffer | null;
+    userName: string,
+    phoneNumber: number | string,
+    deliveryAddress: string,
+}
+
+export interface UpdateUserProfile {
+    userId: string;
+    userData: UpdateUserData;
+}
+
 export interface UserVerifyData {
     userId: string;
-    otp:string;
+    otp: string;
 }
 
 export interface InitalState {
