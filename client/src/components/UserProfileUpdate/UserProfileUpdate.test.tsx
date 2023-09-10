@@ -6,6 +6,7 @@ import { UserProfileUpdate } from "./UserProfileUpdate";
 import { CInputImage } from "../common/CInputImage/CInputImage";
 import { CLable } from "../common/CLable/CLable";
 import userEvent from "@testing-library/user-event";
+import { ChangeEvent } from "react";
 
 let route = '/';
 
@@ -33,27 +34,27 @@ afterEach(() => {
     return route;
 });
 
-// describe('Test UserProfileUpdate component content', () => {
-//     test('Should have title, image, add image input, form with three lables and three inputs, submit button', () => {
-//         renderWithProviders(<UserProfileUpdate setIsUpdate={function (updata: boolean): void { }} />)
-//         const title = screen.getByText('update your profile');
-//         expect(title).toBeInTheDocument;
-//         // expect(<CInputImage onChange={onchange}/>).toBeInTheDocument;
-//         const image = screen.getByRole('img');
-//         expect(image).toBeInTheDocument;
-//         const submitInput = screen.getByDisplayValue('Save');
-//         expect(submitInput).toBeInTheDocument;
-//         const lables = screen.getAllByRole('input-lable');
-//         expect(lables).toHaveLength(3);
-//         const inputs = screen.getAllByRole('form-input');
-//         expect(inputs).toHaveLength(3);
-//         const validationMessages = screen.getAllByRole('validation-message');
-//         expect(validationMessages).toHaveLength(3);
-//     });
-// });
+describe('Test UserProfileUpdate component content', () => {
+    test('Should have title, image, add image input, form with three lables and three inputs, submit button', () => {
+        renderWithProviders(<UserProfileUpdate setIsUpdate={function (updata: boolean): void { }} />)
+        const title = screen.getByText('update your profile');
+        expect(title).toBeInTheDocument;
+        expect(<CInputImage onChange={function (event: ChangeEvent<HTMLInputElement>): void { }} />).toBeInTheDocument;
+        const image = screen.getByRole('img');
+        expect(image).toBeInTheDocument;
+        const submitInput = screen.getByDisplayValue('Save');
+        expect(submitInput).toBeInTheDocument;
+        const lables = screen.getAllByRole('input-lable');
+        expect(lables).toHaveLength(3);
+        const inputs = screen.getAllByRole('form-input');
+        expect(inputs).toHaveLength(3);
+        const validationMessages = screen.getAllByRole('validation-message');
+        expect(validationMessages).toHaveLength(3);
+    });
+});
 
 describe('Test UserProfileUpdate component inputs validation functionality', () => {
-    test('Username no validation messages',async()=>{
+    test('Username no validation messages', async () => {
         renderWithProviders(<UserProfileUpdate setIsUpdate={function (updata: boolean): void { }} />)
         const usernameInput = screen.getByLabelText('Username');
         fireEvent.change(usernameInput, { target: { 'value': 'peter' } });
@@ -62,7 +63,7 @@ describe('Test UserProfileUpdate component inputs validation functionality', () 
         expect(usernameInput).toHaveValue('peter');
         expect(validationMessage).toEqual(null);
     });
-    test('Username validation messages \'Username is required!\'',async()=>{
+    test('Username validation messages \'Username is required!\'', async () => {
         renderWithProviders(<UserProfileUpdate setIsUpdate={function (updata: boolean): void { }} />)
         const usernameInput = screen.getByLabelText('Username');
         fireEvent.change(usernameInput, { target: { 'value': '' } });
@@ -71,7 +72,7 @@ describe('Test UserProfileUpdate component inputs validation functionality', () 
         expect(usernameInput).toHaveValue('');
         expect(validationMessage[0]).toHaveTextContent('Username is required!');
     });
-    test('Username validation messages \'Username needs to be at least 5 characters long!\'',async()=>{
+    test('Username validation messages \'Username needs to be at least 5 characters long!\'', async () => {
         renderWithProviders(<UserProfileUpdate setIsUpdate={function (updata: boolean): void { }} />)
         const usernameInput = screen.getByLabelText('Username');
         fireEvent.change(usernameInput, { target: { 'value': 'john' } });
@@ -81,7 +82,7 @@ describe('Test UserProfileUpdate component inputs validation functionality', () 
         expect(validationMessage[0]).toHaveTextContent('Username needs to be at least 5 characters long!');
     });
 
-    test('Phone no validation messages ',async()=>{
+    test('Phone no validation messages ', async () => {
         renderWithProviders(<UserProfileUpdate setIsUpdate={function (updata: boolean): void { }} />)
         const phoneInput = screen.getByLabelText('Phone number');
         fireEvent.change(phoneInput, { target: { 'value': 8888777888 } });
@@ -91,7 +92,7 @@ describe('Test UserProfileUpdate component inputs validation functionality', () 
         expect(validationMessage[0]).toHaveTextContent('');
     });
 
-    test('Phone validation messages \'Phone is required!\'',async()=>{
+    test('Phone validation messages \'Phone is required!\'', async () => {
         renderWithProviders(<UserProfileUpdate setIsUpdate={function (updata: boolean): void { }} />)
         const phoneInput = screen.getByLabelText('Phone number');
         fireEvent.change(phoneInput, { target: { 'value': null } });
@@ -101,7 +102,7 @@ describe('Test UserProfileUpdate component inputs validation functionality', () 
         expect(validationMessage[1]).toHaveTextContent('Phone is required!');
     });
 
-    test('Phone validation messages \'Invalid phone number!\'',async()=>{
+    test('Phone validation messages \'Invalid phone number!\'', async () => {
         renderWithProviders(<UserProfileUpdate setIsUpdate={function (updata: boolean): void { }} />)
         const phoneInput = screen.getByLabelText('Phone number');
         fireEvent.change(phoneInput, { target: { 'value': 555666 } });
@@ -110,8 +111,8 @@ describe('Test UserProfileUpdate component inputs validation functionality', () 
         expect(phoneInput).toHaveValue(555666);
         expect(validationMessage[1]).toHaveTextContent('Invalid phone number!');
     });
-//todo
-    test('Address validation messages \'Address is required!\'',async()=>{
+    //todo
+    test('Address validation messages \'Address is required!\'', async () => {
         renderWithProviders(<UserProfileUpdate setIsUpdate={function (updata: boolean): void { }} />)
         const phoneInput = screen.getByLabelText('Phone number');
         fireEvent.change(phoneInput, { target: { 'value': 555666 } });

@@ -3,11 +3,14 @@ import { motion } from 'framer-motion';
 import { CLable } from '../common/CLable/CLable';
 import { CInput } from '../common/CInput/CInput';
 import { CInputImage } from '../common/CInputImage/CInputImage';
-import './UserProfileUpdate.scss';
 import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';
-import { useAppSelector } from '../../Redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 import { userInfo } from '../../Redux/User/UserSlice';
-import axios from 'axios';
+import { getUserId } from '../../Redux/Auth/AuthSlice';
+import { useNavigate } from 'react-router-dom';
+import { UpdateUserProfile } from '../../interfaces/interfaces';
+import { updateProfile } from '../../Redux/User/UserActions';
+import './UserProfileUpdate.scss';
 
 interface UserProfileUpdateProps {
     setIsUpdate: (updata: boolean) => void;
@@ -22,19 +25,28 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
     const [isAddressValid, setIsAddressValid] = useState({ isValid: true, message: '' });
     const [image, setImage] = useState<string | ArrayBuffer | null>('');
     const user = useAppSelector(userInfo);
+    const userId = useAppSelector(getUserId);
+    const [username, setUsername] = useState(user.userName);
+    const [phone, setPhone] = useState(user.phoneNumber);
+    const [address, setAddress] = useState(user.deliveryAddress);
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
 
-    const saveHandler = () => {
-        setIsUpdate(false);
-        const data = {
-            userImage: image,
-            userName: 'pesho',
-            phoneNumber: 55555555,
-            deliveryAddress: 'sofia 5864',
+    const saveHandler = (e:React.SyntheticEvent) => {
+        e.preventDefault();
+        const data:UpdateUserProfile = {
+            userId: userId,
+            userData: {
+                userImage: image,
+                userName: username,
+                phoneNumber: phone,
+                deliveryAddress: address,
+            },
         }
-        axios.post(`${process.env.REACT_APP_BASE_URL}/users/updateuserinformation/64ef976eac08b376c69025f2`,
-            data
-        )
+        dispatch(updateProfile(data))
+        setIsUpdate(false);
+        navigate('/');
     }
 
     const imageChangeHandler = (e: React.ChangeEvent): void => {
@@ -43,14 +55,24 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
         const file: File = (target.files as FileList)[0];
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        console.log(55555);
-        
-
         reader.onloadend = () => {
             setImage(reader.result)
-            console.log(reader.result);
-            
+            console.log(reader.result); 
         }
+    }
+
+    const onChangeUsernameHandler = (e:React.ChangeEvent):void => {
+        const target = e.target as HTMLInputElement;
+        setUsername(target.value);
+    }
+
+    const onChangePhoneHandler = (e:React.ChangeEvent):void => {
+        const target = e.target as HTMLInputElement;
+        setPhone(target.value);
+    }
+    const onChangeAddressHandler = (e:React.ChangeEvent):void => {
+        const target = e.target as HTMLInputElement;
+        setAddress(target.value);
     }
 
     const onBlurHandlerUsername = (e: React.FocusEvent<HTMLInputElement>): void => {
@@ -109,7 +131,7 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
                     <ul className='update__card__content__information__list'>
                         <li className='update__card__content__information__list__item'>
                             <CLable inputId={'username'} title={'Username'} />
-                            <CInput type={'text'} name={'username'} id={'username'} placeholder={user.userName} onBlur={onBlurHandlerUsername} required />
+                            <CInput type={'text'} name={'username'} id={'username'} value={username} placeholder='john-green' onBlur={onBlurHandlerUsername} onChange={onChangeUsernameHandler} required />
                             {
                                 isUsernameValid
                                     ? <p className='update__card__error__message' role='validation-message'>{isUsernameValid.message}</p>
@@ -118,7 +140,7 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
                         </li>
                         <li className='update__card__content__information__list__item'>
                             <CLable inputId={'phone'} title={'Phone number'} />
-                            <CInput type={'number'} name={'phone'} id={'phone'} placeholder={user.phoneNumber ? user.phoneNumber : '8474341122'} onBlur={onBlurHandlerPhone} required />
+                            <CInput type={'number'} name={'phone'} id={'phone'} value={phone} placeholder='8474341122' onBlur={onBlurHandlerPhone} onChange={onChangePhoneHandler} required />
                             {
                                 isPhoneValid
                                     ? <p className='update__card__error__message' role='validation-message'>{isPhoneValid.message}</p>
@@ -127,7 +149,7 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
                         </li>
                         <li className='update__card__content__information__list__item'>
                             <CLable inputId={'address'} title={'Delivery address'} />
-                            <CInput type={'text'} name={'address'} id={'address'} placeholder={user.deliveryAddress ? user.deliveryAddress : '332, My Street, Kingston'} onBlur={onBlurHandlerAddress} required />
+                            <CInput type={'text'} name={'address'} id={'address'} value={address} placeholder= '332, My Street, Kingston' onBlur={onBlurHandlerAddress} onChange={onChangeAddressHandler} required />
                             {
                                 isAddressValid
                                     ? <p className='update__card__error__message' role='validation-message'>{isAddressValid.message}</p>

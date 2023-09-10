@@ -23,9 +23,7 @@ export const UserProfileInformation: React.FC<UserProfileInformationProps> = ({
     }, [])
 
     const updateHandler = () => {
-        setIsUpdate(true)
-
-
+        setIsUpdate(true);
     }
 
     return (

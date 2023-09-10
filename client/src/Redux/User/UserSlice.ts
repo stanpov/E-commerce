@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { InitalState } from '../../interfaces/interfaces'
-import { changeMyPassword, confirmMyPassword, resetMyPassword, userInformation } from './UserActions';
+import { changeMyPassword, confirmMyPassword, resetMyPassword, updateProfile, userInformation } from './UserActions';
 
-interface UsetState extends InitalState {
+interface UserState extends InitalState {
     deliveryAddress?: string;
     phoneNumber?: number | null;
     userImage?: string;
@@ -10,7 +10,7 @@ interface UsetState extends InitalState {
     email?:string;
 }
 
-const initialUserState: UsetState = {
+const initialUserState: UserState = {
     message: '',
     isError: false,
     isLoading: false,
@@ -28,62 +28,62 @@ export const userSlice = createSlice({
     extraReducers(builder) {
         builder
 
-            .addCase(changeMyPassword.fulfilled, (state: UsetState, action) => {
+            .addCase(changeMyPassword.fulfilled, (state: UserState, action) => {
                 state.isError = false;
                 state.isLoading = false;
                 state.message = action.payload.data.message;
             })
 
-            .addCase(changeMyPassword.pending, (state: UsetState) => {
+            .addCase(changeMyPassword.pending, (state: UserState) => {
                 state.isError = false;
                 state.isLoading = true;
                 state.message = '';
             })
 
-            .addCase(changeMyPassword.rejected, (state: UsetState, action) => {
+            .addCase(changeMyPassword.rejected, (state: UserState, action) => {
                 state.isError = true;
                 state.isLoading = false;
                 state.message = action.error as string;
             })
 
-            .addCase(confirmMyPassword.fulfilled, (state: UsetState, action) => {
+            .addCase(confirmMyPassword.fulfilled, (state: UserState, action) => {
                 state.isError = false;
                 state.isLoading = false;
                 state.message = action.payload.data.message;
             })
 
-            .addCase(confirmMyPassword.pending, (state: UsetState) => {
+            .addCase(confirmMyPassword.pending, (state: UserState) => {
                 state.isError = false;
                 state.isLoading = true;
                 state.message = '';
             })
 
-            .addCase(confirmMyPassword.rejected, (state: UsetState, action) => {
+            .addCase(confirmMyPassword.rejected, (state: UserState, action) => {
                 state.isError = true;
                 state.isLoading = false;
                 state.message = action.error as string;
             })
 
-            .addCase(resetMyPassword.fulfilled, (state: UsetState, action) => {
+            .addCase(resetMyPassword.fulfilled, (state: UserState, action) => {
                 state.isError = false;
                 state.isLoading = false;
                 state.message = action.payload.data.message;
 
             })
 
-            .addCase(resetMyPassword.pending, (state: UsetState) => {
+            .addCase(resetMyPassword.pending, (state: UserState) => {
                 state.isError = false;
                 state.isLoading = true;
                 state.message = '';
             })
 
-            .addCase(resetMyPassword.rejected, (state: UsetState, action) => {
+            .addCase(resetMyPassword.rejected, (state: UserState, action) => {
                 state.isError = true;
                 state.isLoading = false;
                 state.message = action.error as string;
             })
 
-            .addCase(userInformation.fulfilled, (state: UsetState, action) => {
+            .addCase(userInformation.fulfilled, (state: UserState, action) => {
                 state.isError = false;
                 state.isLoading = false;
                 state.message = action.payload.data.message;
@@ -94,7 +94,7 @@ export const userSlice = createSlice({
                 state.email = action.payload.data?.response.email;
             })
 
-            .addCase(userInformation.pending, (state: UsetState) => {
+            .addCase(userInformation.pending, (state: UserState) => {
                 state.isError = false;
                 state.isLoading = true;
                 state.message = '';
@@ -105,7 +105,40 @@ export const userSlice = createSlice({
                 state.email = '';
             })
 
-            .addCase(userInformation.rejected, (state: UsetState, action) => {
+            .addCase(userInformation.rejected, (state: UserState, action) => {
+                state.isError = true;
+                state.isLoading = false;
+                state.message = action.error as string;
+                state.userName = '';
+                state.phoneNumber = null;
+                state.userImage = '';
+                state.deliveryAddress = '';
+                state.email = '';
+            })
+
+            .addCase(updateProfile.fulfilled, (state: UserState, action) => {
+                state.isError = false;
+                state.isLoading = false;
+                state.message = '';
+                state.userName = action.meta.arg.userData.userName;
+                state.phoneNumber = Number(action.meta.arg.userData.phoneNumber);
+                state.userImage = (action.meta.arg.userData.userImage)?.toString();
+                state.deliveryAddress = action.meta.arg.userData.deliveryAddress;
+                state.email = '';
+            })
+
+            .addCase(updateProfile.pending, (state: UserState) => {
+                state.isError = false;
+                state.isLoading = true;
+                state.message = '';
+                state.userName = '';
+                state.phoneNumber = null;
+                state.userImage = '';
+                state.deliveryAddress = '';
+                state.email = '';
+            })
+
+            .addCase(updateProfile.rejected, (state: UserState, action) => {
                 state.isError = true;
                 state.isLoading = false;
                 state.message = action.error as string;

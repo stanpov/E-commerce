@@ -19,11 +19,8 @@ const register = async (
         if (response.status === 201) {
             setToken(response.data?.access_token);
             successNotification(`${response.data.message}`);
-        }
-        console.log(response.data);
-        
+        }  
         return response.data;
-
     } catch (error: any) {
         errorNotification(`${error.response.data.message}`);
         throw error.response.data.message;

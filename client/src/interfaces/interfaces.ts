@@ -35,7 +35,7 @@ export interface UserLoginResponse {
 }
 
 export interface UserId {
-    userId:string;
+    userId: string;
 }
 
 export interface UserInformationData {
@@ -48,9 +48,21 @@ export interface UserInformationData {
     userName: string;
 }
 
+export interface UpdateUserData {
+    userImage?: string |ArrayBuffer | null;
+    userName: string,
+    phoneNumber: number | string,
+    deliveryAddress: string,
+}
+
+export interface UpdateUserProfile {
+    userId: string;
+    userData: UpdateUserData;
+}
+
 export interface UserVerifyData {
     userId: string;
-    otp:string;
+    otp: string;
 }
 
 export interface InitalState {
