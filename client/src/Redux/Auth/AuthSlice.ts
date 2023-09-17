@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { RootState } from "../index";
 import { InitalState } from "../../interfaces/interfaces";
 import { login, logout, register ,verify} from "./AuthAction";
 
@@ -98,7 +97,6 @@ export const authSlice = createSlice({
       })
 
       .addCase(logout.fulfilled, (state, action) => {
-        console.log(action);
         state.isLoading = false;
         state.isError = false;
         state.userId = null;
@@ -126,7 +124,6 @@ export const authSlice = createSlice({
       })
 
       .addCase(verify.fulfilled, (state, action) => {
-        console.log(action);
         state.isLoading = false;
         state.isError = false;
         state.userId = action.meta.arg.userId;

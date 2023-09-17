@@ -84,7 +84,7 @@
                 height: 100%;
 
                 &__list {
-                    @include gs.display-flex(column, center, start);
+                    @include gs.display-flex(column, center, flex-start);
 
                     &__item {
                         @include gs.display-flex(row, center, center);

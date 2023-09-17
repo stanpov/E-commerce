@@ -1,4 +1,4 @@
-import { ChangePasswordData, ConfirmPasswordData, ResetPasswordData, UpdateUserData, UpdateUserProfile, UserId, UserInformationData } from '../../interfaces/interfaces';
+import { ChangePasswordData, ConfirmPasswordData, ResetPasswordData, UpdateUserProfile, UserId } from '../../interfaces/interfaces';
 import { changePassword, confirmPassword, getUserInformation, resetPassword, updateUserInformation } from './UserServices';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
