@@ -1,0 +1,47 @@
+@use '../../../global-styles/' as gs;
+
+.search {
+    position: relative;
+    display: inline-block;
+
+    &__input {
+        &>input {
+            width: 15rem;
+            height: 1.6rem;
+            padding: 0.8rem 3rem;
+            border-radius: 1rem;
+            border: 1px solid gray;
+            @include gs.shadow(8px,-3px)
+        }
+        &>svg {
+            position: absolute;
+            left: 0.5rem;
+            top: 0.3rem;
+            color: gs.$header-color;
+            font-size: 1rem;
+        }
+    }
+
+    &__submit {
+        position: absolute;
+        color: gs.$header-color;
+        border: none;
+        background: gs.$secondary-color;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.35rem;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        right: 1px;
+        top: 1px;
+        transition: 0.5s;
+
+        &:hover{
+            cursor: pointer;
+            background: gs.$gradient-purple;
+            color: gs.$secondary-color;
+        }
+        
+    }
+
+}

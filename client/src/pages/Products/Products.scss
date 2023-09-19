@@ -1,17 +1,22 @@
 @use '../../global-styles/' as gs;
 
 .products {
-    width: 100%;
-    @include gs.display-flex(row, center, center);
+    position: relative;
+    width: 90%;
+    max-width: 103rem;
+    @include gs.display-flex(row, space-between, flex-start);
 
-    &__filter{
+    &__filter {
         min-width: 11rem;
         padding: 1rem;
-        border: 1px solid  gs.$header-color;
+        // border: 1px solid gs.$header-color;
+        border: 1px solid #d6d6d6;
+        background: #f8f8f8;
+        flex: 0 0 12%;
 
-        &__form{
-            &__section{
-                &>h4{
+        &__form {
+            &__section {
+                &>h4 {
                     text-transform: capitalize;
                     text-align: center;
                     margin: 0.5rem 0 0.3rem 0;
@@ -20,5 +25,36 @@
         }
     }
 
+    &__section {
+        flex: 0 0 86%;
+        // background: red;
+        @include gs.display-flex(column, none, center);
+        border-left: 1px solid #d6d6d6;
+        min-height: 20rem;
+
+        &__sorter {
+            padding: 1rem;
+            border-bottom: 1px solid #d6d6d6;
+            width: 92%;
+            @include gs.display-flex(row, space-between, center);
+            text-align: center;
+
+            &__icons {
+                &>svg {
+                    font-size: 1.2rem;
+                    margin-right: 0.8rem;
+                    transition: 0.5s;
+                    color: gs.$secondary-color;
+
+                    &:hover {
+                        cursor: pointer;
+                        transform: scale(1.15);
+                    }
+
+                }
+            }
+        }
+
+    }
 
 }
