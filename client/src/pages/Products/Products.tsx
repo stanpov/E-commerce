@@ -5,6 +5,7 @@ import './Products.scss';
 import { FaList } from "react-icons/fa";
 import { BsFillGridFill } from "react-icons/bs";
 import { CSearchInput } from "../../components/common/CSearchInput/CSearchInput";
+import { CSelectInput } from "../../components/common/CSelectInput/CSelectInput";
 // import { CInputSubmit } from "../../components/common/CInputSubmit/CInputSubmit";
 
 interface ProductsProps {
@@ -48,7 +49,7 @@ const Products: React.FC<ProductsProps> = () => {
                             <CSearchInput />
                         </div>
                         <div className="products__section__sorter__sort">
-
+                            <CSelectInput/>
                         </div>
                     </article>
                     <article className="products__section__grid">

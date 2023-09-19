@@ -30,7 +30,7 @@
         // background: red;
         @include gs.display-flex(column, none, center);
         border-left: 1px solid #d6d6d6;
-        min-height: 20rem;
+        min-height: 29rem;
 
         &__sorter {
             padding: 1rem;

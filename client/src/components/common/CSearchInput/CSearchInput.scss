@@ -11,8 +11,9 @@
             padding: 0.8rem 3rem;
             border-radius: 1rem;
             border: 1px solid gray;
-            @include gs.shadow(8px,-3px)
+            @include gs.shadow(8px, -3px);
         }
+
         &>svg {
             position: absolute;
             left: 0.5rem;
@@ -32,16 +33,14 @@
         padding: 0.35rem;
         border-top-right-radius: 1rem;
         border-bottom-right-radius: 1rem;
-        right: 1px;
+        right: 0px;
         top: 1px;
         transition: 0.5s;
 
-        &:hover{
+        &:hover {
             cursor: pointer;
             background: gs.$gradient-purple;
             color: gs.$secondary-color;
         }
-        
     }
-
 }

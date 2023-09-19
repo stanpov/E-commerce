@@ -13,8 +13,6 @@ export const CSearchInput: React.FC<CSearchInputProps> = () => {
             </label>
 
             <input className='search__submit' type="submit" id='submit' name='submit' value={'Search'} />
-
-
         </form>
 
     )
