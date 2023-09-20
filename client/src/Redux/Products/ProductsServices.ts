@@ -3,14 +3,11 @@ import { ProductsData } from "../../interfaces/interfaces";
 
 const url = `${process.env.REACT_APP_BASE_URL}`;
 
-export const getProducts = async ():Promise<ProductsData[]>  => {
+export const getProducts = async ():Promise<ProductsData>  => {
     
     try {
-        console.log(url);
-        const response = await axios.get(`${url}/products/allproducts`);
-        console.log(response.data);
-        
-        return response.data.response;
+        const response = await axios.get(`${url}/products/allproducts`);        
+        return response.data;
     } catch (error: any) {
         throw error.response.data.message;
     }

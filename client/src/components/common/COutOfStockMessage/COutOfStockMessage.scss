@@ -1,0 +1,5 @@
+@use '../../../global-styles/' as gs;
+
+.out__of__stock__message{
+    @include gs.card-button(gs.$red-color, gs.$red-color);
+}

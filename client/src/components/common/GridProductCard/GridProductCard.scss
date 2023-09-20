@@ -1,0 +1,43 @@
+@use '../../../global-styles/' as gs;
+
+.grid__card {
+    width: 18rem;
+    height: 27rem;
+    background: gs.$card-color;
+    @include gs.shadow(15px, -5px);
+
+
+    &__image__wrapper {
+        width: 100%;
+        height: 65%;
+
+        &>img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__content {
+        // position: relative;
+        padding-top: 0.5rem;
+        text-align: center;
+        height: 35%;
+        @include gs.display-flex(column, space-between, center);
+
+
+        &__text {
+            width: 80%;
+            margin-inline: auto;
+            @include gs.display-flex(row, space-between, center);
+        }
+
+        &__buttons{
+            width: 100%;
+            @include gs.display-flex(column, center, center);
+            // position: fixed;
+            bottom: 0;
+        }
+    }
+
+}

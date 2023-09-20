@@ -85,3 +85,41 @@
         1px 25px 35px rgba(16, 16, 16, 0.2),
         1px 30px 60px rgba(16, 16, 16, 0.4);
 }
+
+@mixin card-button($color, $hover-color) {
+    border: none;
+    background: $color;
+    text-transform: capitalize;
+    width: 100%;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.6rem;
+    transition: 0.3s;
+
+    &>a {
+        text-decoration: none;
+        width: 100%;
+        color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &>svg{
+            margin-left: 0.5rem;
+        }
+    }
+
+    &>svg {
+        margin-left: 0.5rem;
+        font-size: 1rem;
+        transition: 0.5s;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background: $hover-color;
+    }
+}

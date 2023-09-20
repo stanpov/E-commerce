@@ -49,7 +49,7 @@ export interface UserInformationData {
 }
 
 export interface UpdateUserData {
-    userImage?: string |ArrayBuffer | null;
+    userImage?: string | ArrayBuffer | null;
     userName: string,
     phoneNumber: number | string,
     deliveryAddress: string,
@@ -86,20 +86,33 @@ export interface ResetPasswordData {
     email: string;
 }
 
+
 export interface Reviews {
     userName: string;
     comment: string;
     rating: number | string;
 }
 
-export interface ProductsData {
+export interface Product {
+    _id: string;
     productName: string;
     image: string;
     category: string;
     description: string;
-    price: number | string;
-    countInStock: number | string;
-    rating: number | string;
-    numReviews: number | string;
-    reviews: [Reviews];
+    price: number;
+    countInStock: number;
+    rating: number;
+    numReviews: number;
+    reviews?: Reviews[];
+    createdAt: string;
+    updatedAt: string;
+    __v?: number;
+}
+
+export interface ProductsData {
+    total: number;
+    page: number;
+    limit: number;
+    category: string[];
+    products: Product[];
 }

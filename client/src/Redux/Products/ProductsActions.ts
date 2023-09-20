@@ -11,4 +11,3 @@ export const getAllProducts = createAsyncThunk('products/Allproducts', async (pr
     }
 })
 
-export { }
