@@ -116,3 +116,7 @@ export interface ProductsData {
     category: string[];
     products: Product[];
 }
+
+export interface SearchItem {
+    search:string | undefined |object
+}

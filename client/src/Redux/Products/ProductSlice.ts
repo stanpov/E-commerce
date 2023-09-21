@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ProductsData } from "../../interfaces/interfaces";
-import { getAllProducts } from "./ProductsActions";
+import { getAllProducts, getSearchedProducts } from "./ProductsActions";
 
 
 interface ProductsState extends ProductsData {
@@ -42,6 +42,27 @@ export const productsSlice = createSlice({
                 state.category = [];
             })
             .addCase(getAllProducts.rejected, (state: ProductsState, action) => {
+                state.isError = true;
+                state.isLoading = false;
+                state.products = [];
+                state.category = [];
+            })
+            .addCase(getSearchedProducts.fulfilled, (state: ProductsState, action) => {
+                state.isError = false;
+                state.isLoading = false;
+                state.products = action.payload.products;
+                state.category = action.payload.category;
+                state.total = action.payload.total;
+                state.limit = action.payload.limit;
+                state.page = action.payload.page;
+            })
+            .addCase(getSearchedProducts.pending, (state: ProductsState) => {
+                state.isError = false;
+                state.isLoading = true;
+                state.products = [];
+                state.category = [];
+            })
+            .addCase(getSearchedProducts.rejected, (state: ProductsState, action) => {
                 state.isError = true;
                 state.isLoading = false;
                 state.products = [];

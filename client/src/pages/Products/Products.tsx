@@ -29,7 +29,7 @@ const Products: React.FC<ProductsProps> = () => {
 
     useEffect(() => {
         dispatch(getAllProducts({ total: 0, page: 0, limit: 0, category: [], products: [] }))
-    }, [])
+    }, []);
 
     const setShowMode = () => {
         setIsGridShowMode(!isGridShowMode);
