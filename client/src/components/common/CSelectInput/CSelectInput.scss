@@ -9,24 +9,28 @@
     @include gs.shadow(8px,-3px);
     transition: 0.5s;
 
+    
     &>label{
         font-size: 0.8rem;
         font-weight: 600;
         margin:0 0.5rem;
         @include gs.display-flex(row,center,center);
-
+        
         &>svg{
             font-size: 1.2rem;
             margin-left: 0.5rem;
         }
     }
-
+    
     &>select{
         width: 8rem;
         text-align: center;
         height: 1.6rem;
         border-top-right-radius: 1rem;
         border-bottom-right-radius: 1rem;
+        @include gs.breakpoint(mobile-start,mobile-end){
+            width: 10rem;
+        }
     }
 
     &:hover{

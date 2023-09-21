@@ -1,5 +1,5 @@
 @use '../../../global-styles/' as gs;
 
 .add__wishlist__button{
-    @include gs.card-button(gs.$gradient-ogange,gs.$primary-color)
+    @include gs.card-button(gs.$card-color,gs.$primary-color)
 }

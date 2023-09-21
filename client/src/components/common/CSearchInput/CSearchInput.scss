@@ -12,6 +12,10 @@
             border-radius: 1rem;
             border: 1px solid gray;
             @include gs.shadow(8px, -3px);
+
+            @include gs.breakpoint(mobile-start,mobile-end){
+                width: 13rem;
+            }
         }
 
         &>svg {

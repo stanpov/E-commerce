@@ -1,5 +1,5 @@
 @use '../../../global-styles/' as gs;
 
 .details__card__button{
-    @include gs.card-button(gs.$secondary-color,gs.$primary-color);
+    @include gs.card-button(gs.$card-color,gs.$gradient-ogange);
 }

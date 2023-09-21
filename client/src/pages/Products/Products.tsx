@@ -8,9 +8,10 @@ import { CSelectInput } from "../../components/common/CSelectInput/CSelectInput"
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { getAllProducts } from "../../Redux/Products/ProductsActions";
 import { allProducts, categories, isLoading } from "../../Redux/Products/ProductSlice";
-import './Products.scss';
 import { Loader } from "../../components/common/Loader/Loader";
 import { GridProductCard } from "../../components/common/GridProductCard/GridProductCard";
+import { ListProductCard } from "../../components/common/ListProductCard/ListProductCard";
+import './Products.scss';
 
 interface ProductsProps {
 
@@ -30,6 +31,9 @@ const Products: React.FC<ProductsProps> = () => {
         dispatch(getAllProducts({ total: 0, page: 0, limit: 0, category: [], products: [] }))
     }, [])
 
+    const setShowMode = () => {
+        setIsGridShowMode(!isGridShowMode);
+    }
 
     return (
         <PageWrapper>
@@ -54,12 +58,13 @@ const Products: React.FC<ProductsProps> = () => {
                         {/* <CInputSubmit value={"filter"}/> */}
 
                     </form>
+                    <p className="products__filter__form__hidden">filter</p>
                 </aside>
                 <section className="products__section">
                     <article className="products__section__sorter">
                         <div className="products__section__sorter__icons">
-                            <BsFillGridFill />
-                            <FaList />
+                            <BsFillGridFill onClick={setShowMode} className={isGridShowMode ? "active__show__mode" : undefined} />
+                            <FaList onClick={setShowMode} className={!isGridShowMode ? "active__show__mode" : undefined} />
                         </div>
                         <div className="products__section__sorter__search">
                             <CSearchInput />
@@ -71,8 +76,8 @@ const Products: React.FC<ProductsProps> = () => {
                     <article className={isGridShowMode ? "products__section__grid" : "products__section__list"}>
                         {
                             isGridShowMode
-                                ? products.map((x: any) => <GridProductCard key={x._id} product={x} _id={""} productName={""} image={""} category={""} description={""} price={0} countInStock={0} rating={0} numReviews={0} createdAt={""} updatedAt={""}/>)
-                                : null
+                                ? products.map((x: any) => <GridProductCard key={x._id} product={x} _id={""} productName={""} image={""} category={""} description={""} price={0} countInStock={0} rating={0} numReviews={0} createdAt={""} updatedAt={""} />)
+                                : products.map((x:any) => <ListProductCard key={x._id} product={x} _id={""} productName={""} image={""} category={""} description={""} price={0} countInStock={0} rating={0} numReviews={0} createdAt={""} updatedAt={""}/>)
                         }
                     </article>
                 </section>

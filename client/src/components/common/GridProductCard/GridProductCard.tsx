@@ -1,12 +1,12 @@
 import React from 'react';
 import { Product } from '../../../interfaces/interfaces';
-import './GridProductCard.scss';
 import { CAddCartButton } from '../CAddCartButton/CAddCartButton';
 import { CAddWishlistButton } from '../CAddWishlistButton/CAddWishlistButton';
 import { CDetailsButton } from '../CDetailsButton/CDetailsButton';
 import { useAppSelector } from '../../../Redux/hooks';
 import { getUserId } from '../../../Redux/Auth/AuthSlice';
 import { COutOfStockMessage } from '../COutOfStockMessage/COutOfStockMessage';
+import './GridProductCard.scss';
 
 interface GridProductCardProps extends Product {
     product: Product
