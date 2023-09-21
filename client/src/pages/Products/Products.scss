@@ -2,9 +2,16 @@
 
 .products {
     position: relative;
+    top: 0;
     width: 100%;
     max-width: 88rem;
     @include gs.display-flex(row, space-between, flex-start);
+    margin-inline: auto;
+
+    &__wrapper {
+        min-height: 90vh;
+        padding: 2rem;
+    }
 
     &__filter {
         min-width: 12rem;
@@ -50,7 +57,7 @@
                     text-transform: uppercase;
                     font-weight: 800;
                     letter-spacing: 0.5rem;
-                    -webkit-text-stroke:1px black;
+                    -webkit-text-stroke: 1px black;
                     top: 40%;
                     right: -2.5rem;
                 }
@@ -74,13 +81,13 @@
             padding: 1rem;
             border-bottom: 1px solid #d6d6d6;
             width: 92%;
-            @include gs.display-flex(row, space-between, center);
+            @include gs.display-flex(row, space-around, center);
             text-align: center;
 
             @include gs.breakpoint(mobile-start, mobile-end) {
                 @include gs.display-flex(column-reverse, space-between, center);
-                height: 8.8rem;
             }
+
             &__icons {
                 &>svg {
                     font-size: 1.6rem;

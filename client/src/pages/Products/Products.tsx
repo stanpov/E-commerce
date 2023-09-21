@@ -36,7 +36,7 @@ const Products: React.FC<ProductsProps> = () => {
     }
 
     return (
-        <PageWrapper>
+        <div className="products__wrapper">
             {isLoadingProducts ? <Loader /> : null}
             <section className="products">
                 <aside className="products__filter">
@@ -52,8 +52,7 @@ const Products: React.FC<ProductsProps> = () => {
                             {brands.map((x: string) => <CRadio category="brands" radioName={x} key={x} />)}
                         </section>
                         <section className="products__filter__form__section">
-                            <h4>price</h4>
-
+                            <CSelectInput />
                         </section>
                         {/* <CInputSubmit value={"filter"}/> */}
 
@@ -69,20 +68,18 @@ const Products: React.FC<ProductsProps> = () => {
                         <div className="products__section__sorter__search">
                             <CSearchInput />
                         </div>
-                        <div className="products__section__sorter__sort">
-                            <CSelectInput />
-                        </div>
+
                     </article>
                     <article className={isGridShowMode ? "products__section__grid" : "products__section__list"}>
                         {
                             isGridShowMode
-                                ? products.map((x: any) => <GridProductCard key={x._id} product={x} _id={""} productName={""} image={""} category={""} description={""} price={0} countInStock={0} rating={0} numReviews={0} createdAt={""} updatedAt={""} />)
-                                : products.map((x:any) => <ListProductCard key={x._id} product={x} _id={""} productName={""} image={""} category={""} description={""} price={0} countInStock={0} rating={0} numReviews={0} createdAt={""} updatedAt={""}/>)
+                                ? products.map((x: any) => <GridProductCard key={x._id} product={x} />)
+                                : products.map((x: any) => <ListProductCard key={x._id} product={x} />)
                         }
                     </article>
                 </section>
             </section>
-        </PageWrapper>
+        </div>
     )
 };
 

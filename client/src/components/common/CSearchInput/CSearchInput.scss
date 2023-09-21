@@ -4,18 +4,19 @@
     position: relative;
     display: inline-block;
 
+    @include gs.breakpoint(mobile-start, mobile-end) {
+        margin-bottom: 0.6rem;
+    }
+
     &__input {
         &>input {
-            width: 15rem;
+            width: 20rem;
             height: 1.6rem;
             padding: 0.8rem 3rem;
             border-radius: 1rem;
             border: 1px solid gray;
             @include gs.shadow(8px, -3px);
 
-            @include gs.breakpoint(mobile-start,mobile-end){
-                width: 13rem;
-            }
         }
 
         &>svg {
