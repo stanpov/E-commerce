@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './UserProfile.scss';
 import { PageWrapper } from '../../components/common/PageWrapper/PageWrapper';
-import { Link } from 'react-router-dom';
 import { UserProfileInformation } from '../../components/UserProfileInformation/UserProfileInformation';
 import { UserProfileUpdate } from '../../components/UserProfileUpdate/UserProfileUpdate';
 

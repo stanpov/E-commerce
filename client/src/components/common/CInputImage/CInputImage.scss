@@ -12,6 +12,13 @@
     padding: 0.5rem;
     transition: 0.7s;
 
+    @include gs.breakpoint(mobile-start, mobile-end) {
+        width: 2.8rem;
+        height: 2.8rem;
+        right: 2.7rem;
+        bottom: 3rem;
+    }
+
     &:hover {
         cursor: pointer;
         transform: scale(1.1);

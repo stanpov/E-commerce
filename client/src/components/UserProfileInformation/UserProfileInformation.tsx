@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import './UserProfileInformation.scss';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 import { getUserId } from '../../Redux/Auth/AuthSlice';
 import { userInformation } from '../../Redux/User/UserActions';
 import { userInfo } from '../../Redux/User/UserSlice';
+import './UserProfileInformation.scss';
 
 interface UserProfileInformationProps {
     setIsUpdate: (update: boolean) => void;
@@ -36,15 +36,15 @@ export const UserProfileInformation: React.FC<UserProfileInformationProps> = ({
             animate='end'
             transition={{ duration: 1.3, delay: 0.2 }}
             className='information__card'>
-            <h2 className='information__card__title' role='profile-title'>Hello, {`${user.userName}`}!</h2>
+            <h2 className='information__card__title' data-testid='profile-title'>Hello, {`${user.userName}`}!</h2>
             <section className='information__card__content'>
                 <section className='information__card__content__image'>
                     <div className='information__card__content__image__wrapper'>
                         <div className='information__card__content__image__inside'>
                             {
                                 user.userImage
-                                ? <img src={user.userImage} alt="" />
-                                :<img src='https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png' alt="" />
+                                    ? <img src={user.userImage} alt="" />
+                                    : <img src='https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG.png' alt="" />
                             }
                         </div>
                     </div>
@@ -54,16 +54,16 @@ export const UserProfileInformation: React.FC<UserProfileInformationProps> = ({
                     </div>
                 </section>
                 <section className='information__card__content__information'>
-                    <ul className='information__card__content__information__list' role='information-list'>
-                        <li className='information__card__content__information__list__item' role='information-list-item'>
+                    <ul className='information__card__content__information__list' data-testid='information-list'>
+                        <li className='information__card__content__information__list__item' data-testid='information-list-item'>
                             <h4>username:</h4>
                             <p>{user.userName}</p>
                         </li>
-                        <li className='information__card__content__information__list__item' role='information-list-item'>
+                        <li className='information__card__content__information__list__item' data-testid='information-list-item'>
                             <h4>email:</h4>
                             <p>{user.email}</p>
                         </li>
-                        <li className='information__card__content__information__list__item' role='information-list-item'>
+                        <li className='information__card__content__information__list__item' data-testid='information-list-item'>
                             <h4>phone number:</h4>
                             {
                                 user.phoneNumber
@@ -71,7 +71,7 @@ export const UserProfileInformation: React.FC<UserProfileInformationProps> = ({
                                     : <p>- - - - - - - -</p>
                             }
                         </li>
-                        <li className='information__card__content__information__list__item' role='information-list-item'>
+                        <li className='information__card__content__information__list__item' data-testid='information-list-item'>
                             <h4>Delivery address:</h4>
                             {
                                 user.deliveryAddress

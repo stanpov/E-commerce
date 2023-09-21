@@ -48,7 +48,7 @@ describe('Test UserProfileUpdate component content', () => {
         expect(lables).toHaveLength(3);
         const inputs = screen.getAllByRole('form-input');
         expect(inputs).toHaveLength(3);
-        const validationMessages = screen.getAllByRole('validation-message');
+        const validationMessages = screen.getAllByTestId('validation-message');
         expect(validationMessages).toHaveLength(3);
     });
 });

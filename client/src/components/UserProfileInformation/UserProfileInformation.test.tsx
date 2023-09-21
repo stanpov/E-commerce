@@ -33,15 +33,15 @@ afterEach(() => {
 describe('Test UserProfileInformation component content', () => {
     test('Should have title,button, two links, list with four items image', () => {
         renderWithProviders(<UserProfileInformation setIsUpdate={function (update: boolean): void { }} />)
-        const title = screen.getByRole('profile-title');
+        const title = screen.getByTestId('profile-title');
         expect(title).toBeInTheDocument;
         const button = screen.getByRole('button');
         expect(button).toBeInTheDocument;
         const links = screen.getAllByRole('link');
         expect(links).toHaveLength(2);
-        const list= screen.getByRole('information-list');
+        const list= screen.getByTestId('information-list');
         expect(list).toBeInTheDocument;
-        const listItems = screen.getAllByRole('information-list-item');
+        const listItems = screen.getAllByTestId('information-list-item');
         expect(listItems).toHaveLength(4);
         const image = screen.getByRole('img');
         expect(image).toBeInTheDocument;

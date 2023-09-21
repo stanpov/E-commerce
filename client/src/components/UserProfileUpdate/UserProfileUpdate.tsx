@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { CLable } from '../common/CLable/CLable';
 import { CInput } from '../common/CInput/CInput';
 import { CInputImage } from '../common/CInputImage/CInputImage';
-import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 import { userInfo } from '../../Redux/User/UserSlice';
 import { getUserId } from '../../Redux/Auth/AuthSlice';
@@ -23,7 +22,7 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
     const [isUsernameValid, setIsUsernameValid] = useState({ isValid: true, message: '' });
     const [isPhoneValid, setIsPhoneValid] = useState({ isValid: true, message: '' });
     const [isAddressValid, setIsAddressValid] = useState({ isValid: true, message: '' });
-    const [image, setImage] = useState<string | ArrayBuffer | null>('');
+    const [image, setImage] = useState<string | ArrayBuffer | null>(null);
     const user = useAppSelector(userInfo);
     const userId = useAppSelector(getUserId);
     const [username, setUsername] = useState(user.userName);
@@ -134,7 +133,7 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
                             <CInput type={'text'} name={'username'} id={'username'} value={username} placeholder='john-green' onBlur={onBlurHandlerUsername} onChange={onChangeUsernameHandler} required />
                             {
                                 isUsernameValid
-                                    ? <p className='update__card__error__message' role='validation-message'>{isUsernameValid.message}</p>
+                                    ? <p className='update__card__error__message' data-testid='validation-message'>{isUsernameValid.message}</p>
                                     : null
                             }
                         </li>
@@ -143,7 +142,7 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
                             <CInput type={'number'} name={'phone'} id={'phone'} value={phone} placeholder='8474341122' onBlur={onBlurHandlerPhone} onChange={onChangePhoneHandler} required />
                             {
                                 isPhoneValid
-                                    ? <p className='update__card__error__message' role='validation-message'>{isPhoneValid.message}</p>
+                                    ? <p className='update__card__error__message' data-testid='validation-message'>{isPhoneValid.message}</p>
                                     : null
                             }
                         </li>
@@ -152,7 +151,7 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
                             <CInput type={'text'} name={'address'} id={'address'} value={address} placeholder= '332, My Street, Kingston' onBlur={onBlurHandlerAddress} onChange={onChangeAddressHandler} required />
                             {
                                 isAddressValid
-                                    ? <p className='update__card__error__message' role='validation-message'>{isAddressValid.message}</p>
+                                    ? <p className='update__card__error__message' data-testid='validation-message'>{isAddressValid.message}</p>
                                     : null
                             }
                         </li>

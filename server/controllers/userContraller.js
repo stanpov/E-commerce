@@ -292,7 +292,7 @@ export const updateUserInformation = async (req, res) => {
   console.log(userId);
   try {
     let uploadedUrl;
-    if (userImage !== undefined) {
+    if (userImage !== undefined && userImage !== null) {
       uploadedUrl = await cloudinaryUploader(userImage);
     }
     const user = await User.find({ _id: userId });

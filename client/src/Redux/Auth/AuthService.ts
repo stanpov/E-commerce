@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { config, getToken, removeToken, setToken } from "../../Utils/Utils";
+import { removeToken, setToken } from "../../Utils/Utils";
 import {
     UserDataLogin,
     UserDataRegister,
@@ -33,8 +33,6 @@ const login = async (UserData: UserDataLogin): Promise<UserLoginResponse> => {
         if (response.status === 200) {
             setToken(response.data?.access_token);
             successNotification(`${response.data.message}`);
-            console.log(response.data);
-
         }
         return response.data;
     } catch (error: any) {

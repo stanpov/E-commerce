@@ -1,0 +1,5 @@
+@use '../../../global-styles/' as gs;
+
+.add__cart__button{
+    @include gs.card-button(gs.$card-color,gs.$green-color);
+}
