@@ -7,7 +7,6 @@ import {
 } from "../utils/utils.js";
 import { userOTPVerification } from "../models/userOTPVerification.js";
 import { userNewPasswordVerification } from "../models/userNewPasswordVerification.js";
-import { cloudinaryUploader } from "../cloudinary/cloudinary.js";
 
 export const createUser = async (req, res) => {
   try {
@@ -287,23 +286,18 @@ export const changeMyPassword = async (req, res) => {
 
 export const updateUserInformation = async (req, res) => {
   const { userImage, userName, phoneNumber, deliveryAddress } = req.body;
-  console.log( userImage, userName, phoneNumber, deliveryAddress );
+  console.log(userImage, userName, phoneNumber, deliveryAddress);
   const { userId } = req.params;
-  console.log(userId);
   try {
-    let uploadedUrl;
-    if (userImage !== undefined && userImage !== null) {
-      uploadedUrl = await cloudinaryUploader(userImage);
-    }
     const user = await User.find({ _id: userId });
     if (user.length === 0) {
       return res.status(404).json({ message: "User with this id not found." });
     } else {
-      if (uploadedUrl) {
+      if (userImage != undefined && userImage !== null && userImage !== "") {
         await User.findOneAndUpdate(
           { _id: userId },
           {
-            userImage: uploadedUrl,
+            userImage: userImage,
             userName: userName,
             phoneNumber: Number(phoneNumber),
             deliveryAddress: deliveryAddress,
