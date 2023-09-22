@@ -64,20 +64,6 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
       .catch((e) => {
         setIsUpdate(false);
       });
-    // console.log(result.data.secure_url);
-    // setImageUrl(result.data.secure_url);
-    // const data: UpdateUserProfile = {
-    //   userId: userId,
-    //   userData: {
-    //     userImage: imageUrl,
-    //     userName: username,
-    //     phoneNumber: phone,
-    //     deliveryAddress: address,
-    //   },
-    // };
-    // dispatch(updateProfile(data));
-    // setIsUpdate(false);
-    // navigate("/");
   };
 
   const imageChangeHandler = (e: React.ChangeEvent): void => {
@@ -87,16 +73,8 @@ export const UserProfileUpdate: React.FC<UserProfileUpdateProps> = ({
     if (!input.files?.length) {
       return;
     }
-
     const file = input.files[0];
     setImage(file);
-
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onloadend = () => {
-    //     setImage(reader.result)
-    //     console.log(reader.result);
-    // }
   };
 
   const onChangeUsernameHandler = (e: React.ChangeEvent): void => {
