@@ -35,6 +35,7 @@ export const getAllProduct = async (req, res) => {
     let sort = req.query.sort || "rating";
     let category = req.query.category || "ALL";
     let brand = req.query.brand || "ALL";
+    let rangePrice = {};
 
     if (category === "ALL") {
       category = [...productCategories];
@@ -55,10 +56,19 @@ export const getAllProduct = async (req, res) => {
     } else {
       sortBy[sort[0]] = "asc";
     }
+    if (req.query.rangeprice) {
+      let sorted = req.query.rangeprice.split(",");
+      rangePrice["min"] = Number(sorted[0]);
+      rangePrice["max"] = Number(sorted[1]);
+    }
 
     const products = await Product.find({
       productName: { $regex: search, $options: "i" },
       brand: { $in: brand },
+      price: {
+        $gte: req.query.rangeprice ? rangePrice.min : 0,
+        $lte: req.query.rangeprice ? rangePrice.max : 10000000,
+      },
     })
 
       .where("category")
