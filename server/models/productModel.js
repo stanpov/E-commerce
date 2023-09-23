@@ -2,24 +2,32 @@ import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema(
   {
-    userName: { type: String, require: true },
-    comment: { type: String, require: true },
-    rating: { type: Number, require: true },
+    userName: { type: String, required: false },
+    comment: { type: String, required: false },
+    rating: { type: Number, required: false, max: 5, min: 0 },
   },
   { timestamps: true }
 );
 
 const productSchema = new mongoose.Schema(
   {
-    productName: { type: String, require: true, unique: true },
-    image: { type: String, require: true },
-    category: { type: String, require: true },
-    description: { type: String, require: true },
-    price: { type: Number, require: true },
-    countInStock: { type: Number, require: true },
-    rating: { type: Number, require: true, default: 0 },
-    numReviews: { type: Number, require: true, default: 0 },
-    reviews: [reviewSchema],
+    productName: { type: String, required: true, unique: true },
+    image: { type: String, required: true },
+    category: {
+      type: String,
+      required: true,
+      enum: ["TV", "Phones", "Laptops", "Headphones", "Monitors"],
+    },
+    description: { type: String, required: true },
+    price: { type: Number, required: true },
+    countInStock: { type: Number, required: true },
+    rating: [reviewSchema],
+    numReviews: { type: Number, required: true, default: 0 },
+    brand: {
+      type: String,
+      required: true,
+      enum: ["Sony", "Asus", "Philips", "Huawei", "Apple"],
+    },
   },
   { timestamps: true }
 );

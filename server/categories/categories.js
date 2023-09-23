@@ -5,3 +5,5 @@ export const productCategories = [
   "Headphones",
   "Monitors",
 ];
+
+export const brands = ["Sony", "Asus", "Philips", "Huawei", "Apple"];

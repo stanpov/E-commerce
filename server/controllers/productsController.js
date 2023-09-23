@@ -1,5 +1,5 @@
 import Product from "../models/productModel.js";
-import { productCategories } from "../categories/categories.js";
+import { brands, productCategories } from "../categories/categories.js";
 
 export const createProduct = async (req, res) => {
   try {
@@ -10,8 +10,8 @@ export const createProduct = async (req, res) => {
       description: req.body.description,
       price: req.body.price,
       countInStock: req.body.countInStock,
-      rating: 0,
-      numReviews: 0,
+      brand: req.body.brand,
+      rating: req.body.rating,
     });
 
     const product = await newProduct.save();
@@ -23,24 +23,29 @@ export const createProduct = async (req, res) => {
         .send({ message: "Something went wrong, while creating product" });
     }
   } catch (error) {
-    res
-      .status(500)
-      .send({ message: "Something went wrong while creating product." });
+    res.status(500).send({ message: error.message });
   }
 };
 
 export const getAllProduct = async (req, res) => {
   try {
     const page = parseInt(req.query.page) - 1 || 0;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 9;
     const search = req.query.search || "";
     let sort = req.query.sort || "rating";
     let category = req.query.category || "ALL";
+    let brand = req.query.brand || "ALL";
 
     if (category === "ALL") {
       category = [...productCategories];
     } else {
       category = category.split(",");
+    }
+
+    if (brand === "ALL") {
+      brand = [...brands];
+    } else {
+      brand = brand.split(",");
     }
 
     req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
@@ -53,13 +58,14 @@ export const getAllProduct = async (req, res) => {
 
     const products = await Product.find({
       productName: { $regex: search, $options: "i" },
+      brand: { $in: brand },
     })
+
       .where("category")
       .in([...category])
       .sort(sortBy)
       .skip(page * limit)
       .limit(limit);
-
     const total = await Product.countDocuments({
       category: { $in: [...category] },
       productName: { $regex: search, $options: "i" },
@@ -70,15 +76,13 @@ export const getAllProduct = async (req, res) => {
       page: page + 1,
       limit,
       category: category,
+      brand: brand,
       products,
     };
 
     return res.status(200).send(response);
   } catch (error) {
-    console.log(error);
-    return res
-      .status(500)
-      .json({ message: "Something went wrong while fetching data" });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -112,7 +116,7 @@ export const updateProduct = async (req, res) => {
       res.status(404).send({ message: "Product Not Found" });
     }
   } catch (error) {
-    return res.status(500).send("Something went wrong.");
+    return res.status(500).send(error.message);
   }
 };
 
@@ -129,7 +133,7 @@ export const deleteProduct = async (req, res) => {
         .send({ message: `Product with id: ${req.params.id} not found.` });
     }
   } catch (error) {
-    return res.status(500).send("Something went wrong.");
+    return res.status(500).send(error.message);
   }
 };
 
@@ -144,6 +148,6 @@ export const getProductById = async (req, res) => {
         .send({ message: `Prodcut with id: ${req.params.id} not found.` });
     }
   } catch (error) {
-    return res.status(500).send("Something went wrong.");
+    return res.status(500).send(error.message);
   }
 };
