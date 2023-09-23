@@ -12,8 +12,8 @@ export const CSelectInput: React.FC<CSelectInputProps> = () => {
                 <option value=""> </option>
                 <option value="a-z">Alphabetical A - Z</option>
                 <option value="z-a">Alphabetical Z - A</option>
-                <option value="low">Low - High price</option>
-                <option value="high">High - Low price</option>
+                <option value="price">Low - High price</option>
+                <option value="price,desc">High - Low price</option>
             </select>
         </section>
     )

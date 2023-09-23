@@ -39,7 +39,7 @@ export const ListProductCard: React.FC<ListProductCardProps> = ({
             </section>
             <section className='list__card__content'>
                 <h4>{product.productName}</h4>
-                <p className='list__card__content__price'>${product.price}</p>
+                <p className='list__card__content__price'>${product.price.toFixed(2)}</p>
                 <div className='list__card__content__stars'>
                     {
                         <CRatingStars stars={product.rating}/>

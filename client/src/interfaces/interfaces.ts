@@ -115,8 +115,15 @@ export interface ProductsData {
     limit: number;
     category: string[];
     products: Product[];
+    brand: string[];
 }
 
 export interface SearchItem {
-    search:string | undefined |object
+    search: string | undefined | object
+}
+
+export interface FilterProducts {
+    category?: string| undefined | object;
+    brand?: string| undefined | object;
+    sort?: string| undefined | object;
 }

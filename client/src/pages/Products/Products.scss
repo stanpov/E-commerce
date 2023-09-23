@@ -63,6 +63,18 @@
                 }
             }
 
+            &__submit{
+                width: 100%;
+                margin-top: 1.1rem;
+                @include gs.display-flex(column, center,center);
+                &>input{
+                    background: gs.$gradient-ogange;
+                    color: #000;
+                    text-transform: uppercase;
+                    font-size: 0.9rem;
+                }
+            }
+
         }
     }
 

@@ -39,7 +39,7 @@ export const GridProductCard: React.FC<GridProductCardProps> = ({
             </section>
             <section className='grid__card__content'>
                 <h4>{product.productName}</h4>
-                <p className='grid__card__content__price'>${product.price}</p>
+                <p className='grid__card__content__price'>${product.price.toFixed(2)}</p>
                 <div className='grid__card__content__stars'>
                     {
                        <CRatingStars stars={product.rating}/>

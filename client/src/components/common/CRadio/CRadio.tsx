@@ -4,15 +4,17 @@ import './CRadio.scss';
 interface CRadioProps extends InputHTMLAttributes<HTMLInputElement> {
 		category:string,
 		radioName:string,
+		value:string
 }
 
 export const CRadio: React.FC<CRadioProps> = ({
 	category,
-	radioName
+	radioName,
+	value
 }) => {
 	return (
 		<div className='radio'>
-			<input type="radio" id={radioName} name={category} value={radioName}/>
+			<input type="radio" id={radioName} name={category} value={value}/>
 			<label htmlFor={radioName}>{radioName}</label>
 		</div>
 	)
