@@ -1,5 +1,7 @@
 import Product from "../models/productModel.js";
 import { brands, productCategories } from "../categories/categories.js";
+import { Review } from "../models/productModel.js";
+import User from "../models/userModel.js";
 
 export const createProduct = async (req, res) => {
   try {
@@ -130,6 +132,35 @@ export const updateProduct = async (req, res) => {
   }
 };
 
+export const addRating = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+
+    if (product) {
+      const updateFields = req.body;
+      for (const key in updateFields) {
+        if (!Review.schema.obj.hasOwnProperty(key)) {
+          return res.status(400).send({
+            message: "Bad request",
+            response: `---> ${key} <--- field doesnt exists in Product schema`,
+          });
+        }
+      }
+      product.rating.push(updateFields);
+      product.save().then((response) => {
+        return res
+          .status(201)
+          .json({ message: "Rating added successfully", data: response });
+      });
+    } else {
+      res.status(404).send({ message: "Product Not Found" });
+    }
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+};
+
 export const deleteProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -151,6 +182,21 @@ export const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     if (product) {
+      if (req.user) {
+        console.log(req.user.id);
+        await User.findOneAndUpdate(
+          { _id: req.user.id },
+          { $addToSet: { lastReviewed: product } }
+        ).then((myresp) => {
+          console.log("conting", myresp.lastReviewed.length);
+          if (myresp.lastReviewed.length > 5) {
+            const newLastReviewed = myresp.lastReviewed.slice(1, myresp.length);
+            console.log("new", newLastReviewed);
+            myresp.lastReviewed = newLastReviewed;
+            myresp.save();
+          }
+        });
+      }
       res.status(200).send({ response: product });
     } else {
       res

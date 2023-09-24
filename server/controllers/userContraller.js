@@ -329,7 +329,7 @@ export const updateUserInformation = async (req, res) => {
 
 export const getUserInformation = async (req, res) => {
   const { userId } = req.params;
-  const myUser = await User.findById({ _id: userId });
+  const myUser = await User.findById({ _id: userId }).populate("lastReviewed");
   if (!myUser) {
     return res.status(404).json({ message: "User not found!" });
   } else {
@@ -341,6 +341,7 @@ export const getUserInformation = async (req, res) => {
       verified: myUser.verified,
       email: myUser.email,
       userName: myUser.userName,
+      lastReviewed: myUser.lastReviewed,
     };
     return res.status(200).json({
       data: {

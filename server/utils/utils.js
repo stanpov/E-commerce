@@ -25,6 +25,7 @@ export const isAuth = async (req, res, next) => {
     }
     jwt.verify(token, process.env.SECRET, function (err, decoded) {
       if (err) {
+        console.log(err);
         return res.status(400).json({ msg: "Invalid Authorisation" });
       }
       req.user = decoded;

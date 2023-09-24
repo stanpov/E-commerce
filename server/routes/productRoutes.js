@@ -1,6 +1,7 @@
 import exporess from "express";
 import { isAdmin, isAuth } from "../utils/utils.js";
 import {
+  addRating,
   createProduct,
   deleteProduct,
   getAllProduct,
@@ -18,6 +19,8 @@ productRouter.put("/update/:id", updateProduct);
 
 productRouter.delete("/delete/:id", isAuth, isAdmin, deleteProduct);
 
-productRouter.get("/product/:id", getProductById);
+productRouter.get("/product/:id", isAuth, getProductById);
+
+productRouter.post("/addrating/:id", addRating);
 
 export default productRouter;
