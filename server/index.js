@@ -5,7 +5,6 @@ import userRouter from "./routes/userRoutes.js";
 import productRouter from "./routes/productRoutes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import bodyParser from "body-parser";
 
 dotenv.config();
 const port = process.env.PORT || 5000;
@@ -25,13 +24,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// app.use(bodyParser.json({limit: '50mb'}));
-// app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-app.use(express.json({ extended: false, limit: "50mb" }));
-app.use(
-  express.urlencoded({ limit: "50mb", extended: false, parameterLimit: 50000 })
-);
 app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 

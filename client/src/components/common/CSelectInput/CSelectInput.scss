@@ -8,7 +8,7 @@
     border: 1px solid gray;
     @include gs.shadow(8px,-3px);
     transition: 0.5s;
-
+    margin-top: 0.8rem;
     
     &>label{
         font-size: 0.8rem;
@@ -17,13 +17,13 @@
         @include gs.display-flex(row,center,center);
         
         &>svg{
-            font-size: 1.2rem;
-            margin-left: 0.5rem;
+            font-size: 1.1rem;
+            margin-left: 0.3rem;
         }
     }
     
     &>select{
-        width: 8rem;
+        width: 6rem;
         text-align: center;
         height: 1.6rem;
         border-top-right-radius: 1rem;

@@ -8,6 +8,8 @@
     @include gs.shadow(15px, -5px);
     @include gs.display-flex(row, space-between, center);
     transition: 0.5s ease;
+    border-radius: 1rem;
+
     &:hover {
         transform: scale(1.05);
     }
@@ -49,13 +51,26 @@
         padding-top: 1.5rem;
         @include gs.display-flex(column, space-between, center);
 
+        &__price{
+            font-weight: 600;
+        }
+
+        &__stars{
+            color: gs.$secondary-color;
+        }
+
         &__buttons {
-            width: 100%;
             @include gs.display-flex(row, center, center);
 
             @include gs.breakpoint(mobile-start, mobile-end) {
                 @include gs.display-flex(column, center, center);
 
+            }
+
+            &>button{
+                display: inline-block;
+                width: 10rem;
+                margin: 0.2rem 0.5rem;
             }
         }
     }
