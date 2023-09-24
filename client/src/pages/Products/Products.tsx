@@ -66,13 +66,13 @@ const Products: React.FC<ProductsProps> = () => {
                     <form onSubmit={filterHandler} className="products__filter__form">
                         <section className="products__filter__form__section">
                             <h4>category</h4>
-                            <CRadio category="category" radioName="All"  value={''} />
-                            {category.map((x: string) => <CRadio category="category" radioName={x} key={x} value={x} />)}
+                            <CRadio category="category" radioName="All"  value='' defaultChecked={true}/>
+                            {category.map((x: string) => <CRadio category="category" radioName={x} key={x} value={x} defaultChecked={false} />)}
                         </section>
                         <section className="products__filter__form__section">
                             <h4>brands</h4>
-                            <CRadio category="brand" radioName="All brands" value="" />
-                            {brands.map((x: string) => <CRadio category="brand" radioName={x} key={x} value={x}/>)}
+                            <CRadio category="brand" radioName="All brands" value="" defaultChecked={true}/>
+                            {brands.map((x: string) => <CRadio category="brand" radioName={x} key={x} value={x} defaultChecked={false}/>)}
                         </section>
                         <section className="products__filter__form__section">
                             <CSelectInput />

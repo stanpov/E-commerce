@@ -87,11 +87,13 @@ export interface ResetPasswordData {
 }
 
 
-export interface Reviews {
-    userName: string;
-    comment: string;
-    rating: number | string;
+export interface Rating {
+    userName?: string;
+    comment?: string;
+    rating?: number;
 }
+
+
 
 export interface Product {
     _id: string;
@@ -101,9 +103,9 @@ export interface Product {
     description: string;
     price: number;
     countInStock: number;
-    rating: number;
+    rating: Rating[];
     numReviews: number;
-    reviews?: Reviews[];
+    brand: string;
     createdAt: string;
     updatedAt: string;
     __v?: number;
@@ -123,7 +125,7 @@ export interface SearchItem {
 }
 
 export interface FilterProducts {
-    category?: string| undefined | object;
-    brand?: string| undefined | object;
-    sort?: string| undefined | object;
+    category?: string | undefined | object;
+    brand?: string | undefined | object;
+    sort?: string | undefined | object;
 }

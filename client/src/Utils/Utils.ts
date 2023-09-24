@@ -39,7 +39,7 @@ export const starsCount = (count: number): number[] => {
     let fullStarsCount = count; 
   
     for (let i = fullStarsCount; i > 0; i--) {
-        if (i > 1) {
+        if (i >= 1) {
             stars.push(1);
         }
         else {

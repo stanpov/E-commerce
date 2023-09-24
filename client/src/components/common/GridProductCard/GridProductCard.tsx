@@ -17,6 +17,10 @@ export const GridProductCard: React.FC<GridProductCardProps> = ({
 }) => {
 
     const isLoggedIn = !!useAppSelector(getUserId);
+    let stars = product.rating.reduce((acc, next) => acc + next.rating!, 0);
+    if (product.rating.length > 0) {
+        stars = stars / product.rating.length;
+    }
 
     const UserButtons = () => {
         return (
@@ -42,7 +46,7 @@ export const GridProductCard: React.FC<GridProductCardProps> = ({
                 <p className='grid__card__content__price'>${product.price.toFixed(2)}</p>
                 <div className='grid__card__content__stars'>
                     {
-                       <CRatingStars stars={product.rating}/>
+                        <CRatingStars stars={stars} />
                     }
                 </div>
                 <div className='grid__card__content__buttons'>

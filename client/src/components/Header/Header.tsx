@@ -44,23 +44,10 @@ const Header = () => {
               Products
             </NavLink>
           </li>
-          <li
-            data-testid="wishlist-link"
-            className={
-              isUserLoggedIn ? "navigation__list__item" : "hidden__element"
-            }
-          >
-            <NavLink
-              to={"/wishlist"}
-              className={({ isActive }) => (isActive ? "active" : undefined)}
-            >
-              Wish List
-            </NavLink>
-          </li>
           <li className="navigation__list__item">
             <NavLink
               to={"/contacts"}
-              className={({ isActive }) => (isActive ? "active" : undefined)}
+              className={({ isActive }) => (isActive ? "active" : undefined) }
             >
               Contacts
             </NavLink>

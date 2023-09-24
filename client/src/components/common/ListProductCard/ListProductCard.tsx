@@ -17,7 +17,10 @@ export const ListProductCard: React.FC<ListProductCardProps> = ({
 }) => {
 
     const isLoggedIn = !!useAppSelector(getUserId);
-
+    let stars = product.rating.reduce((acc, next) => acc + next.rating!, 0);
+    if (product.rating.length > 0) {
+        stars = stars / product.rating.length;
+    }
     const UserButtons = () => {
         return (
             <>
@@ -42,7 +45,7 @@ export const ListProductCard: React.FC<ListProductCardProps> = ({
                 <p className='list__card__content__price'>${product.price.toFixed(2)}</p>
                 <div className='list__card__content__stars'>
                     {
-                        <CRatingStars stars={product.rating}/>
+                        <CRatingStars stars={stars}/>
                     }
                 </div>
                 <div className='list__card__content__buttons'>

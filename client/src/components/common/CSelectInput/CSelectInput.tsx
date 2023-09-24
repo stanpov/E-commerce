@@ -10,8 +10,8 @@ export const CSelectInput: React.FC<CSelectInputProps> = () => {
             <label htmlFor="sortBy">sort <BsSortDown/></label>
             <select name="sortBy" id="sortBy">
                 <option value=""> </option>
-                <option value="a-z">Alphabetical A - Z</option>
-                <option value="z-a">Alphabetical Z - A</option>
+                <option value="productName,1">Alphabetical A - Z</option>
+                <option value="productName,-1">Alphabetical Z - A</option>
                 <option value="price">Low - High price</option>
                 <option value="price,desc">High - Low price</option>
             </select>
