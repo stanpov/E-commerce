@@ -49,7 +49,7 @@ export const ListProductCard: React.FC<ListProductCardProps> = ({
                     }
                 </div>
                 <div className='list__card__content__buttons'>
-                    <CDetailsButton />
+                    <CDetailsButton productId={product._id}/>
                     {
                         isLoggedIn
                             ? <UserButtons />

@@ -46,6 +46,7 @@ export interface UserInformationData {
     verified: string;
     email: string;
     userName: string;
+    lastReviewed?: Product[];
 }
 
 export interface UpdateUserData {
@@ -108,7 +109,6 @@ export interface Product {
     brand: string;
     createdAt: string;
     updatedAt: string;
-    __v?: number;
 }
 
 export interface ProductsData {

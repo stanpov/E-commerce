@@ -50,7 +50,7 @@ export const GridProductCard: React.FC<GridProductCardProps> = ({
                     }
                 </div>
                 <div className='grid__card__content__buttons'>
-                    <CDetailsButton />
+                    <CDetailsButton productId={product._id}/>
                     {
                         isLoggedIn
                             ? <UserButtons />
