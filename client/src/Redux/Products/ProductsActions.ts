@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit"
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { filterProducts, getProducts, searchProduct } from "./ProductsServices"
 import { FilterProducts, ProductsData, SearchItem } from "../../interfaces/interfaces";
 

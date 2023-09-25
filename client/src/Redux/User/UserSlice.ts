@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { InitalState } from '../../interfaces/interfaces'
+import { InitalState, Product } from '../../interfaces/interfaces'
 import { changeMyPassword, confirmMyPassword, resetMyPassword, updateProfile, userInformation } from './UserActions';
 
 interface UserState extends InitalState {
@@ -8,6 +8,7 @@ interface UserState extends InitalState {
     userImage?: string;
     userName?: string;
     email?:string;
+    lastReviewed:Product[];
 }
 
 const initialUserState: UserState = {
@@ -19,6 +20,7 @@ const initialUserState: UserState = {
     phoneNumber: null,
     deliveryAddress: '',
     email:'',
+    lastReviewed:[],
 };
 
 export const userSlice = createSlice({
@@ -92,6 +94,7 @@ export const userSlice = createSlice({
                 state.userImage = action.payload.data?.response.userImage;
                 state.deliveryAddress = action.payload.data?.response.deliveryAddress;
                 state.email = action.payload.data?.response.email;
+                state.lastReviewed = action.payload.data.response.lastReviewed;
             })
 
             .addCase(userInformation.pending, (state: UserState) => {
@@ -103,6 +106,7 @@ export const userSlice = createSlice({
                 state.userImage = '';
                 state.deliveryAddress = '';
                 state.email = '';
+                state.lastReviewed = [];
             })
 
             .addCase(userInformation.rejected, (state: UserState, action) => {
@@ -114,6 +118,7 @@ export const userSlice = createSlice({
                 state.userImage = '';
                 state.deliveryAddress = '';
                 state.email = '';
+                state.lastReviewed = [];
             })
 
             .addCase(updateProfile.fulfilled, (state: UserState, action) => {
@@ -151,6 +156,7 @@ export const userSlice = createSlice({
     }
 });
 
+export const lastReviewedItems = (state:any) => state.user.lastReviewed;
 export const getIsUserLoading = (state: any) => state.user.isLoading;
 export const userInfo = (state:any) => state.user;
 

@@ -12,7 +12,7 @@ import { GridProductCard } from "../../components/common/GridProductCard/GridPro
 import { ListProductCard } from "../../components/common/ListProductCard/ListProductCard";
 import { CInputSubmit } from "../../components/common/CInputSubmit/CInputSubmit";
 import './Products.scss';
-import { FilterProducts } from "../../interfaces/interfaces";
+import { FilterProducts, Product } from "../../interfaces/interfaces";
 
 interface ProductsProps {
 
@@ -66,13 +66,13 @@ const Products: React.FC<ProductsProps> = () => {
                     <form onSubmit={filterHandler} className="products__filter__form">
                         <section className="products__filter__form__section">
                             <h4>category</h4>
-                            <CRadio category="category" radioName="All"  value={''} />
-                            {category.map((x: string) => <CRadio category="category" radioName={x} key={x} value={x} />)}
+                            <CRadio category="category" radioName="All"  value='' defaultChecked={true}/>
+                            {category.map((x: string) => <CRadio category="category" radioName={x} key={x} value={x} defaultChecked={false} />)}
                         </section>
                         <section className="products__filter__form__section">
                             <h4>brands</h4>
-                            <CRadio category="brand" radioName="All brands" value="" />
-                            {brands.map((x: string) => <CRadio category="brand" radioName={x} key={x} value={x}/>)}
+                            <CRadio category="brand" radioName="All brands" value="" defaultChecked={true}/>
+                            {brands.map((x: string) => <CRadio category="brand" radioName={x} key={x} value={x} defaultChecked={false}/>)}
                         </section>
                         <section className="products__filter__form__section">
                             <CSelectInput />
@@ -98,8 +98,8 @@ const Products: React.FC<ProductsProps> = () => {
                     <article className={isGridShowMode ? "products__section__grid" : "products__section__list"}>
                         {
                             isGridShowMode
-                                ? products.map((x: any) => <GridProductCard key={x._id} product={x} />)
-                                : products.map((x: any) => <ListProductCard key={x._id} product={x} />)
+                                ? products.map((x: Product) => <GridProductCard key={x._id} product={x} />)
+                                : products.map((x: Product) => <ListProductCard key={x._id} product={x} />)
                         }
                     </article>
                 </section>
