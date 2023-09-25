@@ -12,7 +12,7 @@ import { GridProductCard } from "../../components/common/GridProductCard/GridPro
 import { ListProductCard } from "../../components/common/ListProductCard/ListProductCard";
 import { CInputSubmit } from "../../components/common/CInputSubmit/CInputSubmit";
 import './Products.scss';
-import { FilterProducts } from "../../interfaces/interfaces";
+import { FilterProducts, Product } from "../../interfaces/interfaces";
 
 interface ProductsProps {
 
@@ -98,8 +98,8 @@ const Products: React.FC<ProductsProps> = () => {
                     <article className={isGridShowMode ? "products__section__grid" : "products__section__list"}>
                         {
                             isGridShowMode
-                                ? products.map((x: any) => <GridProductCard key={x._id} product={x} />)
-                                : products.map((x: any) => <ListProductCard key={x._id} product={x} />)
+                                ? products.map((x: Product) => <GridProductCard key={x._id} product={x} />)
+                                : products.map((x: Product) => <ListProductCard key={x._id} product={x} />)
                         }
                     </article>
                 </section>

@@ -1,0 +1,31 @@
+@use '../../../global-styles/' as gs;
+
+.add__count__wrapper {
+    @include gs.display-flex(row, space-between, center);
+    width: 4.7rem;
+
+    &>p {
+        font-size: 1.15rem;
+    }
+
+    &>svg {
+        font-size: 1.4rem;
+        color: gs.$secondary-color;
+        transition: 0.5s;
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.2);
+
+            &:nth-child(1) {
+                color: gs.$red-color;
+            }
+
+            &:nth-child(3) {
+                color: gs.$green-color;
+            }
+
+
+        }
+    }
+}

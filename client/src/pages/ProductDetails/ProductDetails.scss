@@ -1,0 +1,212 @@
+@use '../../global-styles/' as gs;
+
+.details__page {
+    width: 100%;
+    min-height: 90vh;
+    @include gs.display-flex(column, flex-start, center);
+    max-width: 70rem;
+    margin-inline: auto;
+
+    &__card__wrapper {
+        background: #fff;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        width: 100%;
+        margin: 4rem auto;
+    }
+
+    &__card {
+        width: 100%;
+        @include gs.display-flex(row, space-between, flex-start);
+
+        &__images {
+            & img {
+                @include gs.shadow(20px, -5px);
+                border-radius: 1rem;
+                transition: 0.5s;
+
+                &:hover {
+                    cursor: zoom-in;
+                    transform: scale(1.05);
+                }
+            }
+
+            flex: 0 0 45%;
+            @include gs.display-flex(column, center, flex-start);
+
+            &__main {
+                width: 88%;
+
+                &>img {
+                    width: 100%;
+                }
+            }
+
+            &__rest {
+                width: 88%;
+                margin: 1rem 0;
+                @include gs.display-flex(row, space-between, center);
+
+                &>img {
+                    width: 30%;
+                }
+            }
+        }
+
+        &__content {
+            flex: 0 0 55%;
+            height: 100%;
+            @include gs.display-flex(column, space-between, flex-start);
+
+            &>h2 {
+                color: gs.$header-color;
+                margin-bottom: 1.9rem;
+            }
+
+            &>p,
+            &>div {
+                margin-bottom: 1.5rem;
+            }
+
+            &__price {
+                text-transform: capitalize;
+                font-size: 1.4rem;
+                font-weight: 600;
+                color: gs.$secondary-color;
+            }
+
+            &__rating {
+                @include gs.display-flex(row, center, center);
+                align-content: center;
+                text-transform: capitalize;
+                color: gs.$secondary-color;
+                font-weight: 600;
+                font-size: 1.2rem;
+
+                &>div {
+                    margin-right: 1.5rem;
+                }
+            }
+
+            &__description {
+                color: gray;
+                font-size: 0.9rem;
+            }
+
+            &__add__cart {
+                @include gs.display-flex(row, space-between, center);
+                align-content: center;
+                width: 18rem;
+
+                &>button {
+                    width: 10rem;
+                }
+            }
+
+            &__wishlist {
+                width: 13rem;
+            }
+
+            &__information {
+                width: 100%;
+                display: grid;
+                gap: 0.4rem;
+                grid-template-columns: repeat(2, 1fr);
+
+                &>p {
+                    font-size: 0.85rem;
+                    color: gray;
+                    text-transform: capitalize;
+
+                    &>span {
+                        color: gs.$secondary-color;
+                        font-weight: 600;
+                    }
+                }
+
+
+            }
+        }
+    }
+}
+
+.last__view__products {
+    @include gs.display-flex(column, center, center);
+    overflow: hidden;
+    margin-top: 2rem;
+    // box-shadow: 0px 0px 14px -5px rgba(116, 113, 113, 0.75) inset;
+    // -webkit-box-shadow: 0px 0px 14px -5px rgba(116, 113, 113, 0.75) inset;
+    // -moz-box-shadow: 0px 0px 14px -5px rgba(116, 113, 113, 0.75) inset;
+
+    &>h3 {
+        margin: 1.5rem auto;
+        text-transform: capitalize;
+    }
+
+    &__list {
+        position: relative;
+        @include gs.display-flex(row, space-between, center);
+        padding: 1.5rem 0;
+        width: 140%;
+        animation: slide 16s infinite;
+
+    }
+
+    &::before {
+        display: inline-block;
+        content: '';
+        background: gs.$header-color;
+        width: 94%;
+        height: 0.1rem;
+        opacity: 0.75;
+        // position: absolute;
+    }
+
+    &::after {
+        display: inline-block;
+        content: '';
+        background: gs.$header-color;
+        opacity: 0.75;
+        width: 94%;
+        height: 0.1rem;
+        // position: absolute;
+    }
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+
+    12% {
+        transform: translateX(9%);
+    }
+
+    25% {
+        transform: translateX(18%);
+    }
+
+    37% {
+        transform: translateX(9%);
+    }
+
+    50% {
+        transform: translateX(0%);
+    }
+
+    62% {
+        transform: translateX(-9%);
+    }
+
+    75% {
+        transform: translateX(-18%);
+    }
+
+    87% {
+        transform: translateX(-9%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

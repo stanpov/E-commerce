@@ -90,6 +90,7 @@ export const singleProductSlice = createSlice({
                 state.message = action.error as string;;
             })
     }
-})
+});
 
+export const currentProduct = (state:any) => state.singleProduct;
 export const singleProductReducer = singleProductSlice.reducer;

@@ -23,21 +23,21 @@ export const config = {
 
 export const uploadToCloudinary = async (
     data: object
-  ): Promise<AxiosResponse> => {
+): Promise<AxiosResponse> => {
     const result = await axios(
-      `https://api.cloudinary.com/v1_1/doyrxbbu7/image/upload`,
-      {
-        method: "POST",
-        data: data,
-      }
+        `https://api.cloudinary.com/v1_1/doyrxbbu7/image/upload`,
+        {
+            method: "POST",
+            data: data,
+        }
     );
     return result;
-  };
+};
 
 export const starsCount = (count: number): number[] => {
     let stars: number[] = [];
-    let fullStarsCount = count; 
-  
+    let fullStarsCount = count;
+
     for (let i = fullStarsCount; i > 0; i--) {
         if (i >= 1) {
             stars.push(1);
@@ -50,6 +50,11 @@ export const starsCount = (count: number): number[] => {
     for (let i = stars.length; i < 5; i++) {
         stars.push(0);
     }
-    
+
     return stars;
 }
+
+export const dateConvert = (date: string): string  => {
+    let currentDate = new Date(date).toLocaleDateString('en-GB');
+    return currentDate;
+} 

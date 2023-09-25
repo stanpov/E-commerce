@@ -156,6 +156,7 @@ export const userSlice = createSlice({
     }
 });
 
+export const lastReviewedItems = (state:any) => state.user.lastReviewed;
 export const getIsUserLoading = (state: any) => state.user.isLoading;
 export const userInfo = (state:any) => state.user;
 
