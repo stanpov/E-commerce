@@ -1,5 +1,4 @@
-import React from 'react';
-import './ProductDetails.scss';
+import React, { useState } from 'react';
 import { useAppSelector } from '../../Redux/hooks';
 import { currentProduct } from '../../Redux/CurrentProduct/CurrentProductSlice';
 import { CRatingStars } from '../../components/common/CRatingStars/CRatingStars';
@@ -10,16 +9,31 @@ import { dateConvert } from '../../Utils/Utils';
 import { lastReviewedItems } from '../../Redux/User/UserSlice';
 import { GridProductCard } from '../../components/common/GridProductCard/GridProductCard';
 import { Product } from '../../interfaces/interfaces';
+import './ProductDetails.scss';
 
 interface ProductDetailsProps { }
 
 export const ProductDetails: React.FC<ProductDetailsProps> = () => {
-    
+
+    const [itemsCount, setItemsCount] = useState<number>(1);
+    // const [isDisabled,setIsDisabled] = useState<boolean>(false);
     const lastViewProducts = useAppSelector(lastReviewedItems);
     const product = useAppSelector(currentProduct);
     let stars = product.rating.reduce((acc: any, next: any) => acc + next.rating!, 0);
     if (product.rating.length > 0) {
         stars = stars / product.rating.length;
+    }
+
+    const increaseItemsCount = () => {
+        if (itemsCount < product.countInStock) {
+            setItemsCount(itemsCount + 1);
+        }
+    }
+
+    const decreaseItemsCount = () => {
+        if (itemsCount > 1) {
+            setItemsCount(itemsCount - 1);
+        }
     }
 
     const createDate = dateConvert(product.createdAt);
@@ -51,7 +65,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
                         </div>
                         <p className='details__page__card__content__description'>{product.description}</p>
                         <div className='details__page__card__content__add__cart'>
-                            <CCountToAdd count={0} />
+                            <CCountToAdd count={itemsCount} countInStock={product.countInStock} increase={increaseItemsCount} decrease={decreaseItemsCount}/>
                             <CAddCartButton />
                         </div>
                         <div className='details__page__card__content__wishlist'>
@@ -64,6 +78,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
                             <p>Added at: <span>{createDate}</span></p>
                             <p>Item &#8470;: <span>{product._id}</span></p>
                             <p>Last update: <span>{lastUpdateDate}</span></p>
+                            <p>Viewed by clients: <span>{product.numReviews} times</span></p>
                         </div>
                     </article>
                 </section>
@@ -71,9 +86,9 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
                 <section className='last__view__products'>
                     <h3>Recently viewed products</h3>
                     <div className='last__view__products__list'>
-                    {
-                        lastViewProducts.map((x:Product)=><GridProductCard product={x} key={x._id}/>)
-                    }
+                        {
+                            lastViewProducts.map((x: Product) => <GridProductCard product={x} key={x._id} />)
+                        }
                     </div>
                 </section>
             </div>

@@ -3,17 +3,25 @@ import './CCountToAdd.scss';
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 
 interface CCountToAddProps {
-    count:number
- }
+    countInStock: number,
+    count: number,
+    increase: () => void,
+    decrease: () => void
+}
 
-export const CCountToAdd:React.FC<CCountToAddProps> = ({
-    count
+export const CCountToAdd: React.FC<CCountToAddProps> = ({
+    countInStock,
+    count,
+    increase,
+    decrease
 }) => {
+
+
     return (
         <div className='add__count__wrapper'>
-            <AiFillMinusCircle/>
+            <AiFillMinusCircle onClick={decrease} />
             <p>{count}</p>
-            <AiFillPlusCircle/>
+            <AiFillPlusCircle onClick={increase} />
         </div>
     )
 }
