@@ -1,0 +1,67 @@
+@use '../../../global-styles/' as gs;
+
+.rating__section {
+    width: 100%;
+    height: 32rem;
+    @include gs.display-flex(row, space-between, flex-start);
+
+    &__comments {
+        // background: gray;
+        padding: 0.5rem;
+        height: 100%;
+        flex: 0 0 69%;
+        overflow: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+
+    }
+
+    &__form {
+        // background: wheat;
+        height: 23rem;
+        padding: 1rem;
+        flex: 0 0 30%;
+        @include gs.shadow(15px, -5px);
+        border-radius: 1rem;
+        margin-top: 0.5rem;
+
+        &>form {
+            height: 100%;
+            // background: #000;
+            @include gs.display-flex(column, space-around, center);
+
+            &>label{
+                text-decoration: underline;
+            }
+
+            &>textarea {
+                width: 95%;
+                height: 6rem;
+                resize: none;
+                padding: 2rem;
+                font-size: 1.25rem;
+                font-style: italic;
+                text-transform: capitalize;
+                border-radius: 1rem;
+            }
+
+            &>input[type="submit"]{
+                padding: 0.6rem 2.5rem;
+                font-weight: 600;
+                font-size: 1.07rem;
+                border-radius: 50%;
+                border: none; 
+                font-style: italic;
+                background: gs.$secondary-color;
+                transition: 0.5s;
+
+                &:hover{
+                    background: gs.$gradient-purple;
+                    color: white;
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}

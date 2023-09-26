@@ -50,9 +50,6 @@ export const singleProductSlice = createSlice({
                 state.createdAt = action.payload.createdAt;
                 state.updatedAt = action.payload.updatedAt;
                 state.message = '';
-                console.log(action);
-                
-
             })
             .addCase(getProductById.pending, (state: ProductState) => {
                 state.isLoading = true;
@@ -70,7 +67,6 @@ export const singleProductSlice = createSlice({
                 state.createdAt = '';
                 state.updatedAt = '';
                 state.message = '';
-
             })
             .addCase(getProductById.rejected, (state: ProductState, action) => {
                 state.isLoading = false;
@@ -91,6 +87,6 @@ export const singleProductSlice = createSlice({
             })
     }
 });
-
+export const currentProductRating = (state:any) => state.singleProduct.rating;
 export const currentProduct = (state:any) => state.singleProduct;
 export const singleProductReducer = singleProductSlice.reducer;

@@ -10,6 +10,7 @@ import { lastReviewedItems } from '../../Redux/User/UserSlice';
 import { GridProductCard } from '../../components/common/GridProductCard/GridProductCard';
 import { Product } from '../../interfaces/interfaces';
 import './ProductDetails.scss';
+import { CCommentsRating } from '../../components/common/CCommentsRating/CCommentsRating';
 
 interface ProductDetailsProps { }
 
@@ -41,10 +42,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
 
     return (
         <section className='details__page'>
-            {/* <article className='details__page__bg__image'>
-            </article> */}
             <div className='details__page__card__wrapper'>
-
                 <section className='details__page__card'>
                     <article className='details__page__card__images'>
                         <div className='details__page__card__images__main'>
@@ -81,6 +79,11 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
                             <p>Viewed by clients: <span>{product.numReviews} times</span></p>
                         </div>
                     </article>
+                </section>
+
+                <section className='details__page__card__content__comments__rating'>
+                        <h3>comments & rating</h3>
+                        <CCommentsRating/>
                 </section>
 
                 <section className='last__view__products'>

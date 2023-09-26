@@ -129,8 +129,36 @@
                         font-weight: 600;
                     }
                 }
+            }
 
-
+            &__comments__rating{
+                @include gs.display-flex(column, center, center);
+                margin-top: 2rem;
+                     
+                &>h3 {
+                    margin: 1.5rem auto;
+                    text-transform: capitalize;
+                }
+            
+              
+            
+                &::before {
+                    display: inline-block;
+                    content: '';
+                    background: gs.$header-color;
+                    width: 94%;
+                    height: 0.1rem;
+                    opacity: 0.5;
+                }
+            
+                // &::after {
+                //     display: inline-block;
+                //     content: '';
+                //     background: gs.$header-color;
+                //     opacity: 0.55;
+                //     width: 94%;
+                //     height: 0.1rem;
+                // }
             }
         }
     }

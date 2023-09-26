@@ -12,6 +12,7 @@
 
     &>svg {
         margin-right: 0.4rem;
+        transition: 0.3s;
     }
 
     &::after {
@@ -19,11 +20,12 @@
         content: '';
         background: gs.$header-color;
         opacity: 0.55;
-        width: 100%;
+        width: 92%;
         height: 0.1rem;
         position: absolute;
         bottom: -0.2rem;
-        left: 0;
+        left: 50%;
+        transform: translate(-50%);
         transition: 0.5s;
     }
 

@@ -16,16 +16,25 @@
         &:hover {
             cursor: pointer;
             transform: scale(1.2);
-
-            &:nth-child(1) {
-                color: gs.$red-color;
-            }
-
-            &:nth-child(3) {
-                color: gs.$green-color;
-            }
-
-
         }
+    }
+}
+
+.decrease__count__button {
+    &:hover {
+        color: gs.$red-color;
+    }
+}
+
+.increase__count__button {
+    &:hover {
+        color: gs.$green-color;
+    }
+}
+
+.disable__count__button {
+    &:hover {
+        color: gray;
+        cursor: not-allowed !important;
     }
 }

@@ -92,6 +92,8 @@ export interface Rating {
     userName?: string;
     comment?: string;
     rating?: number;
+    createdAt?:string;
+    id:string;
 }
 
 

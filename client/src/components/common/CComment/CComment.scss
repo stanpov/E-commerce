@@ -1,0 +1,45 @@
+@use '../../../global-styles/' as gs;
+
+.single__comment {
+    position: relative;
+    width: 13rem;
+    height: 12rem;
+    // background: gs.$main-color;
+    @include gs.shadow(11px, -5px);
+    padding: 0.4rem;
+    border-radius: 1rem;
+    overflow: auto;
+    @include gs.display-flex(column, space-around, center);
+
+    &__text {
+        font-size: 0.78rem;
+        text-transform: capitalize;
+    }
+
+    &__stars{
+        color: gs.$secondary-color;
+        font-size: 1.08rem;
+    }
+
+    &>svg {
+        position: absolute;
+        width: 110%;
+        height: 110%;
+    }
+
+    &>div:nth-of-type(2) {
+        width: 90%;
+        @include gs.display-flex(row, space-between, center);
+
+        &>h5 {
+            color: gs.$secondary-color;
+            text-transform: capitalize;
+        }
+
+        &>p {
+            font-size: 0.7rem;
+            text-transform: capitalize;
+            text-align: center;
+        }
+    }
+}
