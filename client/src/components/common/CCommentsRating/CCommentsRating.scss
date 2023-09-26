@@ -5,20 +5,26 @@
     height: 32rem;
     @include gs.display-flex(row, space-between, flex-start);
 
-    &__comments {
-        // background: gray;
+    &__comments__grid,
+    &__comments__flex {
         padding: 0.5rem;
         height: 100%;
         flex: 0 0 69%;
         overflow: auto;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
 
     }
 
+    &__comments__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+
+    &__comments__flex {
+        @include gs.display-flex(column,space-between,center);
+    }
+
     &__form {
-        // background: wheat;
         height: 23rem;
         padding: 1rem;
         flex: 0 0 30%;
@@ -28,11 +34,16 @@
 
         &>form {
             height: 100%;
-            // background: #000;
             @include gs.display-flex(column, space-around, center);
 
-            &>label{
+            &>label,
+            &>h4 {
                 text-decoration: underline;
+                color: gs.$secondary-color;
+                font-size: 1.25rem;
+                font-weight: 600;
+                font-style: italic;
+                text-transform: capitalize;
             }
 
             &>textarea {
@@ -46,17 +57,17 @@
                 border-radius: 1rem;
             }
 
-            &>input[type="submit"]{
+            &>input[type="submit"] {
                 padding: 0.6rem 2.5rem;
                 font-weight: 600;
                 font-size: 1.07rem;
                 border-radius: 50%;
-                border: none; 
+                border: none;
                 font-style: italic;
                 background: gs.$secondary-color;
                 transition: 0.5s;
 
-                &:hover{
+                &:hover {
                     background: gs.$gradient-purple;
                     color: white;
                     transform: scale(1.1);

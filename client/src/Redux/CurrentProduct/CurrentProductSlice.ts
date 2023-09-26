@@ -87,6 +87,8 @@ export const singleProductSlice = createSlice({
             })
     }
 });
+
+export const getCurrentProductName = (state:any) => state.singleProduct.productName;
 export const currentProductRating = (state:any) => state.singleProduct.rating;
 export const currentProduct = (state:any) => state.singleProduct;
 export const singleProductReducer = singleProductSlice.reducer;
