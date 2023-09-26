@@ -183,23 +183,33 @@ export const getProductById = async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
       if (req.user) {
-        console.log(req.user.id);
-        await User.findOneAndUpdate(
-          { _id: req.user.id },
-          { $addToSet: { lastReviewed: product } }
-        ).then((myresp) => {
-          console.log("conting", myresp.lastReviewed.length);
-          if (myresp.lastReviewed.length > 5) {
-            const newLastReviewed = myresp.lastReviewed.slice(1, myresp.length);
-            console.log("new", newLastReviewed);
-            myresp.lastReviewed = newLastReviewed;
-            myresp.save();
+        const currentUser = await User.findById({ _id: req.user.id });
+        const lastReviewedUserData = currentUser.lastReviewed;
+
+        if (lastReviewedUserData.length === 5) {
+          const productId = product._id.toString();
+          const existingProduct = lastReviewedUserData.findIndex(
+            (item) => item._id.toString() === productId
+          );
+          if (existingProduct === -1) {
+            const newLastReviewedUserData = lastReviewedUserData.slice(
+              1,
+              lastReviewedUserData.length
+            );
+            newLastReviewedUserData.push(product);
+            currentUser.lastReviewed = newLastReviewedUserData;
+            currentUser.save();
           }
-        });
+        } else {
+          await User.findOneAndUpdate(
+            { _id: req.user.id },
+            { $addToSet: { lastReviewed: product } }
+          );
+        }
+        return res.status(200).send({ response: product });
       }
-      res.status(200).send({ response: product });
     } else {
-      res
+      return res
         .status(404)
         .send({ message: `Prodcut with id: ${req.params.id} not found.` });
     }
