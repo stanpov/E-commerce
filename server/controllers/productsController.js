@@ -181,7 +181,10 @@ export const deleteProduct = async (req, res) => {
 export const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
+
     if (product) {
+      product.numReviews += 1;
+      product.save();
       if (req.user) {
         const currentUser = await User.findById({ _id: req.user.id });
         const lastReviewedUserData = currentUser.lastReviewed;
@@ -207,6 +210,8 @@ export const getProductById = async (req, res) => {
           );
         }
         return res.status(200).send({ response: product });
+      } else {
+        return res.status(403).json({ message: "Unauthorized" });
       }
     } else {
       return res
