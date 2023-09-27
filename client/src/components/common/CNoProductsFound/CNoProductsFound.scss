@@ -1,0 +1,44 @@
+@use '../../../global-styles/' as gs;
+
+.product__not__found__message {
+
+
+    padding: 1rem 2rem;
+    margin: 2rem 0;
+    border-radius: 1rem;
+    @include gs.shadow(15px, -7px);
+    @include gs.display-flex(column, space-around, center);
+    text-align: center;
+    @include gs.breakpoint(mobile-start, mobile-end) {
+       margin-left: 2rem;
+    }
+
+    &>h2 {
+        &>span {
+            color: gs.$secondary-color;
+        }
+    }
+
+    &>h3 {
+        text-transform: capitalize;
+
+        &>span {
+            color: gs.$secondary-color;
+        }
+    }
+
+    &>p {
+        font-size: 0.9rem;
+
+        &>span {
+            color: gs.$secondary-color;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+    }
+
+    &>img {
+        margin-top: 1rem;
+        width: 4.2rem;
+    }
+}

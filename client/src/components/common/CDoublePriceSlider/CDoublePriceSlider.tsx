@@ -33,6 +33,7 @@ export const CDoublePriceSlider: React.FC<CDoublePriceSliderProps> = ({
             <Slider
                 className={'slider'}
                 value={values}
+                step={10}
                 min={MIN}
                 max={MAX}
                 onChange={changeHandler}
