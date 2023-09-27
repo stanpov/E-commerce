@@ -1,18 +1,18 @@
 @use '../../../global-styles/' as gs;
 
-.add__stars__radio__inputs__wrapper{
+.add__stars__radio__inputs__wrapper {
     border-bottom: 1px solid gray;
-    // background: linear-gradient(60deg , );
-    &>label{
-        &>input{
+
+    &>label {
+        &>input {
             display: none;
         }
-        &>svg{
+
+        &>svg {
             cursor: pointer;
             font-size: 1.9rem;
             margin: 0.3rem;
             transition: 0.5s;
-          
         }
     }
 }

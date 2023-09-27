@@ -34,7 +34,7 @@ export const CCommentsRating: React.FC<CCommentsRatingProps> = () => {
                 comments.length > 0
                     ? <article className='rating__section__comments__grid'>
                         {
-                            comments.map((x: Rating) => x.comment ? <CComment key={x.id} product={x} /> : null)
+                            comments.map((x: Rating) => x.comment ? <CComment key={Math.random()} product={x} /> : null)
                         }
                     </article>
                     : <article className='rating__section__comments__flex'>

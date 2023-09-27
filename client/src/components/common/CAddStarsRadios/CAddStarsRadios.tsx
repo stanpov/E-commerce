@@ -14,7 +14,8 @@ export const CAddStarsRadios: React.FC<CAddStarsRadiosProps> = () => {
             {[...Array(5)].map((star, index: number) => {
                 const currentRating = index + 1;
                 return (
-                    <label htmlFor={`${currentRating}`}>
+                    <label htmlFor={`${currentRating}`}  key={Math.random()}>
+                       
                         <input
                             type="radio"
                             name='star'
@@ -24,7 +25,6 @@ export const CAddStarsRadios: React.FC<CAddStarsRadiosProps> = () => {
                         />
                         <FaStar
                             className='add__stars__radio__icon'
-                            key={Math.random()}
                             color={currentRating <= (hover || rating) ? '#ff6600' : '#c9ced6'}
                             onMouseEnter={() => setHover(currentRating)}
                             onMouseLeave={() => setHover(0)}
