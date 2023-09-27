@@ -13,6 +13,13 @@
             font-size: 1.9rem;
             margin: 0.3rem;
             transition: 0.5s;
+            @include gs.breakpoint(tablet-start, tablet-end) {
+                width: 1.35rem;
+            }
+            @include gs.breakpoint(mobile-start, mobile-end) {
+                width: 1.2rem;
+                margin: 0.1rem;
+            }
         }
     }
 }

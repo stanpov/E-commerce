@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import './MotionDownCorner.scss';
 export const MotionDownCorner = () => {
@@ -10,6 +9,7 @@ export const MotionDownCorner = () => {
             }}
             initial='start'
             whileInView='end'
+            viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.2 }}
             className='corner__gradient__down'>
         </motion.div>

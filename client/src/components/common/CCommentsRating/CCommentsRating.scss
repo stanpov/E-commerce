@@ -18,10 +18,19 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 0.5rem;
+
+
+        @include gs.breakpoint(tablet-start, tablet-end) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include gs.breakpoint(mobile-start, mobile-end) {
+            grid-template-columns: repeat(1, 1fr);
+        }
     }
 
     &__comments__flex {
-        @include gs.display-flex(column,space-between,center);
+        @include gs.display-flex(column, space-between, center);
     }
 
     &__form {
@@ -44,6 +53,15 @@
                 font-weight: 600;
                 font-style: italic;
                 text-transform: capitalize;
+
+                @include gs.breakpoint(tablet-start, tablet-end) {
+                    font-size: 1rem;
+                }
+
+                @include gs.breakpoint(mobile-start, mobile-end) {
+                    font-size: 1rem;
+                    text-align: center;
+                }
             }
 
             &>textarea {
@@ -55,6 +73,16 @@
                 font-style: italic;
                 text-transform: capitalize;
                 border-radius: 1rem;
+
+                @include gs.breakpoint(tablet-start, tablet-end) {
+                    width: 100%;
+                    font-size: 1rem;
+                }
+
+                @include gs.breakpoint(mobile-start, mobile-end) {
+                    width: 100%;
+                    font-size: 1rem;
+                }
             }
 
             &>input[type="submit"] {
