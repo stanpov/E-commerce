@@ -1,6 +1,7 @@
 @use '../../global-styles/' as gs;
 
 .details__page {
+    position: relative;
     width: 100%;
     min-height: 90vh;
     @include gs.display-flex(column, flex-start, center);

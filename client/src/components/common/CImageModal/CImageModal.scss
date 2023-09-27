@@ -1,0 +1,61 @@
+@use '../../../global-styles/' as gs;
+
+
+.modal {
+    position: fixed;
+    bottom: 0;
+    background: gs.$dark-transparent;
+    width: 100vw;
+    height: 100%;
+    z-index: 1;
+    @include gs.display-flex(row, center, center);
+
+    &__image {
+        position: relative;
+
+        &>img {
+            max-width: 80vw;
+            min-width: 48vw;
+            max-height: 80vh;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            @include gs.shadow(15px,3px);
+            background: white;
+            z-index: 2;
+        }
+
+        & svg {
+            position: absolute;
+            z-index: 2;
+            margin: 0.25rem;
+            font-size: 1.7rem;
+            color: gs.$gradient-purple;
+            opacity: 0.7;
+            transition: 0.5s;
+
+            &:hover {
+                cursor: pointer;
+                color: gs.$secondary-color;
+                opacity: 1;
+            }
+        }
+
+        &__close {
+            top: 0;
+            right: 0;
+        }
+
+        &__right {
+            right: 0;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+
+        &__left {
+            left: 0;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+    }
+}
