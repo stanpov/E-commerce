@@ -16,7 +16,7 @@ const initialProductsState: ProductsState = {
     limit: 0,
     category: [],
     products: [],
-    brand:[],
+    brand: [],
 }
 
 
@@ -92,8 +92,8 @@ export const productsSlice = createSlice({
     },
 });
 
-export const isLoading = (state:any) => state.products.isLoading;
-export const categories = (state:any) => state.products.category;
-export const brand = (state:any) => state.products.brand;
-export const allProducts = (state:any) => state.products.products;
+export const isLoading = (state: any) => state.products.isLoading;
+export const categories = (state: any) => state.products.category;
+export const brand = (state: any) => state.products.brand;
+export const allProducts = (state: any) => state.products.products;
 export const productsReducer = productsSlice.reducer;

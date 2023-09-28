@@ -25,6 +25,7 @@ export const About: React.FC = () => {
                     }}
                     initial='hidden'
                     whileInView='visible'
+                    viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                     className='about__article'
                 >
@@ -46,6 +47,7 @@ export const About: React.FC = () => {
                     }}
                     initial='hidden'
                     whileInView='visible'
+                    viewport={{ once: true }}
                     transition={{ duration: 0.7 }}
                     className='about__article'>
                     <div className='about__article__content '>
@@ -69,6 +71,7 @@ export const About: React.FC = () => {
                     }}
                     initial='hidden'
                     whileInView='visible'
+                    viewport={{ once: true }}
                     transition={{ delay: 0., duration: 0.7 }}
                     className='about__article'>
                     <div className='about__article__content '>
@@ -90,6 +93,7 @@ export const About: React.FC = () => {
                     }}
                     initial='hidden'
                     whileInView='visible'
+                    viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                     className='about__article'>
                     <div className='about__article__content '>

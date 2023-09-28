@@ -1,6 +1,7 @@
 @use '../../global-styles/' as gs;
 
 .details__page {
+    position: relative;
     width: 100%;
     min-height: 90vh;
     @include gs.display-flex(column, flex-start, center);
@@ -97,6 +98,12 @@
                 @include gs.display-flex(row, space-between, center);
                 align-content: center;
                 width: 18rem;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
 
                 &>button {
                     width: 10rem;
@@ -123,7 +130,27 @@
                         font-weight: 600;
                     }
                 }
+            }
 
+            &__comments__rating {
+                @include gs.display-flex(column, center, center);
+                margin-top: 2rem;
+
+                &>h3 {
+                    margin: 1.5rem auto;
+                    text-transform: capitalize;
+                }
+
+
+
+                &::before {
+                    display: inline-block;
+                    content: '';
+                    background: gs.$header-color;
+                    width: 94%;
+                    height: 0.1rem;
+                    opacity: 0.5;
+                }
 
             }
         }
@@ -134,9 +161,6 @@
     @include gs.display-flex(column, center, center);
     overflow: hidden;
     margin-top: 2rem;
-    // box-shadow: 0px 0px 14px -5px rgba(116, 113, 113, 0.75) inset;
-    // -webkit-box-shadow: 0px 0px 14px -5px rgba(116, 113, 113, 0.75) inset;
-    // -moz-box-shadow: 0px 0px 14px -5px rgba(116, 113, 113, 0.75) inset;
 
     &>h3 {
         margin: 1.5rem auto;
@@ -150,6 +174,20 @@
         width: 140%;
         animation: slide 16s infinite;
 
+        @include gs.breakpoint(tablet-start, tablet-end) {
+            width: 160%;
+        }
+
+        @include gs.breakpoint(mobile-start, mobile-end) {
+            display: grid;
+            width: 100%;
+            animation: none;
+            grid-template-columns: repeat(2, 1fr);
+            justify-items: center;
+            gap: 0.5rem;
+            padding: 0;
+            margin: 1rem 0;
+        }
     }
 
     &::before {

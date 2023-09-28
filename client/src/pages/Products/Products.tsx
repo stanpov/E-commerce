@@ -11,8 +11,10 @@ import { Loader } from "../../components/common/Loader/Loader";
 import { GridProductCard } from "../../components/common/GridProductCard/GridProductCard";
 import { ListProductCard } from "../../components/common/ListProductCard/ListProductCard";
 import { CInputSubmit } from "../../components/common/CInputSubmit/CInputSubmit";
+import { Product } from "../../interfaces/interfaces";
+import { CDoublePriceSlider } from "../../components/common/CDoublePriceSlider/CDoublePriceSlider";
 import './Products.scss';
-import { FilterProducts, Product } from "../../interfaces/interfaces";
+import { CNoProductsFound } from "../../components/common/CNoProductsFound/CNoProductsFound";
 
 interface ProductsProps {
 
@@ -26,7 +28,7 @@ const Products: React.FC<ProductsProps> = () => {
     const brands = useAppSelector(brand);
     const isLoadingProducts = useAppSelector(isLoading);
     const [isGridShowMode, setIsGridShowMode] = useState(true);
-    const [filterData, setFilterData] = useState<FilterProducts>({category:'',brand:'',sort:''});
+    const [priceRange, setPriceRange] = useState([0, 3000]);
 
     useEffect(() => {
         dispatch(getAllProducts({
@@ -44,17 +46,18 @@ const Products: React.FC<ProductsProps> = () => {
         let category = formData.get('category')?.toString();
         let brand = formData.get('brand')?.toString();
         let sort = formData.get('sortBy')?.toString();
+        let lowPrice = priceRange[0]?.toString();
+        let highPrice = priceRange[1]?.toString();
 
         let filterData = {
             category: category ? category : '',
-            brand:brand ? brand : '',
-            sort:sort
+            brand: brand ? brand : '',
+            sort: sort,
+            lowPrice,
+            highPrice,
         }
-        
-        dispatch(getFilterProducts(filterData));
-        // console.log(filterData);
-                
 
+        dispatch(getFilterProducts(filterData));
     }
 
 
@@ -66,13 +69,16 @@ const Products: React.FC<ProductsProps> = () => {
                     <form onSubmit={filterHandler} className="products__filter__form">
                         <section className="products__filter__form__section">
                             <h4>category</h4>
-                            <CRadio category="category" radioName="All"  value='' defaultChecked={true}/>
+                            <CRadio category="category" radioName="All" value='' defaultChecked={true} />
                             {category.map((x: string) => <CRadio category="category" radioName={x} key={x} value={x} defaultChecked={false} />)}
                         </section>
                         <section className="products__filter__form__section">
                             <h4>brands</h4>
-                            <CRadio category="brand" radioName="All brands" value="" defaultChecked={true}/>
-                            {brands.map((x: string) => <CRadio category="brand" radioName={x} key={x} value={x} defaultChecked={false}/>)}
+                            <CRadio category="brand" radioName="All brands" value="" defaultChecked={true} />
+                            {brands.map((x: string) => <CRadio category="brand" radioName={x} key={x} value={x} defaultChecked={false} />)}
+                        </section>
+                        <section className="products__filter__form__section">
+                            <CDoublePriceSlider setPrice={setPriceRange} />
                         </section>
                         <section className="products__filter__form__section">
                             <CSelectInput />
@@ -95,13 +101,19 @@ const Products: React.FC<ProductsProps> = () => {
                         </div>
 
                     </article>
-                    <article className={isGridShowMode ? "products__section__grid" : "products__section__list"}>
-                        {
-                            isGridShowMode
-                                ? products.map((x: Product) => <GridProductCard key={x._id} product={x} />)
-                                : products.map((x: Product) => <ListProductCard key={x._id} product={x} />)
-                        }
-                    </article>
+                    {
+                        products.length > 0
+                            ? <article className={isGridShowMode ? "products__section__grid" : "products__section__list"}>
+                                {
+                                    isGridShowMode
+                                        ? products.map((x: Product) => <GridProductCard key={x._id} product={x} />)
+                                        : products.map((x: Product) => <ListProductCard key={x._id} product={x} />)
+                                }
+                            </article>
+                            : <article className="products__section__list">
+                                <CNoProductsFound />
+                            </article>
+                    }
                 </section>
             </section>
         </div>

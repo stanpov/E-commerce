@@ -92,6 +92,8 @@ export interface Rating {
     userName?: string;
     comment?: string;
     rating?: number;
+    createdAt?:string;
+    id:string;
 }
 
 
@@ -128,4 +130,6 @@ export interface FilterProducts {
     category?: string | undefined | object;
     brand?: string | undefined | object;
     sort?: string | undefined | object;
+    lowPrice:string | undefined | object;
+    highPrice:string | undefined | object;
 }
