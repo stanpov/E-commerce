@@ -7,7 +7,6 @@ export const createProduct = async (req, res) => {
   try {
     const newProduct = new Product({
       productName: req.body.productName,
-      image: req.body.image,
       category: req.body.category,
       description: req.body.description,
       price: req.body.price,
@@ -15,6 +14,10 @@ export const createProduct = async (req, res) => {
       brand: req.body.brand,
       rating: req.body.rating,
     });
+    for (let index = 0; index < req.body.images.length; index++) {
+      const element = req.body.images[index];
+      newProduct.images.push({ imageUrl: element });
+    }
 
     const product = await newProduct.save();
     if (product) {

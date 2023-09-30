@@ -9,10 +9,14 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+const imageSchema = new mongoose.Schema({
+  imageUrl: { type: String, required: true },
+});
+
 const productSchema = new mongoose.Schema(
   {
     productName: { type: String, required: true, unique: true },
-    image: { type: String, required: true },
+    images: [imageSchema],
     category: {
       type: String,
       required: true,
