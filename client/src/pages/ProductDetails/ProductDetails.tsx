@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../../Redux/hooks';
-import { currentProduct } from '../../Redux/CurrentProduct/CurrentProductSlice';
+import { currentProduct, getCurrentProductImages } from '../../Redux/CurrentProduct/CurrentProductSlice';
 import { CRatingStars } from '../../components/common/CRatingStars/CRatingStars';
 import { CAddCartButton } from '../../components/common/CAddCartButton/CAddCartButton';
 import { CCountToAdd } from '../../components/common/CCountToAdd/CCountToAdd';
@@ -8,7 +8,7 @@ import { CAddWishlistButton } from '../../components/common/CAddWishlistButton/C
 import { dateConvert } from '../../Utils/Utils';
 import { lastReviewedItems } from '../../Redux/User/UserSlice';
 import { GridProductCard } from '../../components/common/GridProductCard/GridProductCard';
-import { Product } from '../../interfaces/interfaces';
+import { Image, Product } from '../../interfaces/interfaces';
 import { CCommentsRating } from '../../components/common/CCommentsRating/CCommentsRating';
 import { CImageModal } from '../../components/common/CImageModal/CImageModal';
 import './ProductDetails.scss';
@@ -19,10 +19,15 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
 
     const [openModal, setOpenModal] = useState(false);
     const [itemsCount, setItemsCount] = useState<number>(1);
+    const [startIndex, setCurrentIndex] = useState(0);
     // const [isDisabled,setIsDisabled] = useState<boolean>(false);
     const lastViewProducts = useAppSelector(lastReviewedItems);
     const product = useAppSelector(currentProduct);
+    const images = useAppSelector(getCurrentProductImages);
+    const [mainImage, ...restImages] = images;
     let stars = product.rating.reduce((acc: any, next: any) => acc + next.rating!, 0);
+    let imgIndex = 1;
+
     if (product.rating.length > 0) {
         stars = stars / product.rating.length;
     };
@@ -39,31 +44,37 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
         }
     };
 
-    const closeModalHandler = () =>{
+    const closeModalHandler = () => {
         setOpenModal(false);
     };
 
-    const openModalHandler =()=>{
+    const openModalHandler = (e: React.MouseEvent<HTMLImageElement>) => {
         setOpenModal(true);
+        setCurrentIndex(Number(e.currentTarget.alt));
+        // console.log(e.currentTarget.alt);
+
     };
+
+
 
     const createDate = dateConvert(product.createdAt);
     const lastUpdateDate = dateConvert(product.updatedAt);
 
+
     return (
         <>
-            {openModal ? <CImageModal image={product.image} closeModal={closeModalHandler}/> : null}
+            {openModal ? <CImageModal startIndex={startIndex} images={images} closeModal={closeModalHandler} /> : null}
             <section className='details__page'>
                 <div className='details__page__card__wrapper'>
                     <section className='details__page__card'>
                         <article className='details__page__card__images'>
                             <div className='details__page__card__images__main'>
-                                <img src={product.image} alt="product" onClick={openModalHandler}/>
+                                <img src={mainImage?.imageUrl} alt="0" onClick={openModalHandler} />
                             </div>
                             <div className='details__page__card__images__rest'>
-                                <img src={product.image} alt="product" onClick={openModalHandler}/>
-                                <img src={product.image} alt="product" onClick={openModalHandler}/>
-                                <img src={product.image} alt="product" onClick={openModalHandler}/>
+                                {
+                                    restImages.map((x: Image) => <img src={x.imageUrl} alt={`${imgIndex++}`} key={x._id} onClick={openModalHandler} />)
+                                }
                             </div>
                         </article>
                         <article className='details__page__card__content'>

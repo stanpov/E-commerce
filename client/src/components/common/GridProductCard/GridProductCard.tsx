@@ -39,7 +39,7 @@ export const GridProductCard: React.FC<GridProductCardProps> = ({
     return (
         <article className='grid__card'>
             <section className='grid__card__image__wrapper'>
-                <img src={product.image} alt="" />
+                <img src={product.images[0].imageUrl} alt="" />
             </section>
             <section className='grid__card__content'>
                 <h4>{product.productName}</h4>

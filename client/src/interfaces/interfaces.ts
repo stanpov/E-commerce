@@ -92,16 +92,20 @@ export interface Rating {
     userName?: string;
     comment?: string;
     rating?: number;
-    createdAt?:string;
-    id:string;
+    createdAt?: string;
+    id: string;
 }
 
+export interface Image {
+    imageUrl: string;
+    _id: string;
+}
 
 
 export interface Product {
     _id: string;
     productName: string;
-    image: string;
+    images: Image[];
     category: string;
     description: string;
     price: number;
@@ -130,6 +134,6 @@ export interface FilterProducts {
     category?: string | undefined | object;
     brand?: string | undefined | object;
     sort?: string | undefined | object;
-    lowPrice:string | undefined | object;
-    highPrice:string | undefined | object;
+    lowPrice: string | undefined | object;
+    highPrice: string | undefined | object;
 }

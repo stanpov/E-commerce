@@ -38,7 +38,7 @@ export const ListProductCard: React.FC<ListProductCardProps> = ({
     return (
         <article className='list__card'>
             <section className='list__card__image__wrapper'>
-                <img src={product.image} alt="" />
+                <img src={product.images[0].imageUrl} alt="" />
             </section>
             <section className='list__card__content'>
                 <h4>{product.productName}</h4>

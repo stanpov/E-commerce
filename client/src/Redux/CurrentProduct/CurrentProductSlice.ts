@@ -14,7 +14,7 @@ const initialProductState: ProductState = {
     isError: false,
     _id: '',
     productName: '',
-    image: '',
+    images: [],
     category: '',
     description: '',
     price: 0,
@@ -39,7 +39,7 @@ export const singleProductSlice = createSlice({
                 state.isError = false;
                 state._id = action.payload._id;
                 state.productName = action.payload.productName;
-                state.image = action.payload.image;
+                state.images = action.payload.images;
                 state.category = action.payload.category;
                 state.description = action.payload.description;
                 state.price = action.payload.price;
@@ -56,7 +56,7 @@ export const singleProductSlice = createSlice({
                 state.isError = false;
                 state._id = '';
                 state.productName = '';
-                state.image = '';
+                state.images = [];
                 state.category = '';
                 state.description = '';
                 state.price = 0;
@@ -73,7 +73,7 @@ export const singleProductSlice = createSlice({
                 state.isError = true;
                 state._id = '';
                 state.productName = '';
-                state.image = '';
+                state.images = [];
                 state.category = '';
                 state.description = '';
                 state.price = 0;
@@ -88,6 +88,8 @@ export const singleProductSlice = createSlice({
     }
 });
 
+
+export const getCurrentProductImages = (state:any) => state.singleProduct.images;
 export const getCurrentProductName = (state:any) => state.singleProduct.productName;
 export const currentProductRating = (state:any) => state.singleProduct.rating;
 export const currentProduct = (state:any) => state.singleProduct;

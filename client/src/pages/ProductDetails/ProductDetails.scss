@@ -46,10 +46,14 @@
             &__rest {
                 width: 88%;
                 margin: 1rem 0;
-                @include gs.display-flex(row, space-between, center);
+                display: grid;
+                grid-template-columns: repeat(3,1fr);
+                gap: 0.5rem;
 
                 &>img {
-                    width: 30%;
+                   width: 100%;
+                   height: 8rem;
+                   object-fit: cover;
                 }
             }
         }

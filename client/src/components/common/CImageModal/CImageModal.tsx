@@ -1,23 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { AiOutlineCloseCircle, AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai';
+import { Image } from '../../../interfaces/interfaces';
 import './CImageModal.scss';
-import { AiOutlineCloseCircle, AiOutlineRightCircle ,AiOutlineLeftCircle } from 'react-icons/ai';
 
 interface CImageModalProps {
-    image: string,
-    closeModal:()=>void
+    startIndex: number,
+    images: Image[],
+    closeModal: () => void
 }
 export const CImageModal: React.FC<CImageModalProps> = ({
-    image,
+    startIndex,
+    images,
     closeModal
 }) => {
 
+    const [currentIndex, setCurrentIndex] = useState(startIndex);
+
+    const goLeftHandler = () => {
+        const isFirstImage = currentIndex === 0;
+        const newIndex = isFirstImage ? images.length - 1 : currentIndex - 1;
+        setCurrentIndex(newIndex);
+    }
+
+    const goRightHandler = () => {
+        const isLastImage = currentIndex === images.length - 1;
+        const newIndex = isLastImage ? 0 : currentIndex + 1;
+        setCurrentIndex(newIndex);
+    }
+
     return (
         <div className='modal' onClick={closeModal}>
-            <div className='modal__image' onClick={(e)=>e.stopPropagation()}>
-                <AiOutlineCloseCircle className='modal__image__close' onClick={closeModal}/>
-                <AiOutlineRightCircle className='modal__image__right'/>
-                <AiOutlineLeftCircle className='modal__image__left'/>
-                <img src={image} alt="" />
+            <div className='modal__image' onClick={(e) => e.stopPropagation()}>
+                <AiOutlineCloseCircle className='modal__image__close' onClick={closeModal} />
+                <AiOutlineDoubleRight className='modal__image__right' onClick={goRightHandler} />
+                <AiOutlineDoubleLeft className='modal__image__left' onClick={goLeftHandler} />
+                <p>{currentIndex + 1} / {images.length}</p>
+                <img src={images[currentIndex].imageUrl} alt={`${currentIndex}`} />
             </div>
         </div>
     )
