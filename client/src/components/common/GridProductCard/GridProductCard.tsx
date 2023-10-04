@@ -28,7 +28,7 @@ export const GridProductCard: React.FC<GridProductCardProps> = ({
                 {
                     product.countInStock > 0
                         ? <>
-                            <CAddCartButton />
+                            <CAddCartButton countInStock={product.countInStock} />
                         </>
                         : <COutOfStockMessage />
                 }

@@ -1,6 +1,9 @@
 @use '../../../global-styles/' as gs;
 
-.add__cart__button{
-    @include gs.card-button(gs.$green-color,gs.$gradient-purple);
-    
+.add__cart__button {
+    @include gs.card-button(gs.$green-color, gs.$gradient-purple);
+
+    &__disable {
+        @include gs.card-button(gray, gs.$header-color);
+    }
 }

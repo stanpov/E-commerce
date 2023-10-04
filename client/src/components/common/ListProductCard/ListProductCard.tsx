@@ -27,7 +27,7 @@ export const ListProductCard: React.FC<ListProductCardProps> = ({
                 {
                     product.countInStock > 0
                         ? <>
-                            <CAddCartButton />
+                            <CAddCartButton countInStock={product.countInStock} />
                         </>
                         : <COutOfStockMessage />
                 }

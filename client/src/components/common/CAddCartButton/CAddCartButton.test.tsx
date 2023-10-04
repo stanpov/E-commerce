@@ -41,7 +41,7 @@ afterEach(() => {
 
 describe('Testing CAddCartButton content', () => {
     test('Should have one button',()=>{
-        renderWithProviders(<CAddCartButton/>);
+        renderWithProviders(<CAddCartButton countInStock={0} />);
         const btn = screen.getByRole('button');
         expect(btn).toBeInTheDocument;
         expect(btn).toHaveTextContent('add to cart');

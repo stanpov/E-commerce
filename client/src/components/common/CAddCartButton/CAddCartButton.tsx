@@ -1,13 +1,15 @@
 import React from 'react';
-import './CAddCartButton.scss';
 import { BsCartPlus } from 'react-icons/bs';
+import './CAddCartButton.scss';
 
 interface CAddCartButtonProps {
-
+    countInStock: number
 }
 
-export const CAddCartButton: React.FC<CAddCartButtonProps> = () => {
+export const CAddCartButton: React.FC<CAddCartButtonProps> = ({
+    countInStock
+}) => {
     return (
-        <button className='add__cart__button'>add to cart <BsCartPlus />  </button>
+        <button className={countInStock > 0 ? 'add__cart__button' : 'add__cart__button add__cart__button__disable'}>add to cart <BsCartPlus />  </button>
     )
 }

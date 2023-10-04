@@ -51,15 +51,10 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
     const openModalHandler = (e: React.MouseEvent<HTMLImageElement>) => {
         setOpenModal(true);
         setCurrentIndex(Number(e.currentTarget.alt));
-        // console.log(e.currentTarget.alt);
-
     };
-
-
 
     const createDate = dateConvert(product.createdAt);
     const lastUpdateDate = dateConvert(product.updatedAt);
-
 
     return (
         <>
@@ -87,7 +82,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
                             <p className='details__page__card__content__description'>{product.description}</p>
                             <div className='details__page__card__content__add__cart'>
                                 <CCountToAdd count={itemsCount} countInStock={product.countInStock} increase={increaseItemsCount} decrease={decreaseItemsCount} />
-                                <CAddCartButton />
+                                <CAddCartButton countInStock={product.countInStock}/>
                             </div>
                             <div className='details__page__card__content__wishlist'>
                                 <CAddWishlistButton />
