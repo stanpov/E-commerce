@@ -9,7 +9,7 @@ import { dateConvert } from '../../Utils/Utils';
 import { lastReviewedItems } from '../../Redux/User/UserSlice';
 import { GridProductCard } from '../../components/common/GridProductCard/GridProductCard';
 import { Image, Product } from '../../interfaces/interfaces';
-import { CCommentsRating } from '../../components/common/CCommentsRating/CCommentsRating';
+import { CCommentsAndRating } from '../../components/common/CCommentsAndRating/CCommentsAndRating';
 import { CImageModal } from '../../components/common/CImageModal/CImageModal';
 import './ProductDetails.scss';
 
@@ -101,7 +101,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
 
                     <section className='details__page__card__content__comments__rating'>
                         <h3>comments & rating</h3>
-                        <CCommentsRating />
+                        <CCommentsAndRating />
                     </section>
 
                     <section className='last__view__products'>

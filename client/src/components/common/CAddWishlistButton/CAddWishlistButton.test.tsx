@@ -1,9 +1,11 @@
+import { CAddWishlistButton } from './CAddWishlistButton';
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { CAddCartButton } from "./CAddCartButton";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../../../Redux";
 import { Provider } from "react-redux";
+import userEvent from '@testing-library/user-event';
+
 
 let route = "/";
 
@@ -39,23 +41,29 @@ afterEach(() => {
     return route;
 });
 
-describe('Testing CAddCartButton content', () => {
+describe('Testing CAddWishlistButton content', () => {
     test('Should have one button',()=>{
-        renderWithProviders(<CAddCartButton countInStock={0} />);
+        renderWithProviders(< CAddWishlistButton />);
         const btn = screen.getByRole('button');
         expect(btn).toBeInTheDocument;
-        expect(btn).toHaveTextContent('add to cart');
+        expect(btn).toHaveTextContent('added to wishlist');
+        fireEvent.click(btn);
+        const btns = screen.getByRole('button');
+        expect(btn).toBeInTheDocument;
+        expect(btns).toHaveTextContent('add to wishlist')
     })
 })
-describe('Testing CAddCartButton classes', () => {
-    test('Should have disable class',()=>{
-        renderWithProviders(<CAddCartButton countInStock={0} />);
+
+describe('Testing CAddWishlistButton onClick', () => {
+    test('Should change button text content',()=>{
+        renderWithProviders(< CAddWishlistButton />);
         const btn = screen.getByRole('button');
-        expect(btn).toHaveClass('add__cart__button__disable');
-    })
-    test('Should not have disable class',()=>{
-        renderWithProviders(<CAddCartButton countInStock={1} />);
-        const btn = screen.getByRole('button');
-        expect(btn).toHaveClass('add__cart__button');
+        expect(btn).toBeInTheDocument;
+        expect(btn).toHaveTextContent('added to wishlist');
+        fireEvent.click(btn);
+        const btns = screen.getByRole('button');
+        expect(btn).toBeInTheDocument;
+        expect(btns).toHaveTextContent('add to wishlist')
     })
 })
+

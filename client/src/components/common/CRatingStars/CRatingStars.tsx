@@ -14,7 +14,7 @@ export const CRatingStars: React.FC<CRatingStarsProps> = ({
     const ratingStarsCount = starsCount(stars);
 
     return (
-        <div className='rating__stars'>
+        <div className='rating__stars' data-testid='current-comment-stars'>
             {
                 ratingStarsCount.map((x) => x === 1 ? <BsStarFill key={Math.random()} /> : null)
             }

@@ -25,7 +25,8 @@ export const CAddStarsRadios: React.FC<CAddStarsRadiosProps> = () => {
                         />
                         <FaStar
                             className='add__stars__radio__icon'
-                            color={currentRating <= (hover || rating) ? '#ff6600' : '#c9ced6'}
+                            data-testid='stars-icons'
+                            color={currentRating <= (hover || rating) ? 'rgb(255, 102, 0)' : 'rgb(201, 206, 214)'}
                             onMouseEnter={() => setHover(currentRating)}
                             onMouseLeave={() => setHover(0)}
                         />

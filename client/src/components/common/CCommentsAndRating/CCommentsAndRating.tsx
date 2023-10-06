@@ -7,14 +7,14 @@ import { Rating } from '../../../interfaces/interfaces';
 import { CAddStarsRadios } from '../CAddStarsRadios/CAddStarsRadios';
 import { getUserId } from '../../../Redux/Auth/AuthSlice';
 import { CNoCommentsMessage } from '../CNoCommentsMessage/CNoCommentsMessage';
-import './CCommentsRating.scss';
+import './CCommentsAndRating.scss';
 
-interface CCommentsRatingProps { }
+interface CCommentsAndRatingProps { }
 
-export const CCommentsRating: React.FC<CCommentsRatingProps> = () => {
+export const CCommentsAndRating: React.FC<CCommentsAndRatingProps> = () => {
     const id = useAppSelector(getUserId)
     const commentsAndRating = useAppSelector(currentProductRating);
-    let comments = [...commentsAndRating].filter(x => x.comment !== '' && x.comment !== undefined);
+    let comments= [...commentsAndRating].filter(x => x.comment !== '' && x.comment !== undefined);
 
     const commentRatingSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -29,12 +29,12 @@ export const CCommentsRating: React.FC<CCommentsRatingProps> = () => {
     }
 
     return (
-        <section className='rating__section'>
+        <section className='rating__section' role='contentinfo'>
             {
                 comments.length > 0
                     ? <article className='rating__section__comments__grid'>
                         {
-                            comments.map((x: Rating) => x.comment ? <CComment key={Math.random()} product={x} /> : null)
+                            comments.map((x: Rating) => x.comment ? <CComment key={Math.random()} comment={x} /> : null)
                         }
                     </article>
                     : <article className='rating__section__comments__flex'>
@@ -42,7 +42,7 @@ export const CCommentsRating: React.FC<CCommentsRatingProps> = () => {
                     </article>
             }
             <article className='rating__section__form'>
-                <form onSubmit={commentRatingSubmitHandler}>
+                <form onSubmit={commentRatingSubmitHandler} data-testid={'add-comment-form'}>
                     <CLable inputId={'comment'} title={'Add Comment & Rating'} />
                     <textarea name="comment" id="comment" maxLength={25} ></textarea>
                     <h4>rate our product here</h4>
