@@ -29,11 +29,11 @@ export const CImageModal: React.FC<CImageModalProps> = ({
     }
 
     return (
-        <div className='modal' onClick={closeModal}>
+        <div className='modal' onClick={closeModal} role='slider'>
             <div className='modal__image' onClick={(e) => e.stopPropagation()}>
-                <AiOutlineCloseCircle className='modal__image__close' onClick={closeModal} />
-                <AiOutlineDoubleRight className='modal__image__right' onClick={goRightHandler} />
-                <AiOutlineDoubleLeft className='modal__image__left' onClick={goLeftHandler} />
+                <AiOutlineCloseCircle className='modal__image__close' onClick={closeModal} data-testid={'close-svg'}/>
+                <AiOutlineDoubleRight className='modal__image__right' onClick={goRightHandler} data-testid={'go-right-svg'}/>
+                <AiOutlineDoubleLeft className='modal__image__left' onClick={goLeftHandler} data-testid={'go-left-svg'}/>
                 <p>{currentIndex + 1} / {images.length}</p>
                 <img src={images[currentIndex].imageUrl} alt={`${currentIndex}`} />
             </div>

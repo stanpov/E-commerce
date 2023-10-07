@@ -59,7 +59,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = () => {
     return (
         <>
             {openModal ? <CImageModal startIndex={startIndex} images={images} closeModal={closeModalHandler} /> : null}
-            <section className='details__page'>
+            <section className='details__page' data-testid={'product-details-page'}>
                 <div className='details__page__card__wrapper'>
                     <section className='details__page__card'>
                         <article className='details__page__card__images'>

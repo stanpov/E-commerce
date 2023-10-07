@@ -6,7 +6,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { EnterCode } from "./EnterCode";
 import userEvent from "@testing-library/user-event";
 import { CInput } from "../common/CInput/CInput";
-import { CLable } from "../common/CLable/CLable";
+import { CLable } from "../common/CLabel/CLabel";
 import { CInputSubmit } from "../common/CInputSubmit/CInputSubmit";
 import { Home } from "../../pages/Home/Home";
 

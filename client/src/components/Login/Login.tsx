@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { AppDispatch } from '../../Redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CLable } from '../common/CLable/CLable';
+import { CLable } from '../common/CLabel/CLabel';
 import { CInput } from '../common/CInput/CInput';
 import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';
 import { VerifyEmailCodeForm } from '../common/VerifyEmailCodeForm/VerifyEmailCodeForm';

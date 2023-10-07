@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../../../Redux";
 import { Provider } from "react-redux";
-import { CLable } from "./CLable";
+import { CLable } from "./CLabel";
 
 
 function renderWithProviders(element: React.ReactElement) {

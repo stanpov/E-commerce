@@ -14,7 +14,7 @@ export const CComment: React.FC<CCommentProps> = ({
 
     const createDate = dateConvert(comment.createdAt as string);
     return (
-        <article className='single__comment'>
+        <article className='single__comment' data-testid={'single-comment'}>
             <p className=' single__comment__text'>{comment.comment}</p>
             <div className='single__comment__stars'>{comment.rating ? <CRatingStars stars={comment.rating} key={Math.random() * Math.random()} /> : null}</div>
             <div>

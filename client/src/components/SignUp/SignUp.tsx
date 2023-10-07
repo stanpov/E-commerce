@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CLable } from '../common/CLable/CLable';
+import { CLable } from '../common/CLabel/CLabel';
 import { CInput } from '../common/CInput/CInput';
 import { CInputSubmit } from '../common/CInputSubmit/CInputSubmit';
 import { useDispatch } from 'react-redux';

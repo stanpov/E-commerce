@@ -4,7 +4,7 @@ import { store } from "../../Redux";
 import { Provider } from "react-redux";
 import { UserProfileUpdate } from "./UserProfileUpdate";
 import { CInputImage } from "../common/CInputImage/CInputImage";
-import { CLable } from "../common/CLable/CLable";
+import { CLable } from "../common/CLabel/CLabel";
 import userEvent from "@testing-library/user-event";
 import { ChangeEvent } from "react";
 

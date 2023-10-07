@@ -21,6 +21,7 @@ export const CAddStarsRadios: React.FC<CAddStarsRadiosProps> = () => {
                             name='star'
                             id={`${currentRating}`}
                             value={currentRating}
+                            data-testid={`${currentRating}`}
                             onClick={() => setRating(currentRating)}
                         />
                         <FaStar

@@ -1,6 +1,6 @@
 import React from "react";
 import { LabelHTMLAttributes } from "react";
-import './CLable.scss';
+import './CLabel.scss';
 
 interface CLableProps extends LabelHTMLAttributes<HTMLLabelElement> {
     inputId: string,

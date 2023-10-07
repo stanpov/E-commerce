@@ -1,5 +1,5 @@
 import React from 'react';
-import { CLable } from '../CLable/CLable';
+import { CLable } from '../CLabel/CLabel';
 import { CComment } from '../CComment/CComment';
 import { useAppSelector } from '../../../Redux/hooks';
 import { currentProductRating } from '../../../Redux/CurrentProduct/CurrentProductSlice';
@@ -12,20 +12,20 @@ import './CCommentsAndRating.scss';
 interface CCommentsAndRatingProps { }
 
 export const CCommentsAndRating: React.FC<CCommentsAndRatingProps> = () => {
-    const id = useAppSelector(getUserId)
+    // const id = useAppSelector(getUserId)
     const commentsAndRating = useAppSelector(currentProductRating);
     let comments= [...commentsAndRating].filter(x => x.comment !== '' && x.comment !== undefined);
-
+    
     const commentRatingSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
         let comment = formData.get('comment');
         let starsCount = Number(formData.get('star'));
 
-        console.log(comment);
-        console.log(starsCount);
-        console.log(id.length);
-
+        // console.log(comment);
+        // console.log(starsCount);
+        // console.log(id.length);
+        
     }
 
     return (

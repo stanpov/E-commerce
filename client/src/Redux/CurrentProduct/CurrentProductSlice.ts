@@ -83,7 +83,7 @@ export const singleProductSlice = createSlice({
                 state.brand = '';
                 state.createdAt = '';
                 state.updatedAt = '';
-                state.message = action.error as string;;
+                state.message = action.error as string;
             })
     }
 });

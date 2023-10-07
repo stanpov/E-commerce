@@ -6,7 +6,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { VerifyEmailCodeForm } from "./VerifyEmailCodeForm";
 import userEvent from "@testing-library/user-event";
 import { CInput } from "../CInput/CInput";
-import { CLable } from "../CLable/CLable";
+import { CLable } from "../CLabel/CLabel";
 import { CInputSubmit } from "../CInputSubmit/CInputSubmit";
 import { useState as useStateMock } from 'react';
 

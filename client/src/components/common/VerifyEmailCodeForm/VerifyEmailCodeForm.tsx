@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CLable } from '../CLable/CLable';
+import { CLable } from '../CLabel/CLabel';
 import { CInput } from '../CInput/CInput';
 import { CInputSubmit } from '../CInputSubmit/CInputSubmit';
 import './VerifyEmailCodeForm.scss';

@@ -9,7 +9,7 @@ export const CNoCommentsMessage = () => {
 
     return (
         <article className='no__comments__message'>
-            <p>There are no comments yet for <span>{productName}!</span> <br/> <FaStar/>You could be the first !!! <FaStar/></p>
+            <p data-testid={'no-comments-message'}>There are no comments yet for <span>{productName}!</span> <br/> <FaStar/>You could be the first !!! <FaStar/></p>
         </article>
     )
 }

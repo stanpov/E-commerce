@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { CLable } from "../common/CLable/CLable";
+import { CLable } from "../common/CLabel/CLabel";
 import { CInput } from "../common/CInput/CInput";
 import { CInputImage } from "../common/CInputImage/CInputImage";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
