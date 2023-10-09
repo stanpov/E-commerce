@@ -7,6 +7,8 @@ import { Provider } from "react-redux";
 import userEvent from '@testing-library/user-event';
 import { BsInfoSquare } from 'react-icons/bs';
 import configureStore from "redux-mock-store";
+import { ProductDetails } from '../../../pages/ProductDetails/ProductDetails';
+import { LoginSignUp } from '../../../pages/LoginSignUp/LoginSignUp';
 
 let route = '/';
 const userState = {
@@ -28,6 +30,38 @@ const noUserState = {
         message: '',
         isVerified: false,
     }
+}
+
+const product = {
+    _id: '123',
+    productName: 'asus',
+    images: [
+        {
+            imageUrl: 'test',
+            _id: '123'
+        },
+        {
+            imageUrl: 'test',
+            _id: '123'
+        },
+    ],
+    category: 'TV',
+    description: 'test',
+    price: 100,
+    countInStock: 2,
+    rating: [
+        {
+            userName: 'peter',
+            comment: 'nice',
+            rating: 0,
+            createdAt: '2023-09-30T17:08:45.391Z',
+            id: '123',
+        }
+    ],
+    numReviews: 5,
+    brand: 'asus',
+    createdAt: '2023-09-30T17:08:45.391Z',
+    updatedAt: '2023-09-30T17:08:45.391Z',
 }
 
 function renderWithProviders(element: React.ReactElement, mockStore?: any) {
@@ -73,20 +107,29 @@ describe('Testing CDetailsButton', () => {
 })
 
 describe('Testing CDetailsButton functionality', () => {
-    test('Display button onClick', async () => {
+    test('Logged in user click details button', async () => {
+        const onClick = jest.fn();
         const mockState = configureStore();
         const userStote = mockState(userState);
         userStote.clearActions();
-        const axios = require('axios');
-        jest.mock('axios');
-        axios.get('www.google.com');
-        
 
-        renderWithProviders(<CDetailsButton productId={''} />);
+        renderWithProviders(<CDetailsButton productId={product._id} />);
         const btn = await screen.getByRole('button');
         await userEvent.click(btn);
-        expect(<CDetailsButton productId={''}/>).not.toBeInTheDocument;
-        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(<ProductDetails/>).toBeInTheDocument;
+        expect(btn).not.toBeInTheDocument;
+    })
+    test('NOT Logged in user click details button', async () => {
+        const onClick = jest.fn();
+        const mockState = configureStore();
+        const userStote = mockState(noUserState);
+        userStote.clearActions();
+
+        renderWithProviders(<CDetailsButton productId={product._id} />);
+        const btn = await screen.getByRole('button');
+        await userEvent.click(btn);
+        expect(<LoginSignUp/>).toBeInTheDocument;
+        expect(btn).not.toBeInTheDocument;
     })
 })
 

@@ -16,13 +16,13 @@ export const CRatingStars: React.FC<CRatingStarsProps> = ({
     return (
         <div className='rating__stars' data-testid='current-comment-stars'>
             {
-                ratingStarsCount.map((x) => x === 1 ? <BsStarFill key={Math.random()} /> : null)
+                ratingStarsCount.map((x) => x === 1 ? <BsStarFill key={Math.random()} data-testid='comment-fill-star' /> : null)
             }
             {
-                ratingStarsCount.map(x => x === 0.5 ? <BsStarHalf key={Math.random()} /> : null)
+                ratingStarsCount.map(x => x === 0.5 ? <BsStarHalf key={Math.random()} data-testid='comment-half-star' /> : null)
             }
             {
-                ratingStarsCount.map(x => x === 0 ? <BsStar key={Math.random()} /> : null)
+                ratingStarsCount.map(x => x === 0 ? <BsStar key={Math.random()}  data-testid='comment-empty-star'/> : null)
             }
         </div>
     )

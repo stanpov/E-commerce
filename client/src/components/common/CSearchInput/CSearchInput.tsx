@@ -17,7 +17,7 @@ export const CSearchInput: React.FC<CSearchInputProps> = () => {
     }
 
     return (
-        <form className='search' onSubmit={searchHandler} >
+        <form className='search' onSubmit={searchHandler} role='form' >
             <label htmlFor="search" className='search__input'>
                 <BsSearch />
                 <input
